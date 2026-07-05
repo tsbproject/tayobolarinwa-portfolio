@@ -48,7 +48,8 @@ export const products: Product[] = [
       accessibility: 100,
     },
     category: "",
-    status: "Completed"
+    status: "Completed",
+    blueprint: false
   },
 
   {
@@ -98,7 +99,8 @@ export const products: Product[] = [
       accessibility: 100,
     },
     category: "",
-    status: "Completed"
+    status: "Completed",
+    blueprint: true
   },
 
 {
@@ -145,6 +147,7 @@ export const products: Product[] = [
     accessibility: 98,
   },
   category: "",
-  status: "Completed"
+  status: "Completed",
+  blueprint: true
 }
 ];
