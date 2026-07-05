@@ -1,5 +1,6 @@
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 
+
 export const metadata = {
   title: "Products",
   description:

@@ -5,6 +5,9 @@ import { products } from "@/data/products";
 import ProductHero from "@/components/product/ProductHero";
 import { generateProductMetadata } from "@/lib/metadata";
 import { generateProductJsonLd } from "@/lib/structured-data";
+import ProductOverview from "@/components/product/ProductOverview";
+import ProductMetrics from "@/components/product/ProductMetrics";
+
 
 
 type Props = {
@@ -54,7 +57,9 @@ export default async function ProductPage({
         }}
       />
 
-      <ProductHero product={product} />
-    </>
+    <ProductHero product={product} />
+    <ProductOverview product={product} />
+     <ProductMetrics product={product} />
+       </>
   );
 }

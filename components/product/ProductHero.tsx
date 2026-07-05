@@ -26,6 +26,22 @@ export default function ProductHero({
           {product.description}
         </p>
 
+        <div className="mt-8 flex flex-wrap gap-3">
+        <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
+            {product.status}
+        </span>
+
+        <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700">
+            {product.category}
+        </span>
+
+        {product.blueprint && (
+            <span className="rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700">
+            Blueprint Available
+            </span>
+        )}
+        </div>
+
         <div className="relative mt-16 aspect-[16/9] overflow-hidden rounded-3xl">
           <Image
             src={product.coverImage}
