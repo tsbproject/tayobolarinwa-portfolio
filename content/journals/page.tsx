@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "Learn more about Tayo Bolarinwa, a Full Stack Engineer specializing in modern web applications and digital products.",
+  title: "Engineering Journal",
+  description:
+    "Engineering articles, architecture decisions, development insights and product updates by Tayo Bolarinwa.",
 };
 
-export default function Journal() {
+export default function EngineeringJournalPage() {
   return (
     <main className="py-24">
       <div className="container">
         <h1 className="heading text-5xl font-bold">
-         Journal
+          Engineering Journal
         </h1>
 
         <p className="mt-6 text-lg text-slate-600">
-          This page is currently under development.
+          Engineering articles coming soon.
         </p>
       </div>
     </main>
