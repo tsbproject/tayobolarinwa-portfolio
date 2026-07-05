@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: "Learn more about Tayo Bolarinwa, a Full Stack Engineer specializing in modern web applications and digital products.",
 };
 
-export default function TechStack() {
+export default function Journal() {
   return (
     <main className="py-24">
       <div className="container">
         <h1 className="heading text-5xl font-bold">
-          TechStack
+         Journal
         </h1>
 
         <p className="mt-6 text-lg text-slate-600">
