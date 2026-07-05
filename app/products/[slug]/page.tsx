@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
 import { products } from "@/data/products";
+import ProductHero from "@/components/product/ProductHero";
+import { generateProductMetadata } from "@/lib/metadata";
+import { generateProductJsonLd } from "@/lib/structured-data";
+
 
 type Props = {
   params: Promise<{
@@ -7,24 +13,48 @@ type Props = {
   }>;
 };
 
-export default async function ProductPage({ params }: Props) {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const product = products.find((item) => item.slug === slug);
+  const product = products.find(
+    (item) => item.slug === slug
+  );
+
+  if (!product) {
+    return {};
+  }
+
+  return generateProductMetadata(product);
+}
+
+export default async function ProductPage({
+  params,
+}: Props) {
+  const { slug } = await params;
+
+  const product = products.find(
+    (item) => item.slug === slug
+  );
 
   if (!product) {
     notFound();
   }
 
-  return (
-    <main className="container py-20">
-      <h1 className="heading text-5xl font-bold">
-        {product.title}
-      </h1>
+  const jsonLd =
+    generateProductJsonLd(product);
 
-      <p className="mt-6 max-w-3xl text-lg text-slate-600">
-        {product.description}
-      </p>
-    </main>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
+
+      <ProductHero product={product} />
+    </>
   );
 }
