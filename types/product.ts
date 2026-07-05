@@ -1,3 +1,11 @@
+
+export interface ProductImage {
+  src: string;
+  alt: string;
+  title?: string;
+}
+
+
 export type ProductStatus =
   | "Completed"
   | "Active Development"
@@ -51,7 +59,7 @@ export interface Product {
 
   coverImage: string;
 
-  gallery: string[];
+  gallery: ProductImage[];
 
   liveUrl?: string;
 

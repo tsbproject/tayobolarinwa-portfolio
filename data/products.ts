@@ -36,7 +36,18 @@ export const products: Product[] = [
 
     coverImage: "/images/case-studies/marvelcmedia/cover.png",
 
-    gallery: [],
+      gallery: [
+      {
+        src: "/images/products/marvel-creative-media/homepage.webp",
+        alt: "Marvel Creative Media homepage",
+        title: "Homepage",
+      },
+      {
+        src: "/images/products/marvel-creative-media/services.webp",
+        alt: "Services page",
+        title: "Services",
+      },
+    ],
 
     liveUrl: "https://marvelcmedia.com",
 
@@ -87,7 +98,18 @@ export const products: Product[] = [
 
     coverImage: "/images/case-studies/marvelmarts/cover.png",
 
-    gallery: [],
+    gallery: [
+    {
+      src: "/images/products/marvel-creative-media/homepage.webp",
+      alt: "Marvel Creative Media homepage",
+      title: "Homepage",
+    },
+    {
+      src: "/images/products/marvel-creative-media/services.webp",
+      alt: "Services page",
+      title: "Services",
+    },
+  ],
 
     liveUrl: "https://marvelmarts.com",
 
@@ -135,7 +157,18 @@ export const products: Product[] = [
 
   coverImage: "/images/case-studies/apextraders/cover.png",
 
-  gallery: [],
+    gallery: [
+      {
+        src: "/images/products/marvel-creative-media/homepage.webp",
+        alt: "Marvel Creative Media homepage",
+        title: "Homepage",
+      },
+      {
+        src: "/images/products/marvel-creative-media/services.webp",
+        alt: "Services page",
+        title: "Services",
+      },
+    ],
 
   liveUrl: "https://apextraders.vercel.app",
 

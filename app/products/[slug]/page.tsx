@@ -7,6 +7,7 @@ import { generateProductMetadata } from "@/lib/metadata";
 import { generateProductJsonLd } from "@/lib/structured-data";
 import ProductOverview from "@/components/product/ProductOverview";
 import ProductMetrics from "@/components/product/ProductMetrics";
+import ProductGallery from "@/components/product/ProductGallery";
 
 
 
@@ -60,6 +61,7 @@ export default async function ProductPage({
     <ProductHero product={product} />
     <ProductOverview product={product} />
      <ProductMetrics product={product} />
+     <ProductGallery product={product} />
        </>
   );
 }
