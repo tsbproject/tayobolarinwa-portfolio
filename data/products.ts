@@ -58,9 +58,9 @@ export const products: Product[] = [
       seo: 100,
       accessibility: 100,
     },
-    category: "",
+    category: "Business Website",
     status: "Completed",
-    blueprint: false
+   
   },
 
   {
@@ -96,7 +96,7 @@ export const products: Product[] = [
       "Vercel",
     ],
 
-    coverImage: "/images/case-studies/marvelmarts/cover.png",
+    coverImage: "/images/products/marvelmarts/cover.png",
 
     gallery: [
     {
@@ -120,10 +120,35 @@ export const products: Product[] = [
       seo: 100,
       accessibility: 100,
     },
-    category: "",
+    category: "Multi-vendor Marketplace",
     status: "Completed",
-    blueprint: true
+    
+   blueprint: {
+      available: true,
+
+      coverImage: "/images/products/marvelmarts/blueprint-cover.webp",
+
+      description:
+        "Complete implementation blueprint covering platform architecture, development roadmap and vendor ecosystem.",
+
+      pages: [
+        {
+          src: "/images/products/marvelmarts/blueprint-1.webp",
+          title: "Marketplace Architecture",
+          description:
+            "Overall marketplace architecture and implementation roadmap.",
+        },
+        {
+          src: "/images/products/marvelmarts/blueprint-2.webp",
+          title: "Vendor Ecosystem",
+          description:
+            "Vendor onboarding, verification and marketplace workflow.",
+        },
+      ],
+    },
   },
+
+  
 
 {
   slug: "apextraders",
@@ -168,6 +193,8 @@ export const products: Product[] = [
         alt: "Services page",
         title: "Services",
       },
+
+      
     ],
 
   liveUrl: "https://apextraders.vercel.app",
@@ -179,8 +206,24 @@ export const products: Product[] = [
     seo: 95,
     accessibility: 98,
   },
-  category: "",
+  category: "FinTech",
   status: "Completed",
-  blueprint: true
+  blueprint: {
+  available: true,
+
+  coverImage: "/images/products/apextraders/blueprint-cover.webp",
+
+  description:
+    "Trading platform blueprint illustrating dashboard architecture, trading workflow and development roadmap.",
+
+  pages: [
+    {
+      src: "/images/products/apextraders/blueprint-1.webp",
+      title: "Trading Platform Blueprint",
+      description:
+        "Overall platform architecture and trading workflow.",
+    },
+  ],
+},
 }
 ];

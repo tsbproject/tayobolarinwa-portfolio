@@ -5,16 +5,18 @@ export interface ProductImage {
   title?: string;
 }
 
+export interface BlueprintPage {
+  src: string;
+  title: string;
+  description?: string;
+}
 
-export type ProductStatus =
-  | "Completed"
-  | "Active Development"
-  | "Maintenance";
-
-export type RoadmapStatus =
-  | "completed"
-  | "current"
-  | "planned";
+export interface ProductBlueprint {
+  available: boolean;
+  coverImage: string;
+  description: string;
+  pages: BlueprintPage[];
+}
 
 export interface ProductRoadmap {
   phase: string;
@@ -27,6 +29,19 @@ export interface ProductMetrics {
   seo: number;
   accessibility: number;
 }
+
+
+export type ProductStatus =
+  | "Completed"
+  | "Active Development"
+  | "Maintenance";
+
+export type RoadmapStatus =
+  | "completed"
+  | "current"
+  | "planned";
+
+
 
 export interface Product {
   slug: string;
@@ -49,7 +64,7 @@ export interface Product {
 
   featured: boolean;
 
-  blueprint: boolean;
+  blueprint?: ProductBlueprint;
 
   summary: string;
 
@@ -69,3 +84,4 @@ export interface Product {
 
   metrics: ProductMetrics;
 }
+
