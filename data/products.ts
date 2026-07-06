@@ -126,14 +126,14 @@ export const products: Product[] = [
    blueprint: {
       available: true,
 
-      coverImage: "/images/products/marvelmarts/blueprint-cover.webp",
+      coverImage: "/images/products/marvelmarts/blueprint-cover.png",
 
       description:
         "Complete implementation blueprint covering platform architecture, development roadmap and vendor ecosystem.",
 
       pages: [
         {
-          src: "/images/products/marvelmarts/blueprint-1.webp",
+          src: "/images/products/marvelmarts/blueprint-cover.png",
           title: "Marketplace Architecture",
           description:
             "Overall marketplace architecture and implementation roadmap.",

@@ -12,6 +12,7 @@ import ProductRoadmap from "@/components/product/ProductRoadmap";
 import Breadcrumb from "@/components/ui/BreadCrumb";
 import Container from "@/components/layout/Container";
 import ProductBlueprint from "@/components/product/ProductBlueprint";
+import ProductArchitecture from "@/components/product/ProductAchitecture";
 
 
 
@@ -85,6 +86,8 @@ export default async function ProductPage({
     <ProductGallery product={product} />
     
     <ProductBlueprint product={product} />
+    
+    <ProductArchitecture product={product} />
 
     <ProductRoadmap product={product} />
   </>
