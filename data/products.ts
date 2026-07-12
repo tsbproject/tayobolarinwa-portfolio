@@ -34,7 +34,7 @@ export const products: Product[] = [
       "Vercel",
     ],
 
-    coverImage: "/images/case-studies/marvelcmedia/cover.png",
+    coverImage: "/images/products/marvelcmedia/cover.png",
 
       gallery: [
       {
