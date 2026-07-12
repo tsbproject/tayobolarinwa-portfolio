@@ -10,24 +10,29 @@ type Props = {
 
 const challenges = [
   {
-    title: "Scalable Marketplace Architecture",
+    title: "Designing a Complete Multi-Vendor Marketplace",
     description:
-      "Designing a platform capable of supporting customers, vendors and administrators while maintaining a clean and maintainable codebase.",
+      "Building a marketplace capable of supporting customers, vendors and administrators within a single application required careful planning of permissions, workflows and business rules while keeping the user experience intuitive for every role.",
   },
   {
-    title: "Complex Vendor Ecosystem",
+    title: "Building a Robust Vendor Ecosystem",
     description:
-      "Building a complete vendor experience covering onboarding, verification, store management, products, orders, payouts and analytics.",
+      "Creating an end-to-end vendor experience involved implementing onboarding, verification, storefront management, product management, order processing, wallet functionality, payouts, messaging, reviews and performance analytics as one cohesive system.",
   },
   {
-    title: "Performance & SEO",
+    title: "Scaling a Growing Codebase",
     description:
-      "Maintaining excellent performance and search engine visibility while delivering a feature-rich user experience.",
+      "As MarvelMarts expanded into hundreds of components and numerous API routes, maintaining readability, consistency and long-term maintainability became increasingly challenging.",
   },
   {
-    title: "Long-Term Maintainability",
+    title: "Performance and Search Engine Optimization",
     description:
-      "Structuring the project with reusable components, modular services and a scalable architecture to support future growth.",
+      "Balancing a feature-rich marketplace with fast page loads, excellent Core Web Vitals and strong SEO required careful optimization across the frontend, backend and media delivery pipeline.",
+  },
+  {
+    title: "Building for Long-Term Growth",
+    description:
+      "The platform was designed not only for its current feature set but also to accommodate future capabilities such as AI-powered recommendations, advanced analytics, marketing automation and continued marketplace expansion.",
   },
 ];
 

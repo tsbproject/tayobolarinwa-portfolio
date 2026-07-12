@@ -10,24 +10,29 @@ type Props = {
 
 const solutions = [
   {
-    title: "Modular System Architecture",
+    title: "Modular Full-Stack Architecture",
     description:
-      "The platform was structured into reusable components and clearly separated modules to improve scalability and simplify long-term maintenance.",
+      "The platform was built using a modular architecture with reusable components, shared utilities and clearly separated concerns. This approach improved scalability, simplified maintenance and accelerated feature development.",
   },
   {
-    title: "Robust Vendor Ecosystem",
+    title: "Service-Oriented Backend",
     description:
-      "A complete vendor lifecycle was implemented, including onboarding, verification, store management, inventory, orders, payouts, messaging and analytics.",
+      "As the application grew, business logic was progressively extracted from API routes into dedicated service classes. This reduced code duplication, improved readability and made complex marketplace operations easier to maintain.",
   },
   {
-    title: "Performance-First Development",
+    title: "Complete Vendor Ecosystem",
     description:
-      "Modern Next.js capabilities, optimized assets and efficient rendering strategies were used to deliver fast loading times and excellent SEO.",
+      "A comprehensive vendor ecosystem was implemented to support the entire business lifecycle, including onboarding, verification, store management, inventory, orders, wallet, payouts, messaging, reviews and business analytics.",
   },
   {
-    title: "Maintainable Engineering Practices",
+    title: "Performance-Driven Development",
     description:
-      "TypeScript, Prisma ORM and reusable service patterns were adopted to reduce technical debt and support future feature expansion.",
+      "Performance optimization was considered throughout development by leveraging Next.js App Router, optimized image delivery, efficient database queries and modern rendering strategies to deliver a fast and responsive user experience.",
+  },
+  {
+    title: "Future-Ready Foundation",
+    description:
+      "The architecture was intentionally designed to accommodate future capabilities such as AI-powered features, advanced reporting, marketing tools, additional payment providers and continued marketplace growth without requiring major structural changes.",
   },
 ];
 

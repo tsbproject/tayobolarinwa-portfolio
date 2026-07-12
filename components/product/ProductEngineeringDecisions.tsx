@@ -10,40 +10,40 @@ type Props = {
 
 const decisions = [
   {
-    title: "Modern Frontend Architecture",
+    title: "Framework Selection",
     decision: "Next.js App Router",
     reason:
-      "Chosen for server rendering, excellent SEO, improved performance and a modern React architecture.",
+      "MarvelMarts was built with Next.js App Router to deliver server-side rendering, excellent SEO, fast page loads, and a scalable full-stack architecture capable of supporting future marketplace growth.",
   },
   {
-    title: "Type Safety",
+    title: "End-to-End Type Safety",
     decision: "TypeScript",
     reason:
-      "Provides end-to-end type safety, improves maintainability and reduces runtime errors.",
+      "TypeScript was adopted across the entire application to improve maintainability, reduce runtime errors, and provide confidence while refactoring a rapidly growing codebase.",
   },
   {
-    title: "Database Access",
-    decision: "Prisma ORM",
+    title: "Database Layer",
+    decision: "Prisma ORM + PostgreSQL",
     reason:
-      "Selected for its developer experience, schema management and type-safe database queries.",
+      "Prisma ORM combined with PostgreSQL provides type-safe database access, reliable relational data management, efficient schema migrations, and strong transactional integrity for marketplace operations.",
   },
   {
-    title: "Authentication",
-    decision: "NextAuth",
+    title: "Scalable Backend Architecture",
+    decision: "Service Layer Pattern",
     reason:
-      "Provides a secure, scalable authentication system with flexible provider support.",
-  },
-  {
-    title: "Deployment",
-    decision: "Vercel",
-    reason:
-      "Optimized for Next.js with automatic deployments, edge delivery and excellent performance.",
+      "Business logic was progressively extracted into dedicated service classes, making the application easier to maintain, extend, and test while keeping API routes clean and focused.",
   },
   {
     title: "Media Management",
     decision: "Cloudinary",
     reason:
-      "Handles image optimization, transformation and scalable cloud-based media delivery.",
+      "Cloudinary was integrated to provide optimized image storage, transformation, and delivery for products, vendor assets, and promotional content.",
+  },
+  {
+    title: "Deployment Strategy",
+    decision: "Vercel",
+    reason:
+      "The platform is deployed on Vercel, leveraging automatic deployments, global edge delivery, and seamless integration with the Next.js ecosystem.",
   },
 ];
 

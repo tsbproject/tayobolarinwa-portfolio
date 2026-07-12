@@ -10,24 +10,29 @@ type Props = {
 
 const lessons = [
   {
-    title: "Design for Scalability Early",
+    title: "Build for Scale from Day One",
     description:
-      "Making architectural decisions early helped the platform remain flexible as new features and business requirements emerged.",
+      "Designing the architecture with future growth in mind proved invaluable. Planning for scalability early made it significantly easier to introduce new modules and expand the marketplace without major rewrites.",
   },
   {
-    title: "Reusable Components Increase Velocity",
+    title: "Maintainability Is a Feature",
     description:
-      "Building reusable UI components significantly reduced development time and improved consistency across the application.",
+      "As MarvelMarts grew into a large codebase, investing in reusable components, consistent patterns and a service-oriented backend greatly improved developer productivity and long-term maintainability.",
   },
   {
-    title: "Type Safety Pays Off",
+    title: "Business Understanding Drives Better Engineering",
     description:
-      "Using TypeScript throughout the project reduced runtime bugs and made refactoring much safer as the codebase grew.",
+      "Building a successful marketplace required understanding vendor workflows, customer expectations and administrative operations—not just writing code. Technical decisions were most effective when aligned with business goals.",
   },
   {
-    title: "Think Like a Product Builder",
+    title: "Iterative Improvement Beats Perfection",
     description:
-      "Focusing on business goals and user experience alongside technical implementation led to a more valuable product overall.",
+      "MarvelMarts evolved through continuous refinement. Features were implemented, reviewed, refactored and improved over time, resulting in a stronger and more resilient platform than attempting to perfect everything in the first iteration.",
+  },
+  {
+    title: "Engineering Is About Solving Problems",
+    description:
+      "The greatest value came not from the technologies themselves, but from using them to solve real business challenges. Every architectural decision was evaluated based on its ability to improve the product, user experience and future growth.",
   },
 ];
 
