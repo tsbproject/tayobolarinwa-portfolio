@@ -6,6 +6,9 @@ import { Menu, X } from "lucide-react";
 import Container from "./Container";
 import NavLinks from "./NavLinks";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/ui/logo";
+
+
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -18,7 +21,7 @@ export default function Header() {
           href="/"
           className="heading text-2xl font-bold tracking-tight"
         >
-          Tayo Bolarinwa
+          <Logo priority />
         </Link>
 
         {/* Desktop Navigation */}
