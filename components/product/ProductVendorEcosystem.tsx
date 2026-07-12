@@ -4,27 +4,21 @@ import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-import { Product } from "@/types/product";
-
 type Props = {
-  product: Product;
+  image: string;
 };
 
-export default function ProductBlueprint({
-  product,
+export default function ProductVendorEcosystem({
+  image,
 }: Props) {
-  if (!product.blueprint?.available) {
-    return null;
-  }
-
   return (
     <Section>
       <Container>
 
         <SectionHeading
-          eyebrow="Blueprint"
-          title="Product Blueprint"
-          description={product.blueprint.description}
+          eyebrow="Vendor Ecosystem"
+          title="Vendor Success Ecosystem"
+          description="A complete lifecycle designed to help vendors launch, manage and grow successful businesses on MarvelMarts."
         />
 
         <div className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -32,11 +26,10 @@ export default function ProductBlueprint({
           <div className="relative aspect-[16/9]">
 
             <Image
-              src={product.blueprint.coverImage}
-              alt={`${product.title} Blueprint`}
+              src={image}
+              alt="MarvelMarts Vendor Ecosystem"
               fill
               className="object-center"
-              priority
             />
 
           </div>

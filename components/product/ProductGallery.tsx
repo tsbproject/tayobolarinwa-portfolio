@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 import Container from "@/components/layout/Container";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 import { Product } from "@/types/product";
 
@@ -11,55 +13,55 @@ type Props = {
 export default function ProductGallery({
   product,
 }: Props) {
-  if (product.gallery.length === 0) {
-    return null;
-  }
-
   return (
-    <section className="py-20">
+    <Section>
       <Container>
 
-        <h2 className="heading text-4xl font-bold">
-          Project Gallery
-        </h2>
+        <SectionHeading
+          eyebrow="Gallery"
+          title="Product Showcase"
+          description={`Explore key interfaces and experiences from ${product.title}.`}
+        />
 
-        <p className="mt-4 max-w-3xl text-lg text-slate-600">
-          A visual walkthrough of the product and some of its key
-          interfaces.
-        </p>
-
-        <div className="mt-14 grid gap-8 md:grid-cols-2">
+        <div className="mt-16 grid gap-10 lg:grid-cols-2">
 
           {product.gallery.map((image) => (
 
-            <figure
+            <article
               key={image.src}
-              className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+              className="group overflow-hidden rounded-3xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-2 hover:shadow-xl"
             >
-              <div className="relative aspect-[16/10]">
+
+              <div className="relative aspect-[16/10] overflow-hidden">
 
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover"
+                  className="object-center transition duration-700 group-hover:scale-105"
                 />
 
               </div>
 
-              {image.title && (
-                <figcaption className="p-5 font-medium">
-                  {image.title}
-                </figcaption>
-              )}
+              <div className="space-y-4 p-8">
 
-            </figure>
+                <h3 className="text-2xl font-bold">
+                  {image.title}
+                </h3>
+
+                <p className="leading-8 text-slate-600">
+                  {image.description}
+                </p>
+
+              </div>
+
+            </article>
 
           ))}
 
         </div>
 
       </Container>
-    </section>
+    </Section>
   );
 }

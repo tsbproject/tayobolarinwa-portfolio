@@ -18,7 +18,7 @@ export default function ProductHero({
       <Container>
         <Badge>{product.category}</Badge>
 
-        <h1 className="heading mt-8 text-6xl font-bold">
+        <h1 className="heading mt-8 text-md text-4xl font-bold">
           {product.title}
         </h1>
 

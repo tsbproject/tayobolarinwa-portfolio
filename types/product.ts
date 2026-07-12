@@ -2,9 +2,9 @@
 export interface ProductImage {
   src: string;
   alt: string;
-  title?: string;
+  title: string;
+  description: string;
 }
-
 export interface BlueprintPage {
   src: string;
   title: string;

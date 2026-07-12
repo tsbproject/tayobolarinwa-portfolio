@@ -38,14 +38,18 @@ export const products: Product[] = [
 
       gallery: [
       {
-        src: "/images/products/marvel-creative-media/homepage.webp",
+        src: "/images/products/marvelcmedia/cover.png",
         alt: "Marvel Creative Media homepage",
         title: "Homepage",
+        description:
+      "Marvel Creative Media frontpage ",
       },
       {
-        src: "/images/products/marvel-creative-media/services.webp",
-        alt: "Services page",
-        title: "Services",
+        src: "/images/products/marvelcmedia/mcmedia-blogpage.png",
+        alt: "Bloglist page",
+        title: "Blogpage",
+        description:
+        "Dynamic bloglist page ",
       },
     ],
 
@@ -96,18 +100,36 @@ export const products: Product[] = [
       "Vercel",
     ],
 
-    coverImage: "/images/products/marvelmarts/cover.png",
+    coverImage: "/images/products/marvelmarts/coverx.png",
 
     gallery: [
     {
-      src: "/images/products/marvel-creative-media/homepage.webp",
-      alt: "Marvel Creative Media homepage",
+      src: "/images/products/marvelmarts/coverx.png",
+      alt: "MarvelMarts homepage",
       title: "Homepage",
+      description:
+      "The customer-facing homepage designed for product discovery, promotions and category navigation.",
     },
     {
-      src: "/images/products/marvel-creative-media/services.webp",
-      alt: "Services page",
-      title: "Services",
+      src: "/images/products/marvelmarts/vendor-dashboard.png",
+      alt: "Vendo dashboard",
+      title: "Vendor Dashboard",
+      description:
+      "A comprehensive workspace for vendors to manage products, orders, inventory, analytics and payouts.",
+    },
+    {
+      src: "/images/products/marvelmarts/vendor-orderpage.png",
+      alt: "Vendor order page",
+      title: "Vendor Orderpage",
+      description:
+      "Comprehensive order management page for Vendors or Marchants.",
+    },
+    {
+      src: "/images/products/marvelmarts/admin-order-fulfilment.png",
+      alt: "Admin dashboard",
+      title: "Admin Dashboard",
+      description:
+      "Centralized administration panel for managing users, vendors, products, orders and marketplace operations.",
     },
   ],
 
@@ -126,24 +148,24 @@ export const products: Product[] = [
    blueprint: {
       available: true,
 
-      coverImage: "/images/products/marvelmarts/blueprint-cover.png",
+      coverImage: "/images/products/marvelmarts/blueprint-coverx.png",
 
       description:
         "Complete implementation blueprint covering platform architecture, development roadmap and vendor ecosystem.",
 
       pages: [
-        {
-          src: "/images/products/marvelmarts/blueprint-cover.png",
-          title: "Marketplace Architecture",
-          description:
-            "Overall marketplace architecture and implementation roadmap.",
-        },
-        {
-          src: "/images/products/marvelmarts/blueprint-2.webp",
-          title: "Vendor Ecosystem",
-          description:
-            "Vendor onboarding, verification and marketplace workflow.",
-        },
+        // {
+        //   src: "/images/products/marvelmarts/blueprint-coverx.png",
+        //   title: "Marketplace Architecture",
+        //   description:
+        //     "Overall marketplace architecture and implementation roadmap.",
+        // },
+        // {
+        //   src: "/images/products/marvelmarts/blueprint-cover2.png",
+        //   title: "Vendor Ecosystem",
+        //   description:
+        //     "Vendor onboarding, verification and marketplace workflow.",
+        // },
       ],
     },
   },
@@ -180,18 +202,23 @@ export const products: Product[] = [
     "React Router",
   ],
 
-  coverImage: "/images/case-studies/apextraders/cover.png",
+  coverImage: "/images/products/apextraders/cover.png",
 
     gallery: [
       {
-        src: "/images/products/marvel-creative-media/homepage.webp",
+        src: "/images/products/marvelcmedia/homepage.webp",
         alt: "Marvel Creative Media homepage",
         title: "Homepage",
+        description:
+      "Apextrader comprehensive frontpage ",
+        
       },
       {
-        src: "/images/products/marvel-creative-media/services.webp",
+        src: "/images/products/marvelcmedia/services.webp",
         alt: "Services page",
         title: "Services",
+        description:
+        "Crypto tuenament paage",
       },
 
       

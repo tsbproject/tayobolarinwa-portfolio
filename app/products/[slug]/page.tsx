@@ -13,6 +13,13 @@ import Breadcrumb from "@/components/ui/BreadCrumb";
 import Container from "@/components/layout/Container";
 import ProductBlueprint from "@/components/product/ProductBlueprint";
 import ProductArchitecture from "@/components/product/ProductAchitecture";
+import ProductEngineeringDecisions from "@/components/product/ProductEngineeringDecisions";
+import ProductChallenges from "@/components/product/ProductChallenges";
+import ProductSolutions from "@/components/product/ProductSolutions";
+import ProductLessonsLearned from "@/components/product/ProductLessonsLearned";
+import ProductResults from "@/components/product/ProductResults";
+import RelatedProjects from "@/components/product/RelatedProjects";
+import ProductVendorEcosystem from "@/components/product/ProductVendorEcosystem";
 
 
 
@@ -86,10 +93,28 @@ export default async function ProductPage({
     <ProductGallery product={product} />
     
     <ProductBlueprint product={product} />
+
+    <ProductVendorEcosystem
+        image="/images/products/marvelmarts/vendor-dashboard.png"
+      />
     
     <ProductArchitecture product={product} />
 
+    <ProductEngineeringDecisions product={product} />
+
+    
+    <ProductChallenges product={product} />
+
+    <ProductSolutions product={product} />
+
+    <ProductLessonsLearned product={product} />
+
+    
+    <ProductResults product={product} />
+
     <ProductRoadmap product={product} />
+
+    <RelatedProjects product={product} />
   </>
   );
 }
