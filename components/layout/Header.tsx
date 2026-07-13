@@ -31,7 +31,7 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:block">
-          <Button href="/contact">
+          <Button href="/consultation">
             Book Consultation
           </Button>
         </div>

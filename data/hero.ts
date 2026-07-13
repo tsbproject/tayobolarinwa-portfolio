@@ -14,12 +14,12 @@ export const hero = {
 
   primaryCTA: {
     text: "View Case Studies",
-    href: "/case-studies",
+    href: "/products",
   },
 
   secondaryCTA: {
     text: "Book Consultation",
-    href: "/contact",
+    href: "/consultation",
   },
 
   stats: [
