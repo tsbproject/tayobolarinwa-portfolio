@@ -5,6 +5,19 @@ export interface ProductImage {
   description: string;
 }
 
+export interface ProductFeatureModule {
+  title: string;
+}
+
+
+export interface ProductFeatureHighlight {
+  available: boolean;
+  title: string;
+  description: string;
+  image: string;
+  modules?: ProductFeatureModule[];
+}
+
 export interface BlueprintPage {
   src: string;
   title: string;
@@ -45,6 +58,19 @@ export interface ProductResult {
   label: string;
 }
 
+
+export interface ProductEvolutionStep {
+  title: string;
+  description: string;
+}
+
+export interface ProductEvolution {
+  available: boolean;
+  title: string;
+  description: string;
+  steps: ProductEvolutionStep[];
+}
+
 export interface ProductArchitecture {
   technology: string;
   description: string;
@@ -71,7 +97,7 @@ export interface ProductLesson {
   description: string;
 }
 
-export interface ProductVendorEcosystem {
+export interface ProductFeatureHighlight {
   available: boolean;
   title: string;
   description: string;
@@ -131,9 +157,11 @@ export interface Product {
 
   lessons?: ProductLesson[];
 
-  vendorEcosystem?: ProductVendorEcosystem;
+  featureHighlight?: ProductFeatureHighlight;
 
   vision?: string;
 
   challenge?: string;
+
+  evolution?: ProductEvolution;
 }

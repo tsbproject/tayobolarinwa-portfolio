@@ -19,7 +19,8 @@ import ProductSolutions from "@/components/product/ProductSolutions";
 import ProductLessonsLearned from "@/components/product/ProductLessonsLearned";
 import ProductResults from "@/components/product/ProductResults";
 import RelatedProjects from "@/components/product/RelatedProjects";
-import ProductVendorEcosystem from "@/components/product/ProductVendorEcosystem";
+import ProductVendorEcosystem from "@/components/product/ProductFeatureHighlight";
+import ProductEvolution from "@/components/product/ProductEvolution";
 
 
 
@@ -84,8 +85,14 @@ export default async function ProductPage({
     />
   </Container>
 
+
+       <ProductHero product={product} />
+
   
-    <ProductOverview product={product} />
+      <ProductOverview product={product} />
+
+    
+     <ProductEvolution product={product} />
 
       <ProductMetrics product={product} />
 
@@ -96,28 +103,26 @@ export default async function ProductPage({
       
       <ProductGallery product={product} />
 
-    <ProductHero product={product} />
+      
 
-   <ProductGallery product={product} />
+        <ProductArchitecture product={product} />
+        
+      <ProductBlueprint product={product} />
 
-   <ProductArchitecture product={product} />
-    
-   <ProductBlueprint product={product} />
+      <ProductEngineeringDecisions product={product} />
 
-  <ProductEngineeringDecisions product={product} />
+      <ProductChallenges product={product} />
 
-  <ProductChallenges product={product} />
+      <ProductSolutions product={product} />
 
-  <ProductSolutions product={product} />
+      <ProductLessonsLearned product={product} />
 
-  <ProductLessonsLearned product={product} />
+        
+      <ProductResults product={product} />
 
-    
-  <ProductResults product={product} />
+      <ProductRoadmap product={product} />
 
-  <ProductRoadmap product={product} />
-
-  <RelatedProjects product={product} />
+      <RelatedProjects product={product} />
   </>
   );
 }

@@ -51,6 +51,34 @@ export const products: Product[] = [
         description:
         "Dynamic bloglist page ",
       },
+       {
+        src: "/images/products/marvelcmedia/blog-analytics.png",
+        alt: "Blog Analytics",
+        title: "Blogpage",
+        description:
+        "Dynamic Blog Analyticst page ",
+      },
+      {
+        src: "/images/products/marvelcmedia/mcmedia-project-management.png",
+        alt: "Project management page",
+        title: "Project Management",
+        description:
+        "Project management  page ",
+      },
+      {
+        src: "/images/products/marvelcmedia/mcmedia-role.png",
+        alt: "Role deligation",
+        title: "Role Delegation",
+        description:
+        "Role Delegation page ",
+      },
+       {
+        src: "/images/products/marvelcmedia/mcmedia-client.png",
+        alt: "Client management",
+        title: "Client Management",
+        description:
+        "Client management page ",
+      },
     ],
 
     liveUrl: "https://marvelcmedia.com",
@@ -64,8 +92,263 @@ export const products: Product[] = [
     },
     category: "Business Website",
     status: "Completed",
+
+        vision:
+      "Marvel Creative Media was rebuilt as a modern digital agency platform focused on performance, search engine visibility, scalability and long-term maintainability. The goal was to replace the previous architecture with a future-ready platform capable of supporting business growth, content marketing and client acquisition.",
+
+      challenge:
+        "Design and build a high-performance business website that combines exceptional user experience, enterprise-grade architecture, modern SEO practices and an intuitive content management workflow while remaining easy to scale and maintain.",
+
+              architecture: [
+          {
+            technology: "Next.js",
+            description:
+              "Provides server-side rendering, App Router architecture, dynamic metadata and excellent SEO performance.",
+          },
+          {
+            technology: "TypeScript",
+            description:
+              "Ensures type safety throughout the application, improving maintainability and reducing development errors.",
+          },
+          {
+            technology: "Tailwind CSS",
+            description:
+              "Powers a modern design system with responsive layouts and reusable UI components.",
+          },
+          {
+            technology: "Prisma ORM",
+            description:
+              "Provides a type-safe database layer for managing blog content, projects and application data.",
+          },
+          {
+            technology: "PostgreSQL",
+            description:
+              "Stores structured application data with excellent reliability and scalability.",
+          },
+          {
+            technology: "NextAuth",
+            description:
+              "Provides secure authentication and protected administration features.",
+          },
+          {
+            technology: "Cloudinary",
+            description:
+              "Handles image uploads, optimization and media delivery across the platform.",
+          },
+          {
+            technology: "Resend",
+            description:
+              "Powers transactional emails including consultation requests and website communications.",
+          },
+          {
+            technology: "Vercel",
+            description:
+              "Provides automatic deployments, edge optimization and excellent global performance.",
+          },
+        ],
+
+
+        evolution: {
+          available: true,
+
+          title: "Platform Evolution",
+
+          description:
+            "Marvel Creative Media evolved from a traditional PHP-powered website into a modern full-stack business platform engineered for performance, scalability, SEO and long-term growth.",
+
+          steps: [
+            {
+              title: "Legacy PHP Platform",
+              description:
+                "The original website relied on a traditional PHP backend with limited flexibility, weaker SEO capabilities and a codebase that became increasingly difficult to maintain as the business expanded.",
+            },
+            {
+              title: "Engineering Assessment",
+              description:
+                "A comprehensive review identified opportunities to improve performance, technical SEO, architecture, developer experience and long-term scalability.",
+            },
+            {
+              title: "Architecture Redesign",
+              description:
+                "The platform was rebuilt using Next.js, TypeScript, Prisma and PostgreSQL with a reusable component architecture, server rendering and modern development practices.",
+            },
+            {
+              title: "SEO Transformation",
+              description:
+                "Technical SEO was rebuilt from the ground up using dynamic metadata, structured data, sitemap generation, optimized routing and a scalable content publishing system.",
+            },
+            {
+              title: "Business Operations Platform",
+              description:
+                "Beyond the public website, the platform now includes a custom administrative dashboard supporting CRM, client management, quotations, project management, messaging, reporting and content publishing.",
+            },
+            {
+              title: "Business Growth",
+              description:
+                "Following the migration, search visibility improved significantly. Google began displaying sitelinks, the new blog became a long-term SEO asset and the platform now provides a scalable foundation for continued business growth.",
+            },
+          ],
+        },
+
+      featureHighlight: {
+        available: true,
+
+        title: "Business Operations Platform",
+
+        description:
+          "Beyond the public website, Marvel Creative Media includes a custom business management platform that powers the agency's daily operations through a centralized administrative dashboard.",
+
+        image: "/images/products/marvelcmedia/mcmedia-dashboard.png",
+
+        modules: [
+          { title: "CRM" },
+          { title: "Lead Management" },
+          { title: "Client Management" },
+          { title: "Project Management" },
+          { title: "Quotations" },
+          { title: "Messages" },
+          { title: "Reports" },
+          { title: "Blog CMS" },
+          { title: "Gallery Manager" },
+          { title: "Training Manager" },
+          { title: "User Management" },
+          { title: "Analytics" },
+           { title: "Blog Analytics" },
+        ],
+      },
+              
+
+
+      engineeringDecisions: [
+      {
+        title: "Modern Framework",
+        decision: "Next.js App Router",
+        reason:
+          "Selected to deliver excellent SEO, server-side rendering, modern routing and a scalable full-stack architecture.",
+      },
+      {
+        title: "Type Safety",
+        decision: "TypeScript",
+        reason:
+          "Used across the project to improve maintainability, refactoring confidence and developer productivity.",
+      },
+      {
+        title: "Database Architecture",
+        decision: "Prisma + PostgreSQL",
+        reason:
+          "Chosen to provide reliable relational data management with a type-safe development experience.",
+      },
+      {
+        title: "Performance First",
+        decision: "Server Components",
+        reason:
+          "Leveraged Server Components and optimized rendering strategies to improve performance and Core Web Vitals.",
+      },
+      {
+        title: "Media Optimization",
+        decision: "Cloudinary",
+        reason:
+          "Integrated for efficient image optimization, storage and fast global delivery.",
+      },
+    ],
+
+
+      challenges: [
+      {
+        title: "Complete Platform Rebuild",
+        description:
+          "The previous website was completely redesigned and re-engineered using a modern technology stack without compromising business continuity.",
+      },
+      {
+        title: "SEO Migration",
+        description:
+          "Migrating existing content while improving search visibility required careful planning of URLs, metadata and structured data.",
+      },
+      {
+        title: "Performance Optimization",
+        description:
+          "Balancing modern visual design with excellent loading performance required continuous optimization.",
+      },
+    ],
+
+
+        solutions: [
+      {
+        title: "Modern Architecture",
+        description:
+          "Migrated the platform to a scalable Next.js architecture using reusable components and modern development practices.",
+      },
+      {
+        title: "Enterprise SEO",
+        description:
+          "Implemented structured metadata, Open Graph, dynamic sitemap generation and technical SEO best practices.",
+      },
+      {
+        title: "Content Platform",
+        description:
+          "Built a flexible blog system supporting scalable content publishing and long-term SEO growth.",
+      },
+    ],
+
+
+
+        lessons: [
+      {
+        title: "Architecture Matters",
+        description:
+          "Investing in a solid architecture from the beginning significantly simplifies future expansion and maintenance.",
+      },
+      {
+        title: "SEO Begins During Development",
+        description:
+          "Technical SEO should be part of the architecture rather than something added after launch.",
+      },
+      {
+        title: "Performance Is Part of User Experience",
+        description:
+          "Fast loading times contribute directly to better engagement, SEO and overall business outcomes.",
+      },
+    ],
+
+
+      results: [
+    {
+      value: "100",
+      label: "Performance Score",
+    },
+    {
+      value: "100",
+      label: "SEO Score",
+    },
+    {
+      value: "100",
+      label: "Accessibility",
+    },
+    {
+      value: "Next.js",
+      label: "Modern Platform",
+    },
+    {
+      value: "Blog",
+      label: "SEO Content Engine",
+    },
+    {
+      value: "Enterprise",
+      label: "Architecture",
+    },
+    {
+      value: "Cloud",
+      label: "Deployment Ready",
+    },
+    {
+      value: "Scalable",
+      label: "Future Growth",
+    },
+  ],
    
   },
+
+  
 
   {
     slug: "marvelmarts",
@@ -159,7 +442,7 @@ export const products: Product[] = [
 
     },
 
-    vendorEcosystem: {
+    featureHighlight: {
         available: true,
 
         title: "Vendor Success Ecosystem",
