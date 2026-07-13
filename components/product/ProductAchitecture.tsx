@@ -11,6 +11,13 @@ type Props = {
 export default function ProductArchitecture({
   product,
 }: Props) {
+  if (
+    !product.architecture ||
+    product.architecture.length === 0
+  ) {
+    return null;
+  }
+
   return (
     <Section>
       <Container>
@@ -23,20 +30,19 @@ export default function ProductArchitecture({
 
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
-          {product.technologies.map((tech) => (
+          {product.architecture.map((item) => (
 
             <div
-              key={tech}
+              key={item.technology}
               className="rounded-3xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
             >
 
               <h3 className="text-xl font-semibold">
-                {tech}
+                {item.technology}
               </h3>
 
               <p className="mt-4 leading-7 text-slate-600">
-                Architecture explanation will be added for this
-                technology as the case study grows.
+                {item.description}
               </p>
 
             </div>

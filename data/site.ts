@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Tayo Bolarinwa",
 
-  title: "Senior Full Stack Engineer",
+  title: " Full Stack Engineer",
 
   description:
     "I build scalable web applications, enterprise platforms and digital products using modern technologies.",

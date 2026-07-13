@@ -4,21 +4,32 @@ import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
+import { Product } from "@/types/product";
+
 type Props = {
-  image: string;
+  product: Product;
 };
 
 export default function ProductVendorEcosystem({
-  image,
+  product,
 }: Props) {
+  if (
+    !product.vendorEcosystem ||
+    !product.vendorEcosystem.available
+  ) {
+    return null;
+  }
+
+  const ecosystem = product.vendorEcosystem;
+
   return (
     <Section>
       <Container>
 
         <SectionHeading
           eyebrow="Vendor Ecosystem"
-          title="Vendor Success Ecosystem"
-          description="A complete lifecycle designed to help vendors launch, manage and grow successful businesses on MarvelMarts."
+          title={ecosystem.title}
+          description={ecosystem.description}
         />
 
         <div className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -26,8 +37,8 @@ export default function ProductVendorEcosystem({
           <div className="relative aspect-[16/9]">
 
             <Image
-              src={image}
-              alt="MarvelMarts Vendor Ecosystem"
+              src={ecosystem.image}
+              alt={ecosystem.title}
               fill
               className="object-center"
             />

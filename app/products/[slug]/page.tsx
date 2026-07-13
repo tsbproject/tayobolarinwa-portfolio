@@ -84,37 +84,40 @@ export default async function ProductPage({
     />
   </Container>
 
-    <ProductHero product={product} />
-
+  
     <ProductOverview product={product} />
 
-    <ProductMetrics product={product} />
+      <ProductMetrics product={product} />
 
-    <ProductGallery product={product} />
+      <ProductBlueprint product={product} />
+
+      <ProductVendorEcosystem product={product}/>
+
+      
+      <ProductGallery product={product} />
+
+    <ProductHero product={product} />
+
+   <ProductGallery product={product} />
+
+   <ProductArchitecture product={product} />
     
-    <ProductBlueprint product={product} />
+   <ProductBlueprint product={product} />
 
-    <ProductVendorEcosystem
-        image="/images/products/marvelmarts/vendor-dashboard.png"
-      />
-    
-    <ProductArchitecture product={product} />
+  <ProductEngineeringDecisions product={product} />
 
-    <ProductEngineeringDecisions product={product} />
+  <ProductChallenges product={product} />
 
-    
-    <ProductChallenges product={product} />
+  <ProductSolutions product={product} />
 
-    <ProductSolutions product={product} />
-
-    <ProductLessonsLearned product={product} />
+  <ProductLessonsLearned product={product} />
 
     
-    <ProductResults product={product} />
+  <ProductResults product={product} />
 
-    <ProductRoadmap product={product} />
+  <ProductRoadmap product={product} />
 
-    <RelatedProjects product={product} />
+  <RelatedProjects product={product} />
   </>
   );
 }

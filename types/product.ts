@@ -1,10 +1,10 @@
-
 export interface ProductImage {
   src: string;
   alt: string;
   title: string;
   description: string;
 }
+
 export interface BlueprintPage {
   src: string;
   title: string;
@@ -18,6 +18,16 @@ export interface ProductBlueprint {
   pages: BlueprintPage[];
 }
 
+export type ProductStatus =
+  | "Completed"
+  | "Active Development"
+  | "Maintenance";
+
+export type RoadmapStatus =
+  | "completed"
+  | "current"
+  | "planned";
+
 export interface ProductRoadmap {
   phase: string;
   title: string;
@@ -30,18 +40,43 @@ export interface ProductMetrics {
   accessibility: number;
 }
 
+export interface ProductResult {
+  value: string;
+  label: string;
+}
 
-export type ProductStatus =
-  | "Completed"
-  | "Active Development"
-  | "Maintenance";
+export interface ProductArchitecture {
+  technology: string;
+  description: string;
+}
 
-export type RoadmapStatus =
-  | "completed"
-  | "current"
-  | "planned";
+export interface ProductDecision {
+  title: string;
+  decision: string;
+  reason: string;
+}
 
+export interface ProductChallenge {
+  title: string;
+  description: string;
+}
 
+export interface ProductSolution {
+  title: string;
+  description: string;
+}
+
+export interface ProductLesson {
+  title: string;
+  description: string;
+}
+
+export interface ProductVendorEcosystem {
+  available: boolean;
+  title: string;
+  description: string;
+  image: string;
+}
 
 export interface Product {
   slug: string;
@@ -64,8 +99,6 @@ export interface Product {
 
   featured: boolean;
 
-  blueprint?: ProductBlueprint;
-
   summary: string;
 
   description: string;
@@ -80,8 +113,27 @@ export interface Product {
 
   githubUrl?: string;
 
+  metrics: ProductMetrics;
+
+  blueprint?: ProductBlueprint;
+
   roadmap?: ProductRoadmap[];
 
-  metrics: ProductMetrics;
-}
+  results?: ProductResult[];
 
+  architecture?: ProductArchitecture[];
+
+  engineeringDecisions?: ProductDecision[];
+
+  challenges?: ProductChallenge[];
+
+  solutions?: ProductSolution[];
+
+  lessons?: ProductLesson[];
+
+  vendorEcosystem?: ProductVendorEcosystem;
+
+  vision?: string;
+
+  challenge?: string;
+}

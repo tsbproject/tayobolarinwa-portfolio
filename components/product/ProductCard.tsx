@@ -21,7 +21,7 @@ export default function CaseStudyCard({
           src={product.coverImage}
           alt={product.title}
           fill
-          className="object-cover transition duration-700 group-hover:scale-105"
+          className="object-center transition duration-700 group-hover:scale-105"
         />
       </div>
 

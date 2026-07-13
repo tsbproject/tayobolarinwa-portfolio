@@ -19,7 +19,7 @@ export function generateProductJsonLd(
     author: {
       "@type": "Person",
 
-      name: "Tayo Bolarinwa",
+      name: "Tayo Samuel Bolarinwa",
 
       url: "https://tayobolarinwa.dev",
     },
