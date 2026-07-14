@@ -98,7 +98,7 @@ export default function Header() {
           <div className="hidden items-center gap-4 lg:flex">
 
               <Button
-                href="/resume/Tayo-Bolarinwa-Resume.pdf"
+                href="/Tayo-Bolarinwa-Resume.pdf"
                 target="_blank"
                 variant="secondary"
               >
@@ -168,7 +168,7 @@ export default function Header() {
           <div className="space-y-4">
 
            <Button
-              href="/resume/Tayo-Bolarinwa-Resume.pdf"
+              href="/Tayo-Bolarinwa-Resume.pdf"
               target="_blank"
               variant="secondary"
             >
