@@ -167,11 +167,16 @@ export default function Header() {
 
           <div className="space-y-4">
 
-            <Button
+           <Button
               href="/resume/Tayo-Bolarinwa-Resume.pdf"
               target="_blank"
+              variant="secondary"
             >
-              Download Résumé
+
+              <Download size={18} />
+
+              <span>Download Résumé</span>
+
             </Button>
 
             <Button href="/consultation">
