@@ -49,7 +49,7 @@ export default function ProductEcosystem({
             Unified Platform
           </p>
 
-          <h3 className="heading mt-4 text-5xl font-bold">
+          <h3 className="heading mt-4 text-2xl md:text-4xl font-bold">
             MarvelMarts
           </h3>
 

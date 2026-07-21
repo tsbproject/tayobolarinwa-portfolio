@@ -28,6 +28,7 @@ import ProductEvolution from "@/components/product/ProductEvolution";
 
 
 
+
 type Props = {
   params: Promise<{
     slug: string;
@@ -111,6 +112,8 @@ export default async function ProductPage({
       <ProductGallery product={product} />
 
       <ProductArchitecture product={product} />
+
+      
 
       <ProductEngineeringDecisions product={product} />
 
