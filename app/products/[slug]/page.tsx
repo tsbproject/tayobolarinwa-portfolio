@@ -21,6 +21,7 @@ import RelatedProjects from "@/components/product/RelatedProjects";
 import ProductFeatureHighlight from "@/components/product/ProductFeatureHighlight";
 import ProductEngineeringDecisions from "@/components/product/ProductEngineeringDecisions";
 import ProductEcosystem from "@/components/product/ProductEcosystem";
+import ProductTradingFramework from "@/components/product/ProductTradingFramework";
 
 
 import ProductEngineeringJourney from "@/components/product/ProductEngineeringJourney";
@@ -94,6 +95,10 @@ export default async function ProductPage({
        <ProductHero product={product} />
 
       <ProductOverview product={product} />
+
+      {product.slug === "apextraders" && (
+        <ProductTradingFramework />
+      )}
 
       {product.showEngineeringJourney && (
         <ProductEngineeringJourney />

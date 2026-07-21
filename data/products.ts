@@ -1011,8 +1011,8 @@ export const products: Product[] = [
 
   title: "ApexTraders",
 
-  headline:
-  "Designing a modern real-time trading experience.",
+ headline:
+"Engineering a high-performance trading intelligence platform for digital asset traders.",
 
   client: "Personal Product",
 
@@ -1026,40 +1026,91 @@ export const products: Product[] = [
 
   featured: true,
 
-  summary: "A professional cryptocurrency trading platform featuring live market data, portfolio management, tournament rankings and an immersive trading experience.",
+summary:
+"A modern trading intelligence platform engineered to help digital asset traders execute trades, monitor portfolio performance and improve decision-making through an intuitive financial dashboard.",
+description:
+"ApexTraders combines a decoupled React frontend with an Express API, Prisma ORM and PostgreSQL to deliver a scalable trading platform focused on execution workflows, portfolio intelligence, analytics and competitive trading experiences.",
+  
+technologies: [
+  "React 19",
+  "TypeScript",
+  "Vite",
+  "Tailwind CSS 4",
+  "Redux Toolkit",
+  "React Router 7",
+  "Express.js",
+  "Prisma ORM",
+  "PostgreSQL",
+  "Framer Motion",
+],
 
-  description: "ApexTraders is a modern trading platform focused on delivering an intuitive, high-performance trading experience through real-time market updates, portfolio tracking and competitive trading features.",
-
-  technologies: [
-    "React",
-    "TypeScript",
-    "Vite",
-    "Redux Toolkit",
-    "Tailwind CSS",
-    "React Router",
-  ],
-
-  coverImage: "/images/products/apextraders/cover.png",
+coverImage: "/images/products/apextraders/cover.png",
 
     gallery: [
-      {
-        src: "/images/products/marvelcmedia/homepage.webp",
-        alt: "Marvel Creative Media homepage",
-        title: "Homepage",
-        description:
-      "Apextrader comprehensive frontpage ",
-        
-      },
-      {
-        src: "/images/products/marvelcmedia/services.webp",
-        alt: "Services page",
-        title: "Services",
-        description:
-        "Crypto tuenament paage",
-      },
+  {
+    src: "/images/products/apextraders/dashboard.png",
 
-      
-    ],
+    alt: "Trading Workspace",
+
+    title: "Trading Workspace",
+
+    subtitle: "A professional trading environment",
+
+    description:
+      "The primary workspace where traders monitor market activity, manage positions and interact with the platform through an optimized financial interface.",
+
+    impact:
+      "Provides a focused environment that supports fast decision-making and efficient trading workflows.",
+  },
+
+  {
+    src: "/images/products/apextraders/portfolio.png",
+
+    alt: "Portfolio Intelligence",
+
+    title: "Portfolio Intelligence",
+
+    subtitle: "Tracking performance with clarity",
+
+    description:
+      "Portfolio analytics help traders evaluate account performance, monitor positions and understand trading outcomes over time.",
+
+    impact:
+      "Transforms raw trading data into actionable insights that support continuous improvement.",
+  },
+
+  {
+    src: "/images/products/apextraders/leaderboard.png",
+
+    alt: "Competitive Leaderboard",
+
+    title: "Competitive Leaderboard",
+
+    subtitle: "Performance-driven competition",
+
+    description:
+      "The leaderboard introduces a competitive dimension by highlighting top-performing traders within the platform.",
+
+    impact:
+      "Encourages engagement while rewarding consistent trading performance.",
+  },
+
+  {
+    src: "/images/products/apextraders/profile.png",
+
+    alt: "Identity & Security",
+
+    title: "Profile & Account Management",
+
+    subtitle: "Managing trader identity",
+
+    description:
+      "A secure account management interface designed to help traders manage their profiles and platform preferences.",
+
+    impact:
+      "Supports a professional user experience while preparing the platform for future account capabilities.",
+  },
+],
 
   liveUrl: "https://apextraders.vercel.app",
 
@@ -1070,12 +1121,12 @@ export const products: Product[] = [
     seo: 95,
     accessibility: 98,
   },
-  category: "FinTech",
-  status: "Completed",
+  category: "Trading Platform",
+  status: "Active Development",
   blueprint: {
   available: true,
 
-  coverImage: "/images/products/apextraders/blueprint-cover.webp",
+  coverImage: "/images/products/apextraders/apextrader-blueprint-cover.png",
 
   description:
     "Trading platform blueprint illustrating dashboard architecture, trading workflow and development roadmap.",
@@ -1089,7 +1140,55 @@ export const products: Product[] = [
     },
   ],
 },
+
+
+vision:
+"To build a professional trading intelligence platform that empowers digital asset traders with fast execution tools, portfolio insights and scalable financial technology.",
+
+challenge:
+"Designing a responsive financial dashboard capable of presenting complex trading information with clarity while maintaining a scalable architecture ready for future market intelligence capabilities.",
+
+
+evolution: {
+  available: true,
+
+  title: "Platform Evolution",
+
+  description:
+    "ApexTraders evolved from a trading dashboard concept into a modern trading intelligence platform focused on helping traders make better decisions through intuitive financial software.",
+
+  steps: [
+    {
+      title: "Trading Concept",
+      description:
+        "The project began with the vision of creating a professional trading experience focused on usability and performance.",
+    },
+    {
+      title: "Execution Workspace",
+      description:
+        "Core trading workflows were designed to provide a focused environment for monitoring and managing trading activity.",
+    },
+    {
+      title: "Portfolio Intelligence",
+      description:
+        "Performance tracking and portfolio analytics transformed raw trading activity into meaningful insights.",
+    },
+    {
+      title: "Competitive Trading",
+      description:
+        "Leaderboards introduced competition and community engagement while encouraging trading excellence.",
+    },
+    {
+      title: "Trading Intelligence Platform",
+      description:
+        "The platform continues evolving toward a comprehensive trading intelligence solution capable of supporting advanced market analysis and future real-time capabilities.",
+    },
+  ],
+},
 }
+
+
+
 
 
 ];

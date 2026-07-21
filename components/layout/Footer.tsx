@@ -10,7 +10,7 @@ const navigation = [
       { name: "Case Studies", href: "/products" },
       { name: "Engineering", href: "/journals" },
       { name: "Services", href: "/services" },
-      { name: "Contact", href: "/contact" },
+      { name: "Contact", href: "/consultation" },
     ],
   },
 ];
@@ -22,7 +22,7 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/tayo-bolarinwa-a6b1252a5",
   },
 ];
 
