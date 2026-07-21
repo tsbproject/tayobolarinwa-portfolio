@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import InfoCard from "@/components/ui/InfoCard";
 
 import { Product } from "@/types/product";
 
@@ -25,27 +26,23 @@ export default function ProductArchitecture({
         <SectionHeading
           eyebrow="Architecture"
           title="Technical Architecture"
-          description="Core technologies and architectural decisions behind the product."
+          description="Every technology was intentionally selected to support scalability, maintainability, performance and long-term product growth."
         />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-20 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
           {product.architecture.map((item) => (
 
-            <div
+            <InfoCard
               key={item.technology}
-              className="rounded-3xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
-            >
-
-              <h3 className="text-xl font-semibold">
-                {item.technology}
-              </h3>
-
-              <p className="mt-4 leading-7 text-slate-600">
-                {item.description}
-              </p>
-
-            </div>
+              label={item.technology}
+              value={
+                <p className="leading-8 text-slate-600">
+                  {item.description}
+                </p>
+              }
+              className="h-full"
+            />
 
           ))}
 

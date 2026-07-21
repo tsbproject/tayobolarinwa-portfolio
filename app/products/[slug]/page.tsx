@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { products } from "@/data/products";
+import {products } from "@/data/products";
 import ProductHero from "@/components/product/ProductHero";
 import { generateProductMetadata } from "@/lib/metadata";
 import { generateProductJsonLd } from "@/lib/structured-data";
@@ -13,13 +13,17 @@ import Breadcrumb from "@/components/ui/BreadCrumb";
 import Container from "@/components/layout/Container";
 import ProductBlueprint from "@/components/product/ProductBlueprint";
 import ProductArchitecture from "@/components/product/ProductAchitecture";
-import ProductEngineeringDecisions from "@/components/product/ProductEngineeringDecisions";
 import ProductChallenges from "@/components/product/ProductChallenges";
 import ProductSolutions from "@/components/product/ProductSolutions";
 import ProductLessonsLearned from "@/components/product/ProductLessonsLearned";
 import ProductResults from "@/components/product/ProductResults";
 import RelatedProjects from "@/components/product/RelatedProjects";
-import ProductVendorEcosystem from "@/components/product/ProductFeatureHighlight";
+import ProductFeatureHighlight from "@/components/product/ProductFeatureHighlight";
+import ProductEngineeringDecisions from "@/components/product/ProductEngineeringDecisions";
+import ProductEcosystem from "@/components/product/ProductEcosystem";
+
+
+import ProductEngineeringJourney from "@/components/product/ProductEngineeringJourney";
 import ProductEvolution from "@/components/product/ProductEvolution";
 
 
@@ -88,26 +92,25 @@ export default async function ProductPage({
 
        <ProductHero product={product} />
 
-  
       <ProductOverview product={product} />
 
-    
-     <ProductEvolution product={product} />
+      {product.showEngineeringJourney && (
+        <ProductEngineeringJourney />
+      )}
+
+      {product.ecosystem ? (
+        <ProductEcosystem product={product} />
+      ) : (
+        <ProductFeatureHighlight product={product} />
+      )}
 
       <ProductMetrics product={product} />
 
       <ProductBlueprint product={product} />
 
-      <ProductVendorEcosystem product={product}/>
-
-      
       <ProductGallery product={product} />
 
-      
-
-        <ProductArchitecture product={product} />
-        
-      <ProductBlueprint product={product} />
+      <ProductArchitecture product={product} />
 
       <ProductEngineeringDecisions product={product} />
 
@@ -117,7 +120,8 @@ export default async function ProductPage({
 
       <ProductLessonsLearned product={product} />
 
-        
+      <ProductEvolution product={product} />
+
       <ProductResults product={product} />
 
       <ProductRoadmap product={product} />

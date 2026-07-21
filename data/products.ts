@@ -6,6 +6,9 @@ export const products: Product[] = [
 
     title: "Marvel Creative Media",
 
+    headline:
+  "Building the operating system behind a modern digital agency.",
+
     client: "Marvel Creative Media",
 
     industry: "Digital Agency",
@@ -17,6 +20,8 @@ export const products: Product[] = [
     year: "2026",
 
     featured: true,
+
+    showEngineeringJourney: true,
 
     summary: "A modern digital agency platform built for performance, SEO and scalability.",
 
@@ -39,51 +44,93 @@ export const products: Product[] = [
       gallery: [
       {
         src: "/images/products/marvelcmedia/cover.png",
-        alt: "Marvel Creative Media homepage",
+        alt: "Marvel Creative Media Homepage",
+
         title: "Homepage",
+
+        subtitle: "A high-performance digital storefront",
+
         description:
-      "Marvel Creative Media frontpage ",
+          "Designed to communicate the agency's services, establish trust and provide a fast, SEO-first experience for prospective clients.",
+
+        impact:
+          "Creates a strong first impression while supporting search visibility and lead generation.",
       },
       {
         src: "/images/products/marvelcmedia/mcmedia-blogpage.png",
-        alt: "Bloglist page",
-        title: "Blogpage",
+        alt: "Blog Platform",
+
+        title: "Engineering Journal",
+
+        subtitle: "Content marketing powered by SEO",
+
         description:
-        "Dynamic bloglist page ",
+          "A dynamic publishing platform built to support long-term organic growth through technical articles and educational content.",
+
+        impact:
+          "Transforms the website into a scalable content engine that continuously attracts qualified visitors.",
       },
        {
         src: "/images/products/marvelcmedia/blog-analytics.png",
-        alt: "Blog Analytics",
-        title: "Blogpage",
+        alt: "Blog Analytics Dashboard",
+
+        title: "Content Analytics",
+
+        subtitle: "Measuring content performance",
+
         description:
-        "Dynamic Blog Analyticst page ",
+          "Provides detailed insights into article engagement, audience behaviour and publishing performance.",
+
+        impact:
+          "Supports data-driven content decisions and continuous SEO optimisation.",
       },
       {
         src: "/images/products/marvelcmedia/mcmedia-project-management.png",
-        alt: "Project management page",
+        alt: "Project Management",
+
         title: "Project Management",
+
+        subtitle: "Centralising delivery workflows",
+
         description:
-        "Project management  page ",
+          "Allows administrators to manage client projects, timelines and progress from a unified dashboard.",
+
+        impact:
+          "Improves collaboration and provides better visibility into project delivery.",
       },
       {
         src: "/images/products/marvelcmedia/mcmedia-role.png",
-        alt: "Role deligation",
-        title: "Role Delegation",
+        alt: "Role Management",
+
+        title: "Role Management",
+
+        subtitle: "Secure access control",
+
         description:
-        "Role Delegation page ",
+          "Role-based permissions ensure that every team member has access only to the functionality required for their responsibilities.",
+
+        impact:
+          "Strengthens platform security while simplifying team administration.",
       },
        {
         src: "/images/products/marvelcmedia/mcmedia-client.png",
-        alt: "Client management",
+        alt: "Client Management",
+
         title: "Client Management",
+
+        subtitle: "Building stronger client relationships",
+
         description:
-        "Client management page ",
+          "Centralises client records, communication history and project information into a single management interface.",
+
+        impact:
+          "Improves operational efficiency and creates a more connected client experience.",
       },
     ],
 
     liveUrl: "https://marvelcmedia.com",
 
-    githubUrl: "",
+    githubUrl: "https://github/tsbproject/mcmedia-website",
 
     metrics: {
       performance: 100,
@@ -190,33 +237,84 @@ export const products: Product[] = [
           ],
         },
 
-      featureHighlight: {
+     featureHighlight: {
         available: true,
 
         title: "Business Operations Platform",
 
         description:
-          "Beyond the public website, Marvel Creative Media includes a custom business management platform that powers the agency's daily operations through a centralized administrative dashboard.",
+          "Beyond the public website, Marvel Creative Media includes a custom-built business operations platform that centralizes agency workflows into a single administrative experience. From managing leads and projects to publishing content and tracking performance, the platform streamlines day-to-day operations while providing a scalable foundation for future growth.",
 
         image: "/images/products/marvelcmedia/mcmedia-dashboard.png",
 
         modules: [
-          { title: "CRM" },
-          { title: "Lead Management" },
-          { title: "Client Management" },
-          { title: "Project Management" },
-          { title: "Quotations" },
-          { title: "Messages" },
-          { title: "Reports" },
-          { title: "Blog CMS" },
-          { title: "Gallery Manager" },
-          { title: "Training Manager" },
-          { title: "User Management" },
-          { title: "Analytics" },
-           { title: "Blog Analytics" },
+          {
+            title: "CRM",
+            description:
+              "Maintain client relationships, communication history and business interactions from one place.",
+          },
+          {
+            title: "Lead Management",
+            description:
+              "Capture, qualify and track new business opportunities through the sales pipeline.",
+          },
+          {
+            title: "Client Management",
+            description:
+              "Organize client accounts, contacts, projects and ongoing engagements efficiently.",
+          },
+          {
+            title: "Project Management",
+            description:
+              "Coordinate project delivery, milestones, assignments and progress across teams.",
+          },
+          {
+            title: "Quotations",
+            description:
+              "Generate and manage professional quotations for prospective and existing clients.",
+          },
+          {
+            title: "Messages",
+            description:
+              "Centralize conversations and internal communication within the platform.",
+          },
+          {
+            title: "Reports",
+            description:
+              "Access operational reports to monitor business performance and decision-making.",
+          },
+          {
+            title: "Blog CMS",
+            description:
+              "Create, manage and publish SEO-optimized articles without relying on third-party tools.",
+          },
+          {
+            title: "Gallery Manager",
+            description:
+              "Manage portfolio images, media assets and visual content from a unified interface.",
+          },
+          {
+            title: "Training Manager",
+            description:
+              "Publish and organize internal learning resources and training materials.",
+          },
+          {
+            title: "User Management",
+            description:
+              "Control user roles, permissions and administrative access across the platform.",
+          },
+          {
+            title: "Analytics",
+            description:
+              "Monitor business activity and key operational metrics through interactive dashboards.",
+          },
+          {
+            title: "Blog Analytics",
+            description:
+              "Track article performance, audience engagement and content growth over time.",
+          },
         ],
-      },
-              
+      },   
 
 
       engineeringDecisions: [
@@ -272,7 +370,8 @@ export const products: Product[] = [
     ],
 
 
-        solutions: [
+   
+    solutions: [
       {
         title: "Modern Architecture",
         description:
@@ -355,6 +454,9 @@ export const products: Product[] = [
 
     title: "MarvelMarts",
 
+      headline:
+    "Engineering a scalable multi-vendor commerce ecosystem.",
+
     client: "MarvelMarts",
 
     industry: "Multi-Vendor E-commerce Marketplace",
@@ -385,36 +487,157 @@ export const products: Product[] = [
 
     coverImage: "/images/products/marvelmarts/coverx.png",
 
-    gallery: [
-    {
-      src: "/images/products/marvelmarts/coverx.png",
-      alt: "MarvelMarts homepage",
-      title: "Homepage",
-      description:
-      "The customer-facing homepage designed for product discovery, promotions and category navigation.",
-    },
-    {
-      src: "/images/products/marvelmarts/vendor-dashboard.png",
-      alt: "Vendo dashboard",
-      title: "Vendor Dashboard",
-      description:
-      "A comprehensive workspace for vendors to manage products, orders, inventory, analytics and payouts.",
-    },
-    {
-      src: "/images/products/marvelmarts/vendor-orderpage.png",
-      alt: "Vendor order page",
-      title: "Vendor Orderpage",
-      description:
-      "Comprehensive order management page for Vendors or Marchants.",
-    },
-    {
-      src: "/images/products/marvelmarts/admin-order-fulfilment.png",
-      alt: "Admin dashboard",
-      title: "Admin Dashboard",
-      description:
-      "Centralized administration panel for managing users, vendors, products, orders and marketplace operations.",
-    },
-  ],
+   gallery: [
+      {
+        src: "/images/products/marvelmarts/coverx.png",
+        alt: "MarvelMarts Homepage",
+
+        title: "Marketplace Homepage",
+
+        subtitle: "A modern multi-vendor shopping experience",
+
+        description:
+          "The customer-facing storefront was designed to make product discovery fast, intuitive and engaging. It supports featured products, promotional campaigns, category navigation and responsive browsing across devices.",
+
+        impact:
+          "Creates a seamless shopping experience while increasing product visibility and marketplace engagement.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-dashboard.png",
+        alt: "Vendor Dashboard",
+
+        title: "Vendor Business Dashboard",
+
+        subtitle: "Running an entire business from one workspace",
+
+        description:
+          "A comprehensive workspace where vendors monitor sales, manage products, fulfil orders, review analytics and oversee their entire business operation.",
+
+        impact:
+          "Provides every vendor with an independent business management platform inside the marketplace.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-inventory-dashboard.png",
+        alt: "Inventory Management",
+
+        title: "Inventory Management",
+
+        subtitle: "Warehouse and stock intelligence",
+
+        description:
+          "Inventory tools help vendors organise products, monitor stock availability and maintain accurate inventory records across the marketplace.",
+
+        impact:
+          "Improves stock control while reducing inventory errors and operational overhead.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-analytics-dashboard.png",
+        alt: "Vendor Analytics",
+
+        title: "Business Analytics",
+
+        subtitle: "Data-driven business insights",
+
+        description:
+          "Interactive dashboards provide vendors with insights into sales, revenue, customer activity and overall marketplace performance.",
+
+        impact:
+          "Transforms operational data into actionable business intelligence for smarter decision-making.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/customer-payment-method.png",
+        alt: "Customer Payment Methods",
+
+        title: "Wallet & Payment Methods",
+
+        subtitle: "Secure digital payment experience",
+
+        description:
+          "Customers can securely manage payment methods and complete transactions through an intuitive payment experience integrated into the platform.",
+
+        impact:
+          "Simplifies checkout while improving transaction reliability and customer confidence.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-withdrawal-dashboard.png",
+        alt: "Vendor Withdrawal Dashboard",
+
+        title: "Vendor Withdrawal Centre",
+
+        subtitle: "Financial operations made simple",
+
+        description:
+          "Vendors can monitor earnings, request withdrawals and manage financial transactions from a centralized financial dashboard.",
+
+        impact:
+          "Provides transparent financial management and supports efficient vendor payouts.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-store-settings.png",
+        alt: "Store Settings",
+
+        title: "Store Configuration",
+
+        subtitle: "Complete business customization",
+
+        description:
+          "Allows vendors to configure their storefront, business information, payment preferences and operational settings.",
+
+        impact:
+          "Empowers vendors to personalise their businesses while maintaining marketplace standards.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-creditboost-dashboard.png",
+        alt: "Credit Boost Dashboard",
+
+        title: "Credit Boost Engine",
+
+        subtitle: "Marketplace growth and promotion",
+
+        description:
+          "A built-in promotional system that enables vendors to increase product visibility through paid marketplace promotion.",
+
+        impact:
+          "Creates an additional revenue model for the platform while helping vendors grow faster.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-support-dashboard.png",
+        alt: "Vendor Support",
+
+        title: "Support Centre",
+
+        subtitle: "Integrated vendor assistance",
+
+        description:
+          "A centralized support system that enables vendors to raise issues, monitor requests and receive assistance without leaving the platform.",
+
+        impact:
+          "Improves operational efficiency while delivering better support experiences.",
+      },
+
+      {
+        src: "/images/products/marvelmarts/vendor-livechat-interface.png",
+        alt: "Live Messaging",
+
+        title: "Live Messaging",
+
+        subtitle: "Real-time marketplace communication",
+
+        description:
+          "Built-in messaging enables seamless communication between marketplace participants without relying on external communication tools.",
+
+        impact:
+          "Strengthens collaboration, improves response times and enhances the overall marketplace experience.",
+      },
+    ],
 
     liveUrl: "https://marvelmarts.com",
 
@@ -568,6 +791,70 @@ export const products: Product[] = [
             },
           ],
 
+
+          ecosystem: {
+            available: true,
+
+            title: "Enterprise Commerce Ecosystem",
+
+            description:
+              "MarvelMarts was designed as a complete commerce ecosystem where buyers, vendors and administrators operate together through a unified platform. Each role has dedicated tools while sharing a common marketplace infrastructure.",
+
+            groups: [
+              {
+                title: "Buyers",
+
+                description:
+                  "Discover products, place orders and manage purchases.",
+
+                features: [
+                  "Marketplace",
+                  "Product Search",
+                  "Wishlist",
+                  "Orders",
+                  "Reviews",
+                  "Secure Checkout",
+                ],
+              },
+
+              {
+                title: "Vendors",
+
+                description:
+                  "Operate an independent online business within the marketplace.",
+
+                features: [
+                  "Dashboard",
+                  "Inventory",
+                  "Orders",
+                  "Analytics",
+                  "Wallet",
+                  "Payouts",
+                  "Live Messaging",
+                  "Support",
+                  "Boost Center",
+                ],
+              },
+
+              {
+                title: "Administrators",
+
+                description:
+                  "Manage the marketplace, vendors and platform operations.",
+
+                features: [
+                  "Vendor Management",
+                  "Marketplace Control",
+                  "Order Fulfilment",
+                  "Reports",
+                  "CMS",
+                  "Moderation",
+                  "Configuration",
+                ],
+              },
+            ],
+          },
+
           solutions: [
           {
             title: "Modular Full-Stack Architecture",
@@ -624,6 +911,54 @@ export const products: Product[] = [
           },
         ],
 
+
+        evolution: {
+          available: true,
+
+          title: "Platform Evolution",
+
+          description:
+            "MarvelMarts evolved from an online marketplace concept into a comprehensive enterprise commerce platform. Each stage introduced new capabilities that expanded the platform beyond buying and selling into a complete business ecosystem.",
+
+          steps: [
+            {
+              title: "Marketplace Vision",
+              description:
+                "The project began with a simple vision: create a scalable online marketplace where multiple vendors could sell products through one unified platform while customers enjoyed a seamless shopping experience.",
+            },
+
+            {
+              title: "Marketplace Foundation",
+              description:
+                "Core marketplace functionality was established, including authentication, product management, categories, shopping cart, checkout and order processing to support day-to-day commerce operations.",
+            },
+
+            {
+              title: "Vendor Business Suite",
+              description:
+                "The platform expanded beyond selling products by introducing dedicated vendor workspaces with inventory management, analytics, order management, messaging and operational tools.",
+            },
+
+            {
+              title: "Financial Operations",
+              description:
+                "Advanced financial workflows such as wallets, withdrawals, payment methods, vendor settlements and promotional credit systems transformed MarvelMarts into a financially capable commerce platform.",
+            },
+
+            {
+              title: "Business Intelligence",
+              description:
+                "Interactive analytics, reporting dashboards and operational insights enabled vendors and administrators to make data-driven business decisions while improving overall marketplace performance.",
+            },
+
+            {
+              title: "Enterprise Commerce Platform",
+              description:
+                "Today MarvelMarts operates as a complete enterprise commerce ecosystem connecting buyers, vendors and administrators through scalable architecture, business workflows and modern engineering practices.",
+            },
+          ],
+        },
+
         results: [
       {
         value: "100+",
@@ -675,6 +1010,9 @@ export const products: Product[] = [
   slug: "apextraders",
 
   title: "ApexTraders",
+
+  headline:
+  "Designing a modern real-time trading experience.",
 
   client: "Personal Product",
 

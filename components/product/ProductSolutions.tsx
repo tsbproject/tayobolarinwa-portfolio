@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import InfoCard from "@/components/ui/InfoCard";
 
 import { Product } from "@/types/product";
 
@@ -25,27 +26,29 @@ export default function ProductSolutions({
         <SectionHeading
           eyebrow="Solutions"
           title="Engineering Solutions"
-          description={`How the identified challenges were addressed while building ${product.title}.`}
+          description={`Each challenge was addressed through deliberate architectural and engineering decisions that support long-term scalability and maintainability.`}
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-2">
+        <div className="mt-20 grid gap-6 lg:grid-cols-2">
 
-          {product.solutions.map((solution) => (
+          {product.solutions.map((solution, index) => (
 
-            <div
+            <InfoCard
               key={solution.title}
-              className="rounded-3xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
-            >
+              label={`Solution ${String(index + 1).padStart(2, "0")}`}
+              value={
+                <>
+                  <h3 className="text-2xl font-bold text-slate-900">
+                    {solution.title}
+                  </h3>
 
-              <h3 className="text-2xl font-bold">
-                {solution.title}
-              </h3>
-
-              <p className="mt-5 leading-8 text-slate-600">
-                {solution.description}
-              </p>
-
-            </div>
+                  <p className="mt-5 leading-8 text-slate-600">
+                    {solution.description}
+                  </p>
+                </>
+              }
+              className="h-full"
+            />
 
           ))}
 

@@ -1,14 +1,21 @@
 export interface ProductImage {
   src: string;
+
   alt: string;
+
   title: string;
+
+  subtitle?: string;
+
   description: string;
+
+  impact?: string;
 }
 
 export interface ProductFeatureModule {
   title: string;
+  description?: string;
 }
-
 
 export interface ProductFeatureHighlight {
   available: boolean;
@@ -71,6 +78,24 @@ export interface ProductEvolution {
   steps: ProductEvolutionStep[];
 }
 
+
+
+export interface ProductEcosystemGroup {
+  title: string;
+  description: string;
+  features: string[];
+}
+
+export interface ProductEcosystem {
+  available: boolean;
+  title: string;
+  description: string;
+  groups: ProductEcosystemGroup[];
+}
+
+
+
+
 export interface ProductArchitecture {
   technology: string;
   description: string;
@@ -97,17 +122,17 @@ export interface ProductLesson {
   description: string;
 }
 
-export interface ProductFeatureHighlight {
-  available: boolean;
-  title: string;
-  description: string;
-  image: string;
-}
+
 
 export interface Product {
+
+  showEngineeringJourney?: boolean;
+
   slug: string;
 
   title: string;
+
+  headline: string;
 
   category: string;
 
@@ -153,11 +178,14 @@ export interface Product {
 
   challenges?: ProductChallenge[];
 
+
   solutions?: ProductSolution[];
 
   lessons?: ProductLesson[];
 
   featureHighlight?: ProductFeatureHighlight;
+
+  ecosystem?: ProductEcosystem;
 
   vision?: string;
 

@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import InfoCard from "@/components/ui/InfoCard";
 
 import { Product } from "@/types/product";
 
@@ -25,31 +26,29 @@ export default function ProductEngineeringDecisions({
         <SectionHeading
           eyebrow="Engineering"
           title="Engineering Decisions"
-          description={`Key technical decisions that shaped the architecture of ${product.title}.`}
+          description={`Every major technology choice was made to improve scalability, maintainability and long-term product evolution.`}
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-2">
+        <div className="mt-20 grid gap-6 lg:grid-cols-2">
 
           {product.engineeringDecisions.map((item) => (
 
-            <div
+            <InfoCard
               key={item.title}
-              className="rounded-3xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
-            >
+              label={item.title}
+              value={
+                <>
+                  <h3 className="text-2xl font-bold text-slate-900">
+                    {item.decision}
+                  </h3>
 
-              <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
-                {item.title}
-              </p>
-
-              <h3 className="mt-3 text-2xl font-bold">
-                {item.decision}
-              </h3>
-
-              <p className="mt-5 leading-8 text-slate-600">
-                {item.reason}
-              </p>
-
-            </div>
+                  <p className="mt-5 leading-8 text-slate-600">
+                    {item.reason}
+                  </p>
+                </>
+              }
+              className="h-full"
+            />
 
           ))}
 
