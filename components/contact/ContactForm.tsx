@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import toast from "react-hot-toast";
 
 import {
   consultationSchema,
@@ -62,7 +63,7 @@ export default function ContactForm() {
     } catch (error) {
       console.error(error);
 
-      alert(
+     toast.error(
         error instanceof Error
           ? error.message
           : "Something went wrong."
@@ -305,7 +306,7 @@ export default function ContactForm() {
                   Above ₦5,000,000
                 </option>
                 <option value="Let's Discuss">
-                  Let's Discuss
+                  Let&apos;s Discuss
                 </option>
               </select>
 

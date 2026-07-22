@@ -1,5 +1,3 @@
-import { render } from "@react-email/render";
-
 import { resendProvider } from "../providers/resend.provider";
 
 export interface SendEmailOptions {
@@ -17,14 +15,25 @@ export class EmailService {
     react,
   }: SendEmailOptions) {
 
-    const html = await render(react);
+    const response =
+      await resendProvider.emails.send({
 
-    return resendProvider.emails.send({
-      from,
-      to,
-      subject,
-      html,
-    });
+        from,
+
+        to,
+
+        subject,
+
+        react,
+
+      });
+
+    console.log(
+      "Email Sent:",
+      response.data?.id
+    );
+
+    return response;
 
   }
 }
