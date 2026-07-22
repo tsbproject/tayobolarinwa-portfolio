@@ -1,4 +1,5 @@
 import ConsultationEmail from "@/app/_emails/ConsultationEmail";
+import ConsultationConfirmationEmail from "@/app/_emails/ConsultationConfirmationEmail";
 
 import type { ConsultationInput } from "../validation/consultation";
 import type { ServiceResult } from "../types/service";
@@ -14,21 +15,40 @@ export class ConsultationService {
 
   try {
 
-    await EmailService.send({
+    await Promise.all([
+  EmailService.send({
 
-      from: AppConfig.sender,
+    from: AppConfig.sender,
 
-      to: AppConfig.email,
+    to: AppConfig.email,
 
-      subject: `New Consultation Request — ${data.fullName}`,
+    subject: `New Consultation Request — ${data.fullName}`,
 
-      react: (
-        <ConsultationEmail
-          data={data}
-        />
-      ),
+    react: (
+      <ConsultationEmail
+        data={data}
+      />
+    ),
 
-    });
+  }),
+
+  EmailService.send({
+
+    from: AppConfig.sender,
+
+    to: data.email,
+
+    subject:
+      "Thank you for contacting Tayo Bolarinwa",
+
+    react: (
+      <ConsultationConfirmationEmail
+        fullName={data.fullName}
+      />
+    ),
+
+  }),
+]);
 
     return {
 
