@@ -14,7 +14,7 @@ const reasons = [
     icon: Lightbulb,
     title: "Product-First Thinking",
     description:
-      "Every decision starts with solving business problems and creating value for users—not simply writing code.",
+      "Every decision starts with solving business problems and creating value for users, not simply writing code.",
   },
   {
     icon: Layers3,
