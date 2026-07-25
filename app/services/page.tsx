@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Full-stack engineering, product development, technical consulting, and digital transformation services by Tayo Bolarinwa.",
-};
+import ServicesHero from "@/components/services/ServicesHero";
+import ServicesGrid from "@/components/services/ServicesGrid";
+import DevelopmentProcess from "@/components/services/DevelopmentProcess";
+import TechnologyStack from "@/components/services/TechnologyStack";
+import WhyWorkWithMe from "@/components/services/WhyWorkWithMe";
+import ServicesFAQ from "@/components/services/ServicesFAQ";
+import ServicesCTA from "@/components/services/ServicesCTA";
 
 export default function ServicesPage() {
   return (
-    <main className="py-24">
-      <div className="container mx-auto px-6">
-        <h1 className="text-5xl font-bold">Services</h1>
+    <>
+      <ServicesHero />
+      <ServicesGrid />
+      <DevelopmentProcess />
+      <TechnologyStack />
+      <WhyWorkWithMe />
+      <ServicesFAQ />
+      <ServicesCTA />
 
-        <p className="mt-6 text-lg text-slate-600">
-          This page is currently under development.
-        </p>
-      </div>
-    </main>
+    </>
   );
 }
