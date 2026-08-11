@@ -14,7 +14,7 @@ export default function HeroContent() {
         {hero.greeting}
         </p>
 
-        <h1 className="heading mt-2 text-6xl font-bold tracking-tight md:text-7xl">
+        <h1 className="heading mt-2 text-4xl md:text-6xl font-bold tracking-tight md:text-7xl">
         {hero.name}
         </h1>
 
