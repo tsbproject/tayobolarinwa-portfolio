@@ -33,7 +33,7 @@ export interface BlueprintPage {
 
 export interface ProductBlueprint {
   available: boolean;
-  coverImage?: string;
+  coverImage: string;
   description: string;
   pages: BlueprintPage[];
 }
@@ -156,7 +156,7 @@ export interface Product {
 
   technologies: string[];
 
-  coverImage: string;
+  coverImage?: string;
 
   gallery: ProductImage[];
 
