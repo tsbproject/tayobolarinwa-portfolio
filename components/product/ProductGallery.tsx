@@ -13,6 +13,10 @@ type Props = {
 export default function ProductGallery({
   product,
 }: Props) {
+  if (!product.gallery?.length) {
+    return null;
+  }
+
   return (
     <Section>
       <Container>
