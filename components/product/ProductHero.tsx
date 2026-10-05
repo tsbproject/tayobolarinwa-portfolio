@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ShieldCheck } from "lucide-react";
 
 import Container from "@/components/layout/Container";
 import Badge from "@/components/ui/Badge";
@@ -104,13 +105,24 @@ export default function ProductHero({
 
         </div>
 
-          <Image
-            src={product.coverImage}
-            alt={product.title}
-            fill
-            priority
-            className="object-center object-top transition duration-700 hover:scale-[1.02]"
-          />
+          {product.coverImage ? (
+            <Image
+              src={product.coverImage}
+              alt={product.title}
+              fill
+              priority
+              className="object-center object-top transition duration-700 hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="absolute inset-x-0 bottom-0 top-[65px] flex flex-col items-center justify-center bg-slate-950 px-8 text-center text-white">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-amber-300/30 bg-amber-300/10 shadow-2xl">
+                <ShieldCheck className="h-10 w-10 text-amber-300" />
+              </div>
+              <p className="mt-8 text-sm font-semibold uppercase tracking-[0.3em] text-amber-300">Verified Housing Infrastructure</p>
+              <p className="mt-4 text-5xl font-bold tracking-tight">Rilaebu</p>
+              <p className="mt-4 max-w-xl text-lg leading-8 text-slate-300">A security-first platform for safer, transparent direct tenancies.</p>
+            </div>
+          )}
 
         </div>
 
