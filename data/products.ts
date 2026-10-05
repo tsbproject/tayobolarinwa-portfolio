@@ -23,8 +23,99 @@ export const products: Product[] = [
       "PostgreSQL",
       "Resend",
     ],
-    coverImage: "",
-    gallery: [],
+    coverImage: "/images/products/rilaebu/rilaebu-frontpage.PNG",
+    gallery: [
+      {
+        src: "/images/products/rilaebu/rilaebu-frontpage.PNG",
+        alt: "Rilaebu housing platform homepage",
+        title: "Rilaebu Homepage",
+        subtitle: "Housing you can trust",
+        description:
+          "The public entry point introduces Rilaebu's verified-housing proposition and guides users into the platform's core rental journey.",
+        impact:
+          "Establishes the product's trust-first positioning while giving landlords and tenants a clear starting point.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-searchpage.PNG",
+        alt: "Rilaebu property search interface",
+        title: "Property Search",
+        subtitle: "A focused housing discovery experience",
+        description:
+          "The search experience provides the interface for discovering available housing within Rilaebu's marketplace journey.",
+        impact:
+          "Moves the product from its public proposition into practical property discovery.",
+      },
+      {
+        src: "/images/products/rilaebu/landlord-tenant-register.PNG",
+        alt: "Rilaebu landlord and tenant registration interface",
+        title: "Account Registration",
+        subtitle: "Role-aware onboarding",
+        description:
+          "Registration introduces users to the platform through landlord and tenant account paths as the foundation for role-aware housing workflows.",
+        impact:
+          "Creates a structured entry point for the two primary sides of the rental marketplace.",
+      },
+      {
+        src: "/images/products/rilaebu/sign-in-page.PNG",
+        alt: "Rilaebu sign-in interface",
+        title: "Secure Sign In",
+        subtitle: "Account access",
+        description:
+          "The sign-in experience provides a focused authentication entry point for returning Rilaebu users.",
+        impact:
+          "Supports the identity and session foundation that underpins protected platform experiences.",
+      },
+      {
+        src: "/images/products/rilaebu/password-recovery.PNG",
+        alt: "Rilaebu password recovery interface",
+        title: "Password Recovery",
+        subtitle: "Account recovery workflow",
+        description:
+          "The recovery interface supports users who need to regain access to their Rilaebu account.",
+        impact:
+          "Extends the authentication experience beyond sign-in with a practical account-recovery path.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-verification-page.PNG",
+        alt: "Rilaebu account verification interface",
+        title: "Account Verification",
+        subtitle: "Trust begins with verified identity",
+        description:
+          "The verification experience forms part of Rilaebu's trust-first account lifecycle and guides users through account verification.",
+        impact:
+          "Connects identity onboarding with the wider trust architecture of the housing platform.",
+      },
+      {
+        src: "/images/products/rilaebu/tenant-page-dashboard.PNG",
+        alt: "Rilaebu tenant dashboard",
+        title: "Tenant Dashboard",
+        subtitle: "A dedicated tenant workspace",
+        description:
+          "The tenant dashboard provides a role-specific workspace for the tenant side of the Rilaebu experience.",
+        impact:
+          "Demonstrates the platform's progression from public discovery into authenticated, role-aware product experiences.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-landlord-dashboard.PNG",
+        alt: "Rilaebu landlord dashboard",
+        title: "Landlord Dashboard",
+        subtitle: "A dedicated landlord workspace",
+        description:
+          "The landlord dashboard provides a role-specific workspace for the supply side of the platform.",
+        impact:
+          "Establishes the interface foundation for landlord-focused housing and operational workflows.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-aboutpage.PNG",
+        alt: "Rilaebu about page",
+        title: "Platform Story",
+        subtitle: "The mission behind Rilaebu",
+        description:
+          "The about experience explains the product's housing mission and the trust problem Rilaebu is being designed to address.",
+        impact:
+          "Gives the platform narrative context beyond individual screens and workflows.",
+      },
+    ],
     category: "PropTech Platform",
     status: "Active Development",
     blueprint: {
