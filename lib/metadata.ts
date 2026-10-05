@@ -13,6 +13,8 @@ export function generateProductMetadata(
 
   const url = `${SITE_URL}/products/${product.slug}`;
 
+  const socialImage = product.coverImage;
+
   return {
     title,
 
@@ -39,14 +41,18 @@ export function generateProductMetadata(
       url,
       siteName: "Tayo Bolarinwa",
 
-      images: [
-        {
-          url: product.coverImage,
-          width: 1200,
-          height: 630,
-          alt: product.title,
-        },
-      ],
+      ...(socialImage
+        ? {
+            images: [
+              {
+                url: socialImage,
+                width: 1200,
+                height: 630,
+                alt: product.title,
+              },
+            ],
+          }
+        : {}),
 
       type: "article",
     },
@@ -55,7 +61,7 @@ export function generateProductMetadata(
       card: "summary_large_image",
       title,
       description,
-      images: [product.coverImage],
+      ...(socialImage ? { images: [socialImage] } : {}),
     },
   };
 }
