@@ -2,6 +2,207 @@ import { Product } from "@/types/product";
 
 export const products: Product[] = [
   {
+    slug: "rilaebu",
+    title: "Rilaebu",
+    headline: "Engineering verified housing infrastructure for safer direct tenancies.",
+    client: "Personal Product",
+    industry: "PropTech / Housing Infrastructure",
+    role: "Founder & Lead Full-Stack Engineer",
+    duration: "Active Development",
+    year: "2026",
+    featured: true,
+    summary:
+      "A security-first housing platform designed to make direct landlord-tenant transactions safer, more transparent and operationally complete.",
+    description:
+      "Rilaebu is a verified housing infrastructure platform being engineered for the Nigerian rental market. It combines trusted property discovery with identity, verification, controlled transaction workflows, landlord operations, auditability and trust-and-safety foundations. The product is currently in active development, with the architecture intentionally designed for secure growth without premature infrastructure complexity.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Resend",
+    ],
+    coverImage: "",
+    gallery: [],
+    metrics: {
+      performance: 0,
+      seo: 0,
+      accessibility: 0,
+    },
+    category: "PropTech Platform",
+    status: "Active Development",
+    vision:
+      "Build verified housing infrastructure that enables landlords and tenants to complete direct rental journeys with clearer trust signals, transparent costs, controlled workflows and stronger operational accountability.",
+    challenge:
+      "Nigeria's rental journey can involve fragmented discovery, unclear authority, weak trust signals, hidden costs and disconnected offline processes. Rilaebu is being designed to connect discovery, verification and transaction infrastructure without recreating the traditional informal gatekeeping model.",
+    architecture: [
+      {
+        technology: "Next.js + TypeScript",
+        description:
+          "Provides the initial full-stack application foundation with explicit domain and service boundaries that can evolve as scale and operational needs justify separation.",
+      },
+      {
+        technology: "Modular Monolith",
+        description:
+          "Keeps the first production architecture operationally simple while preserving clear boundaries for identity, properties, verification, listings, transactions, trust and administration.",
+      },
+      {
+        technology: "PostgreSQL + Prisma",
+        description:
+          "Provides a relational, type-safe data foundation for stateful housing, identity and transaction workflows.",
+      },
+      {
+        technology: "Identity & Sessions",
+        description:
+          "The implemented foundation covers registration, email verification and account-verification workflows, with the broader lifecycle designed for recovery, session management, MFA and step-up authentication.",
+      },
+      {
+        technology: "Authorization",
+        description:
+          "Sensitive actions are designed around role permissions, resource ownership and current state or policy checks, with enforcement on the server rather than relying on frontend visibility.",
+      },
+      {
+        technology: "Audit & Observability",
+        description:
+          "Authentication, API, authorization/security and business audit events are separated so sensitive workflows can be traced while protected data and credentials remain excluded from logs.",
+      },
+    ],
+    engineeringDecisions: [
+      {
+        title: "Architecture Strategy",
+        decision: "Modular monolith before microservices",
+        reason:
+          "Rilaebu preserves explicit domain boundaries without paying the operational cost of distributed services before scale, reliability or ownership boundaries justify them.",
+      },
+      {
+        title: "Authorization Model",
+        decision: "RBAC + ownership + state/policy checks",
+        reason:
+          "Role-based access alone is insufficient for sensitive housing and financial workflows. Authorization decisions also consider the actor's relationship to a resource and its current state.",
+      },
+      {
+        title: "Security Foundation",
+        decision: "Security as architecture",
+        reason:
+          "Authentication, authorization, auditability, logging, privacy, abuse controls and monitoring are treated as foundation concerns rather than features to bolt on after launch.",
+      },
+      {
+        title: "Property Data Model",
+        decision: "Verified asset separated from market listing",
+        reason:
+          "Property, ownership, address and verification remain authoritative domain records while a listing is treated as the market-facing representation of an underlying asset or unit.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Designing trust into the product",
+        description:
+          "A generic verified badge is not enough. The platform must communicate exactly what has been verified while preserving evidence quality and user privacy.",
+      },
+      {
+        title: "Fine-grained access control",
+        description:
+          "Tenant, landlord, professional, verification, support, finance and administrative workflows require stronger boundaries than simple role checks.",
+      },
+      {
+        title: "Complex workflows without premature complexity",
+        description:
+          "The long-term platform spans identity, properties, verification, applications, agreements, payments, disputes and operations, but the MVP must remain focused and operable.",
+      },
+      {
+        title: "Sensitive operational evidence",
+        description:
+          "Security and business events need enough context for investigation and audit without leaking credentials, identity documents, tokens or other protected information.",
+      },
+    ],
+    solutions: [
+      {
+        title: "Explicit domain boundaries",
+        description:
+          "The architecture separates identity, authentication, authorization, properties, verification, listings, applications, agreements, payments, audit, security events and administration into clear modules.",
+      },
+      {
+        title: "Policy-driven authorization",
+        description:
+          "Sensitive server-side actions combine permissions, resource relationships and current state to produce authorization decisions based on least privilege.",
+      },
+      {
+        title: "Traceable security architecture",
+        description:
+          "Structured authentication, API, audit and security-event records are designed around request correlation, redaction and append-oriented audit evidence.",
+      },
+      {
+        title: "Deliberate phased delivery",
+        description:
+          "The platform defines future capability while implementing the secure golden path first, avoiding unnecessary infrastructure and unsupported feature claims.",
+      },
+    ],
+    lessons: [
+      {
+        title: "Trust requires explainability",
+        description:
+          "Verification is more useful when users understand what was checked, rather than seeing an unexplained status badge.",
+      },
+      {
+        title: "Authorization is a domain problem",
+        description:
+          "Secure access control depends on resource relationships and workflow state as much as it depends on a user's role.",
+      },
+      {
+        title: "Architecture should preserve options",
+        description:
+          "Clear boundaries can support future service extraction without forcing a young product to operate distributed infrastructure too early.",
+      },
+      {
+        title: "Security decisions shape product design",
+        description:
+          "Identity, auditing, privacy and abuse prevention affect workflows and data models from the beginning, so they belong in product architecture.",
+      },
+    ],
+    evolution: {
+      available: true,
+      title: "Product Development Roadmap",
+      description:
+        "Rilaebu is being delivered deliberately from product and security foundations toward a focused verified-tenancy MVP before broader platform expansion.",
+      steps: [
+        {
+          title: "Product & Trust Foundation",
+          description:
+            "Define the housing problem, trust model, product principles, design system, legal/compliance dependencies and production architecture.",
+        },
+        {
+          title: "Identity & Session Foundation",
+          description:
+            "Build the account lifecycle and secure identity/session foundations. Registration and email verification are already part of the active implementation.",
+        },
+        {
+          title: "Verified Marketplace MVP",
+          description:
+            "Develop the focused landlord and tenant journey around profiles, properties, authority evidence, verification, listings, enquiries, viewings and applications.",
+        },
+        {
+          title: "Transaction Infrastructure",
+          description:
+            "Introduce qualified payment integration, transaction records and digital agreement workflows using appropriately licensed partners.",
+        },
+        {
+          title: "Trust & Operations Expansion",
+          description:
+            "Strengthen landlord operations, fraud controls, disputes, maintenance, rent collection and mobile/PWA capabilities after the core journey is proven.",
+        },
+      ],
+    },
+    roadmap: [
+      { phase: "Foundation", title: "Product, architecture and security specification", status: "completed" },
+      { phase: "Identity", title: "Authentication, email verification and session foundation", status: "current" },
+      { phase: "Marketplace", title: "Properties, verification, listings, viewings and applications", status: "planned" },
+      { phase: "Transactions", title: "Agreements and qualified payment integration", status: "planned" },
+      { phase: "Operations", title: "Trust, fraud, disputes and landlord operations", status: "planned" },
+    ],
+  },
+
+  {
     slug: "marvel-creative-media",
 
     title: "Marvel Creative Media",
