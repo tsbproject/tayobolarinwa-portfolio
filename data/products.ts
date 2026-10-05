@@ -27,6 +27,13 @@ export const products: Product[] = [
     gallery: [],
     category: "PropTech Platform",
     status: "Active Development",
+    blueprint: {
+      available: true,
+      coverImage: "/images/products/rilaebu/rilaebu-product-development-roadmap.png",
+      description:
+        "Rilaebu product development roadmap showing the progression from product and trust foundations through identity, the verified marketplace, transaction infrastructure and trust-and-operations expansion.",
+      pages: [],
+    },
     vision:
       "Build verified housing infrastructure that enables landlords and tenants to complete direct rental journeys with clearer trust signals, transparent costs, controlled workflows and stronger operational accountability.",
     challenge:
