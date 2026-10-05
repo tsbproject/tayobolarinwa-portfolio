@@ -164,7 +164,7 @@ export interface Product {
 
   githubUrl?: string;
 
-  metrics: ProductMetrics;
+  metrics?: ProductMetrics;
 
   blueprint?: ProductBlueprint;
 
