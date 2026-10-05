@@ -23,6 +23,10 @@ const metrics = [
 export default function ProductMetrics({
   product,
 }: Props) {
+  if (!product.metrics) {
+    return null;
+  }
+
   return (
     <section className="py-20">
       <Container>
