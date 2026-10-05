@@ -25,7 +25,7 @@ export const products: Product[] = [
       "Resend",
     ],
     coverImage: "/images/products/rilaebu/rilaebu-frontpage.PNG",
-    liveUrl: "https://rilaebu.vercel.app",
+    // liveUrl: "https://rilaebu.vercel.app",
     gallery: [
       {
         src: "/images/products/rilaebu/rilaebu-frontpage.PNG",
