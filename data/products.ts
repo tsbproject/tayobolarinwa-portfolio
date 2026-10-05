@@ -4,10 +4,11 @@ export const products: Product[] = [
   {
     slug: "rilaebu",
     title: "Rilaebu",
+    liveUrl: "https://rilaebu.vercel.app",
     headline: "Engineering verified housing infrastructure for safer direct tenancies.",
     client: "Personal Product",
     industry: "PropTech / Housing Infrastructure",
-    role: "Founder & Lead Full-Stack Engineer",
+    role: "Lead Full-Stack Engineer",
     duration: "2026 – Present",
     year: "2026",
     featured: true,
