@@ -8,7 +8,7 @@ export const products: Product[] = [
     client: "Personal Product",
     industry: "PropTech / Housing Infrastructure",
     role: "Founder & Lead Full-Stack Engineer",
-    duration: "Active Development",
+    duration: "2026 – Present",
     year: "2026",
     featured: true,
     summary:
@@ -25,11 +25,6 @@ export const products: Product[] = [
     ],
     coverImage: "",
     gallery: [],
-    metrics: {
-      performance: 0,
-      seo: 0,
-      accessibility: 0,
-    },
     category: "PropTech Platform",
     status: "Active Development",
     vision:
