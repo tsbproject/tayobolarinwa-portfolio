@@ -2,6 +2,302 @@ import { Product } from "@/types/product";
 
 export const products: Product[] = [
   {
+    slug: "rilaebu",
+    title: "Rilaebu",
+    liveUrl: "https://rilaebu.vercel.app",
+    headline: "Engineering verified housing infrastructure for safer direct tenancies.",
+    client: "Personal Product",
+    industry: "PropTech / Housing Infrastructure",
+    role: "Lead Full-Stack Engineer",
+    duration: "2026 – Present",
+    year: "2026",
+    featured: true,
+    summary:
+      "A security-first housing platform designed to make direct landlord-tenant transactions safer, more transparent and operationally complete.",
+    description:
+      "Rilaebu is a verified housing infrastructure platform being engineered for the Nigerian rental market. It combines trusted property discovery with identity, verification, controlled transaction workflows, landlord operations, auditability and trust-and-safety foundations. The product is currently in active development, with the architecture intentionally designed for secure growth without premature infrastructure complexity.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Resend",
+    ],
+    coverImage: "/images/products/rilaebu/rilaebu-frontpage.PNG",
+    // liveUrl: "https://rilaebu.vercel.app",
+    gallery: [
+      {
+        src: "/images/products/rilaebu/rilaebu-frontpage.PNG",
+        alt: "Rilaebu housing platform homepage",
+        title: "Rilaebu Homepage",
+        subtitle: "Housing you can trust",
+        description:
+          "The public entry point introduces Rilaebu's verified-housing proposition and guides users into the platform's core rental journey.",
+        impact:
+          "Establishes the product's trust-first positioning while giving landlords and tenants a clear starting point.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-searchpage.PNG",
+        alt: "Rilaebu property search interface",
+        title: "Property Search",
+        subtitle: "A focused housing discovery experience",
+        description:
+          "The search experience provides the interface for discovering available housing within Rilaebu's marketplace journey.",
+        impact:
+          "Moves the product from its public proposition into practical property discovery.",
+      },
+      {
+        src: "/images/products/rilaebu/landlord-tenant-register.PNG",
+        alt: "Rilaebu landlord and tenant registration interface",
+        title: "Account Registration",
+        subtitle: "Role-aware onboarding",
+        description:
+          "Registration introduces users to the platform through landlord and tenant account paths as the foundation for role-aware housing workflows.",
+        impact:
+          "Creates a structured entry point for the two primary sides of the rental marketplace.",
+      },
+      {
+        src: "/images/products/rilaebu/sign-in-page.PNG",
+        alt: "Rilaebu sign-in interface",
+        title: "Secure Sign In",
+        subtitle: "Account access",
+        description:
+          "The sign-in experience provides a focused authentication entry point for returning Rilaebu users.",
+        impact:
+          "Supports the identity and session foundation that underpins protected platform experiences.",
+      },
+      {
+        src: "/images/products/rilaebu/password-recovery.PNG",
+        alt: "Rilaebu password recovery interface",
+        title: "Password Recovery",
+        subtitle: "Account recovery workflow",
+        description:
+          "The recovery interface supports users who need to regain access to their Rilaebu account.",
+        impact:
+          "Extends the authentication experience beyond sign-in with a practical account-recovery path.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-verification-page.PNG",
+        alt: "Rilaebu account verification interface",
+        title: "Account Verification",
+        subtitle: "Trust begins with verified identity",
+        description:
+          "The verification experience forms part of Rilaebu's trust-first account lifecycle and guides users through account verification.",
+        impact:
+          "Connects identity onboarding with the wider trust architecture of the housing platform.",
+      },
+      {
+        src: "/images/products/rilaebu/tenant-page-dashboard.PNG",
+        alt: "Rilaebu tenant dashboard",
+        title: "Tenant Dashboard",
+        subtitle: "A dedicated tenant workspace",
+        description:
+          "The tenant dashboard provides a role-specific workspace for the tenant side of the Rilaebu experience.",
+        impact:
+          "Demonstrates the platform's progression from public discovery into authenticated, role-aware product experiences.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-landlord-dashboard.PNG",
+        alt: "Rilaebu landlord dashboard",
+        title: "Landlord Dashboard",
+        subtitle: "A dedicated landlord workspace",
+        description:
+          "The landlord dashboard provides a role-specific workspace for the supply side of the platform.",
+        impact:
+          "Establishes the interface foundation for landlord-focused housing and operational workflows.",
+      },
+      {
+        src: "/images/products/rilaebu/rilaebu-aboutpage.PNG",
+        alt: "Rilaebu about page",
+        title: "Platform Story",
+        subtitle: "The mission behind Rilaebu",
+        description:
+          "The about experience explains the product's housing mission and the trust problem Rilaebu is being designed to address.",
+        impact:
+          "Gives the platform narrative context beyond individual screens and workflows.",
+      },
+    ],
+    category: "PropTech Platform",
+    status: "Active Development",
+    blueprint: {
+      available: true,
+      coverImage: "/images/products/rilaebu/rilaebu-product-development-roadmap.png",
+      description:
+        "Rilaebu product development roadmap showing the progression from product and trust foundations through identity, the verified marketplace, transaction infrastructure and trust-and-operations expansion.",
+      pages: [],
+    },
+    vision:
+      "Build verified housing infrastructure that enables landlords and tenants to complete direct rental journeys with clearer trust signals, transparent costs, controlled workflows and stronger operational accountability.",
+    challenge:
+      "Nigeria's rental journey can involve fragmented discovery, unclear authority, weak trust signals, hidden costs and disconnected offline processes. Rilaebu is being designed to connect discovery, verification and transaction infrastructure without recreating the traditional informal gatekeeping model.",
+    architecture: [
+      {
+        technology: "Next.js + TypeScript",
+        description:
+          "Provides the initial full-stack application foundation with explicit domain and service boundaries that can evolve as scale and operational needs justify separation.",
+      },
+      {
+        technology: "Modular Monolith",
+        description:
+          "Keeps the first production architecture operationally simple while preserving clear boundaries for identity, properties, verification, listings, transactions, trust and administration.",
+      },
+      {
+        technology: "PostgreSQL + Prisma",
+        description:
+          "Provides a relational, type-safe data foundation for stateful housing, identity and transaction workflows.",
+      },
+      {
+        technology: "Identity & Sessions",
+        description:
+          "The implemented foundation covers registration, email verification and account-verification workflows, with the broader lifecycle designed for recovery, session management, MFA and step-up authentication.",
+      },
+      {
+        technology: "Authorization",
+        description:
+          "Sensitive actions are designed around role permissions, resource ownership and current state or policy checks, with enforcement on the server rather than relying on frontend visibility.",
+      },
+      {
+        technology: "Audit & Observability",
+        description:
+          "Authentication, API, authorization/security and business audit events are separated so sensitive workflows can be traced while protected data and credentials remain excluded from logs.",
+      },
+    ],
+    engineeringDecisions: [
+      {
+        title: "Architecture Strategy",
+        decision: "Modular monolith before microservices",
+        reason:
+          "Rilaebu preserves explicit domain boundaries without paying the operational cost of distributed services before scale, reliability or ownership boundaries justify them.",
+      },
+      {
+        title: "Authorization Model",
+        decision: "RBAC + ownership + state/policy checks",
+        reason:
+          "Role-based access alone is insufficient for sensitive housing and financial workflows. Authorization decisions also consider the actor's relationship to a resource and its current state.",
+      },
+      {
+        title: "Security Foundation",
+        decision: "Security as architecture",
+        reason:
+          "Authentication, authorization, auditability, logging, privacy, abuse controls and monitoring are treated as foundation concerns rather than features to bolt on after launch.",
+      },
+      {
+        title: "Property Data Model",
+        decision: "Verified asset separated from market listing",
+        reason:
+          "Property, ownership, address and verification remain authoritative domain records while a listing is treated as the market-facing representation of an underlying asset or unit.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Designing trust into the product",
+        description:
+          "A generic verified badge is not enough. The platform must communicate exactly what has been verified while preserving evidence quality and user privacy.",
+      },
+      {
+        title: "Fine-grained access control",
+        description:
+          "Tenant, landlord, professional, verification, support, finance and administrative workflows require stronger boundaries than simple role checks.",
+      },
+      {
+        title: "Complex workflows without premature complexity",
+        description:
+          "The long-term platform spans identity, properties, verification, applications, agreements, payments, disputes and operations, but the MVP must remain focused and operable.",
+      },
+      {
+        title: "Sensitive operational evidence",
+        description:
+          "Security and business events need enough context for investigation and audit without leaking credentials, identity documents, tokens or other protected information.",
+      },
+    ],
+    solutions: [
+      {
+        title: "Explicit domain boundaries",
+        description:
+          "The architecture separates identity, authentication, authorization, properties, verification, listings, applications, agreements, payments, audit, security events and administration into clear modules.",
+      },
+      {
+        title: "Policy-driven authorization",
+        description:
+          "Sensitive server-side actions combine permissions, resource relationships and current state to produce authorization decisions based on least privilege.",
+      },
+      {
+        title: "Traceable security architecture",
+        description:
+          "Structured authentication, API, audit and security-event records are designed around request correlation, redaction and append-oriented audit evidence.",
+      },
+      {
+        title: "Deliberate phased delivery",
+        description:
+          "The platform defines future capability while implementing the secure golden path first, avoiding unnecessary infrastructure and unsupported feature claims.",
+      },
+    ],
+    lessons: [
+      {
+        title: "Trust requires explainability",
+        description:
+          "Verification is more useful when users understand what was checked, rather than seeing an unexplained status badge.",
+      },
+      {
+        title: "Authorization is a domain problem",
+        description:
+          "Secure access control depends on resource relationships and workflow state as much as it depends on a user's role.",
+      },
+      {
+        title: "Architecture should preserve options",
+        description:
+          "Clear boundaries can support future service extraction without forcing a young product to operate distributed infrastructure too early.",
+      },
+      {
+        title: "Security decisions shape product design",
+        description:
+          "Identity, auditing, privacy and abuse prevention affect workflows and data models from the beginning, so they belong in product architecture.",
+      },
+    ],
+    evolution: {
+      available: true,
+      title: "Product Development Roadmap",
+      description:
+        "Rilaebu is being delivered deliberately from product and security foundations toward a focused verified-tenancy MVP before broader platform expansion.",
+      steps: [
+        {
+          title: "Product & Trust Foundation",
+          description:
+            "Define the housing problem, trust model, product principles, design system, legal/compliance dependencies and production architecture.",
+        },
+        {
+          title: "Identity & Session Foundation",
+          description:
+            "Build the account lifecycle and secure identity/session foundations. Registration and email verification are already part of the active implementation.",
+        },
+        {
+          title: "Verified Marketplace MVP",
+          description:
+            "Develop the focused landlord and tenant journey around profiles, properties, authority evidence, verification, listings, enquiries, viewings and applications.",
+        },
+        {
+          title: "Transaction Infrastructure",
+          description:
+            "Introduce qualified payment integration, transaction records and digital agreement workflows using appropriately licensed partners.",
+        },
+        {
+          title: "Trust & Operations Expansion",
+          description:
+            "Strengthen landlord operations, fraud controls, disputes, maintenance, rent collection and mobile/PWA capabilities after the core journey is proven.",
+        },
+      ],
+    },
+    roadmap: [
+      { phase: "Foundation", title: "Product, architecture and security specification", status: "completed" },
+      { phase: "Identity", title: "Authentication, email verification and session foundation", status: "current" },
+      { phase: "Marketplace", title: "Properties, verification, listings, viewings and applications", status: "planned" },
+      { phase: "Transactions", title: "Agreements and qualified payment integration", status: "planned" },
+      { phase: "Operations", title: "Trust, fraud, disputes and landlord operations", status: "planned" },
+    ],
+  },
+
+  {
     slug: "marvel-creative-media",
 
     title: "Marvel Creative Media",

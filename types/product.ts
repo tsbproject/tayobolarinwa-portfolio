@@ -156,7 +156,7 @@ export interface Product {
 
   technologies: string[];
 
-  coverImage: string;
+  coverImage?: string;
 
   gallery: ProductImage[];
 
@@ -164,7 +164,7 @@ export interface Product {
 
   githubUrl?: string;
 
-  metrics: ProductMetrics;
+  metrics?: ProductMetrics;
 
   blueprint?: ProductBlueprint;
 

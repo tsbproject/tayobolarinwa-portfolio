@@ -23,6 +23,12 @@ const metrics = [
 export default function ProductMetrics({
   product,
 }: Props) {
+  const productMetrics = product.metrics;
+
+  if (!productMetrics) {
+    return null;
+  }
+
   return (
     <section className="py-20">
       <Container>
@@ -44,7 +50,7 @@ export default function ProductMetrics({
               className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm"
             >
               <div className="text-6xl font-bold text-blue-600">
-                {product.metrics[metric.key]}
+                {productMetrics[metric.key]}
               </div>
 
               <p className="mt-4 text-lg font-semibold">
