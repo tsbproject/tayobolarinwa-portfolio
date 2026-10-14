@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getPublishedJournals } from "@/lib/journals";
 import Container from "@/components/layout/Container";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ const topics = [
 ];
 
 export default function JournalsPage() {
+  const articles = getPublishedJournals();
   return (
     <section className="relative isolate overflow-hidden py-24 md:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 -z-10 h-[480px] w-[480px] rounded-full bg-blue-100/80 blur-3xl" />
@@ -51,6 +53,22 @@ export default function JournalsPage() {
             Explore case studies <span aria-hidden="true" className="ml-2">→</span>
           </Link>
         </div>
+
+        {articles.length > 0 && (
+          <div className="mt-20">
+            <h2 className="heading text-2xl font-bold text-slate-900 md:text-3xl">Latest articles</h2>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {articles.map((article) => (
+                <Link key={article.slug} href={`/journals/${article.slug}`} className="rounded-2xl border border-slate-200 bg-white p-7 transition hover:border-blue-300 hover:shadow-md">
+                  <time dateTime={article.date} className="text-sm text-slate-500">{article.date} · {article.readingTime} min read</time>
+                  <h3 className="heading mt-3 text-xl font-semibold text-slate-900">{article.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{article.description}</p>
+                  <span className="mt-5 inline-block text-sm font-semibold text-blue-600">Read article →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-20">
           <h2 className="heading text-2xl font-bold text-slate-900 md:text-3xl">
