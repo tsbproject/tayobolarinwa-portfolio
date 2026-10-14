@@ -28,7 +28,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-32 border-t border-slate-200 bg-slate-50">
+    <footer className="mt-32 border-t border-blue-900 bg-slate-950 text-slate-100">
       <Container className="py-20">
 
         <div className="grid gap-16 lg:grid-cols-[2fr_1fr_1fr]">
@@ -39,12 +39,12 @@ export default function Footer() {
 
             <Link
               href="/"
-              className="heading text-3xl font-bold"
+              className="heading text-3xl font-bold text-white transition hover:text-blue-300"
             >
               Tayo Bolarinwa
             </Link>
 
-            <p className="mt-6 max-w-md leading-8 text-slate-600">
+            <p className="mt-6 max-w-md leading-8 text-slate-300">
               Full Stack Engineer building scalable products,
               enterprise software and high-performance digital
               experiences.
@@ -58,7 +58,7 @@ export default function Footer() {
 
             <div key={group.title}>
 
-              <h3 className="font-semibold">
+              <h3 className="font-semibold text-white">
                 {group.title}
               </h3>
 
@@ -70,7 +70,7 @@ export default function Footer() {
 
                     <Link
                       href={link.href}
-                      className="text-slate-600 transition hover:text-blue-600"
+                      className="text-slate-300 transition hover:text-blue-300"
                     >
                       {link.name}
                     </Link>
@@ -89,7 +89,7 @@ export default function Footer() {
 
           <div>
 
-            <h3 className="font-semibold">
+            <h3 className="font-semibold text-white">
               Connect
             </h3>
 
@@ -102,7 +102,7 @@ export default function Footer() {
                   <Link
                     href={social.href}
                     target="_blank"
-                    className="text-slate-600 transition hover:text-blue-600"
+                    className="text-slate-300 transition hover:text-blue-300"
                   >
                     {social.name}
                   </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-slate-200 pt-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-slate-800 pt-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
 
           <p>
             © {new Date().getFullYear()} Tayo Bolarinwa.
