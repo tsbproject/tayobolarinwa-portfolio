@@ -1,0 +1,81 @@
+---
+title: "Rebuilding a Business Website: From WordPress to a Full-Stack Next.js Platform"
+description: "The engineering decisions behind moving Marvel Creative Media from a WordPress-based website to a more integrated Next.js application."
+date: "2026-10-14"
+tags:
+  - "Next.js"
+  - "TypeScript"
+  - "Architecture"
+  - "SEO"
+published: false
+---
+
+A business website often starts as a collection of pages: services, contact details, and a few articles. As the business grows, those pages can become part of a larger operational system. That change shaped how I approached rebuilding the Marvel Creative Media website.
+
+This article documents the reasoning behind moving from a WordPress-based site to a custom application built with Next.js. It is a reflection on the architecture and trade-offs, not a claim that every business needs to replace WordPress.
+
+## Why reconsider the original platform?
+
+WordPress helped establish the business's online presence. But the requirements expanded beyond publishing pages. We needed more control over application behaviour, structured data, enquiries, administrative workflows, and how different features fit together.
+
+The important question was not whether WordPress could be extended. It was whether a custom application would make the next stage of development easier to maintain.
+
+That distinction matters: migration is justified by requirements and operating costs, not by a framework's popularity.
+
+## Choosing an application architecture
+
+The rebuild uses Next.js and TypeScript for the web application, Prisma for data access, and PostgreSQL hosted on Neon.
+
+This gives the project a shared codebase for the user-facing website and server-side functionality. It also makes it easier to define data models and keep application behaviour close to the interfaces that use it.
+
+The main responsibilities are deliberately separated:
+
+- **Pages and components** present services, content, and interactions.
+- **Server routes and application logic** process requests and enforce relevant rules.
+- **Prisma and PostgreSQL** handle persistent application data.
+- **Email integration** supports business communication workflows.
+- **Administrative interfaces** help manage content and operational information.
+
+This separation is useful even when the application is deployed as one project. Clear boundaries make changes easier to review and reduce the risk of mixing presentation code with sensitive server-side operations.
+
+## Treating enquiries as application workflows
+
+A contact form should do more than accept text and display a success message. It should validate incoming data, reject invalid requests, process submissions consistently, and communicate the result clearly.
+
+In the rebuild, business enquiries and messaging became part of the application's server-side responsibilities. The broader platform also uses Resend for email delivery and Cloudflare Turnstile as part of its request-protection measures.
+
+The engineering lesson is to design around the complete journey: what the visitor submits, what the server accepts, how the business receives the information, and how failures are handled.
+
+## SEO as part of the rebuild
+
+Moving platforms introduces SEO risks. Existing URLs, page titles, metadata, indexing rules, and content structure all need attention. A faster framework alone does not preserve search visibility.
+
+The Next.js rebuild gave us direct control over metadata and page rendering, while the migration required continued work on indexing and discoverability.
+
+My approach was to treat SEO as an engineering concern rather than a final marketing checklist:
+
+1. Define meaningful metadata for important pages.
+2. Keep URLs and navigation intentional.
+3. Ensure crawlers can reach the content that should be indexed.
+4. Review indexing reports after deployment.
+5. Correct technical issues as evidence appears.
+
+I am deliberately not attaching traffic-growth percentages to this article without a verified before-and-after measurement.
+
+## What I would preserve in a similar migration
+
+A rebuild should not discard working business processes simply because the technology changes. The service information, brand identity, customer communication needs, and content priorities still matter.
+
+I would preserve those requirements, map the existing user journeys, and migrate incrementally where practical. I would also plan how to validate redirects, forms, metadata, and administrative workflows before switching production traffic.
+
+## Lessons learned
+
+The biggest lesson is that the framework is only one part of the decision.
+
+A successful business-platform rebuild needs a clear model of the business, explicit responsibilities in the codebase, attention to security and SEO, and a deployment process that supports iteration.
+
+For Marvel Creative Media, the move to Next.js was an opportunity to develop a more integrated digital platform. The value was not simply replacing WordPress; it was creating a foundation that could support the business's changing needs.
+
+---
+
+*Editorial note: This is a draft. Specific implementation details, migration chronology, and any measurable outcomes should be verified against project records before publication.*
