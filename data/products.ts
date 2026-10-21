@@ -303,7 +303,7 @@ export const products: Product[] = [
     title: "Marvel Creative Media",
 
     headline:
-  "Building the operating system behind a modern digital agency.",
+  "Engineering an agency platform for delivery, content and measurable web performance.",
 
     client: "Marvel Creative Media",
 
@@ -319,9 +319,9 @@ export const products: Product[] = [
 
     showEngineeringJourney: true,
 
-    summary: "A modern digital agency platform built for performance, SEO and scalability.",
+    summary: "A full-stack agency platform combining CRM and project delivery, an AI-assisted editorial workflow and a high-performing public website with 40+ published articles.",
 
-    description: "Complete redesign and redevelopment of Marvel Creative Media into a high-performance business platform powered by Next.js and TypeScript.",
+    description: "Rebuilt Marvel Creative Media as a Next.js, TypeScript, Prisma and PostgreSQL platform spanning the public website, CRM, project coordination and content publishing. The editorial workflow supports AI-assisted research, drafting, refinement and SEO preparation with human review; the team reports 40+ published articles and an estimated 5–10 minutes per article from research to publication. Recent PageSpeed Insights lab results: desktop 98 performance, 91 accessibility, 100 best practices and 100 SEO; mobile 74 performance, 96 accessibility, 100 best practices and 100 SEO (October 2026 snapshots, not field Core Web Vitals).",
 
     technologies: [
       "Next.js",
@@ -361,10 +361,10 @@ export const products: Product[] = [
         subtitle: "Content marketing powered by SEO",
 
         description:
-          "A dynamic publishing platform built to support long-term organic growth through technical articles and educational content.",
+          "A publishing system supporting 40+ articles, with AI-assisted research, drafting, refinement and SEO preparation under editorial review.",
 
         impact:
-          "Transforms the website into a scalable content engine that continuously attracts qualified visitors.",
+          "Gives the agency a repeatable publishing workflow; search traffic and conversion uplift have not been independently quantified.",
       },
        {
         src: "/images/products/marvelcmedia/blog-analytics.png",
@@ -426,12 +426,12 @@ export const products: Product[] = [
 
     liveUrl: "https://marvelcmedia.com",
 
-    githubUrl: "https://github/tsbproject/mcmedia-website",
+    githubUrl: "",
 
     metrics: {
-      performance: 100,
+      performance: 98,
       seo: 100,
-      accessibility: 100,
+      accessibility: 91,
     },
     category: "Business Website",
     status: "Completed",
@@ -528,7 +528,7 @@ export const products: Product[] = [
             {
               title: "Business Growth",
               description:
-                "Following the migration, search visibility improved significantly. Google began displaying sitelinks, the new blog became a long-term SEO asset and the platform now provides a scalable foundation for continued business growth.",
+                "Google began displaying sitelinks for the rebuilt site. October 2026 PageSpeed Insights lab snapshots recorded desktop performance 98 and mobile performance 74, with SEO 100 on both; these snapshots do not establish a before-and-after traffic increase.",
             },
           ],
         },
@@ -751,7 +751,7 @@ export const products: Product[] = [
     title: "MarvelMarts",
 
       headline:
-    "Engineering a scalable multi-vendor commerce ecosystem.",
+    "Building a vendor-centric marketplace with real operating traction.",
 
     client: "MarvelMarts",
 
@@ -765,9 +765,9 @@ export const products: Product[] = [
 
     featured: true,
 
-    summary: "A modern multi-vendor marketplace engineered for scalability, security, and exceptional user experience.",
+    summary: "A live Nigerian multi-vendor marketplace supporting 20 vendors, 30 listed products and 100 completed orders, with dedicated customer, vendor and administration workflows.",
 
-    description: "MarvelMarts is a full-featured e-commerce marketplace built to support multiple vendors, advanced product management, secure authentication, order processing, customer engagement, and a scalable administrative ecosystem. The platform focuses on performance, maintainability, and long-term business growth.",
+    description: "MarvelMarts is a vendor-centric commerce platform engineered around separate customer, vendor and administrative experiences. Its implementation spans catalogue and inventory management, order processing, Paystack payments, wallet and financial workflows, permissions and vendor ownership boundaries. As of October 2026, the platform has 20 vendors, 30 listed products and 100 completed orders (founder-reported figures). Security, reliability and financial controls continue to evolve through staged engineering improvements.",
 
     technologies: [
       "Next.js",
@@ -945,7 +945,7 @@ export const products: Product[] = [
       accessibility: 100,
     },
     category: "Multi-vendor Marketplace",
-    status: "Completed",
+    status: "Live — Ongoing Development",
     
    blueprint: {
       available: true,
