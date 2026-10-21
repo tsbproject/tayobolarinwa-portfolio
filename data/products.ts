@@ -945,7 +945,7 @@ export const products: Product[] = [
       accessibility: 100,
     },
     category: "Multi-vendor Marketplace",
-    status: "Live — Ongoing Development",
+    status: "Active Development",
     
    blueprint: {
       available: true,
