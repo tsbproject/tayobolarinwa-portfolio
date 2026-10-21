@@ -1022,6 +1022,21 @@ export const products: Product[] = [
 
           engineeringDecisions: [
             {
+              title: "Multi-Vendor Fulfilment Boundaries",
+              decision: "Separate Order, VendorOrder and Shipment domains",
+              reason: "The parent Order represents the customer purchase, VendorOrder isolates each seller’s allocation and financial entitlement, and Shipment owns courier tracking and physical delivery. Independent vendor shipments can progress without waiting for other sellers.",
+            },
+            {
+              title: "Delivery-Triggered Settlement",
+              decision: "Tie vendor balance release to the shipment delivery transaction",
+              reason: "The documented shipment service records delivery transitions and shipment events in the same database transaction used to release the corresponding VendorOrder balance, rather than relying on the parent order’s status.",
+            },
+            {
+              title: "Financial Reporting Architecture",
+              decision: "Dedicated reporting services and controlled financial environments",
+              reason: "Financial reporting is separated into overview, transactions, general ledger, reconciliation and vendor-payables workflows, with permission-gated administration. Finance validation currently uses Paystack Sandbox/test data; production reporting should not be inferred from sandbox records.",
+            },
+            {
               title: "Framework Selection",
               decision: "Next.js App Router",
               reason:
@@ -1153,6 +1168,14 @@ export const products: Product[] = [
 
           solutions: [
           {
+            title: "Independent Shipment & Courier Tracking",
+            description: "A multi-vendor order is split into vendor-owned fulfilment units, each with its own Shipment lifecycle and tracking events. Shipping ownership is separate from payment allocation, while delivery drives the appropriate vendor-level settlement boundary.",
+          },
+          {
+            title: "Financial Ledger & Reconciliation",
+            description: "A dedicated financial reporting service supports administrative views of transactions, general ledger, reconciliation and vendor payables. Permission checks and test-versus-production environment separation are central to the design; current finance validation uses sandbox transactions.",
+          },
+          {
             title: "Modular Full-Stack Architecture",
             description:
               "The platform was built using a modular architecture with reusable components, shared utilities and clearly separated concerns. This improved scalability, simplified maintenance and accelerated feature development.",
@@ -1238,9 +1261,14 @@ export const products: Product[] = [
             {
               title: "Financial Operations",
               description:
-                "Advanced financial workflows such as wallets, withdrawals, payment methods, vendor settlements and promotional credit systems transformed MarvelMarts into a financially capable commerce platform.",
+                "The platform expanded into wallets, Paystack payment verification, vendor balances and settlements, alongside a dedicated finance reporting layer for ledger, reconciliation, transactions and payables. The newer reporting workflows are being validated with sandbox data.",
             },
 
+            {
+              title: "Multi-Vendor Shipping & Tracking",
+              description:
+                "Fulfilment architecture separates the parent customer order from vendor allocations and individual shipments. Courier tracking, shipment events and delivery-triggered vendor settlement support independent vendor delivery lifecycles.",
+            },
             {
               title: "Business Intelligence",
               description:
@@ -1257,16 +1285,16 @@ export const products: Product[] = [
 
         results: [
       {
-        value: "100+",
-        label: "Reusable Components",
+        value: "100",
+        label: "Completed Orders (Reported)",
       },
       {
-        value: "50+",
-        label: "Marketplace Features",
+        value: "20",
+        label: "Vendors (Reported)",
       },
       {
-        value: "3",
-        label: "User Roles",
+        value: "30",
+        label: "Listed Products (Reported)",
       },
       {
         value: "SEO",
@@ -1281,8 +1309,8 @@ export const products: Product[] = [
         label: "Backend Architecture",
       },
       {
-        value: "Production",
-        label: "Ready Foundation",
+        value: "Sandbox",
+        label: "Finance Validation",
       },
       {
         value: "AI Ready",
