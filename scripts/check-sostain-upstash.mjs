@@ -20,8 +20,24 @@ async function redis(commands) {
     throw new Error("Redis REST request failed (" + response.status + ").");
   }
   const values = await response.json();
-  if (!Array.isArray(values) || values.length !== commands.length || values.some(item => item.error)) {
-    throw new Error("Redis REST returned an invalid response or command error.");
+  if (!Array.isArray(values) || values.length !== commands.length) {
+    throw new Error("Redis REST returned an unexpected response structure.");
+  }
+  for (let index = 0; index < commands.length; index++) {
+    const item = values[index];
+    if (item?.error) {
+      const raw = String(item.error);
+      // Never echo server replies verbatim: they could contain user data.
+      const category = /unknown command|unsupported|syntax|wrong number|invalid argument/i.test(raw)
+        ? "command unsupported or syntax invalid"
+        : /permission|denied|noperm|readonly/i.test(raw)
+          ? "database token lacks write permissions"
+          : "Redis command rejected";
+      throw new Error("Command " + (index + 1) + " (" + commands[index][0] + "): " + category + ".");
+    }
+    if (!item || !Object.prototype.hasOwnProperty.call(item, "result")) {
+      throw new Error("Command " + (index + 1) + " (" + commands[index][0] + "): missing result.");
+    }
   }
   return values.map(item => item.result);
 }
