@@ -39,3 +39,27 @@ Expect **9/9 PASS** while both survey release flags are false.
 Verify admin login and **one CSV and one Excel download** using your normal test account. These credentialed requests must access Upstash; if they return 503, check local Upstash environment configuration and application logs without sharing secrets. If 429, wait for the 10-minute window to expire. Do not run brute-force tests against a shared production Upstash database.
 
 Do not merge to master, deploy, change survey status to open or toggle release flags until all later review gates pass.
+
+## Phase 11B: isolated rate-limit policy validation (2026-11-09)
+
+Added `scripts/check-sostain-admin-throttle.mjs`. It uses cryptographically random diagnostic-only Redis keys and the **same Upstash INCR/EXPIRE-NX pipeline and threshold logic** as the admin gate.
+
+Assertions:
+- Counter 1 starts and is allowed.
+- Account attempt 30 remains allowed; attempt 31 is denied (30/10m).
+- Global attempt 80 remains allowed; attempt 81 is denied even when that account is below its individual threshold (80/10m).
+- Redis TTLs are set and at most ten minutes.
+- Four disposable keys are deleted in a finally block; deletion is verified.
+
+Safety: never sends an admin password, reads a research DB, changes release flags or touches actual production admin counters. Use the existing local Upstash test configuration. The script writes **only its own four temporary Redis keys** and cleans them up. If cleanup fails, inspect the isolated diagnostic prefix before retrying.
+
+Local run:
+```powershell
+git status --short
+git pull --ff-only origin feature/sostain-research-portal
+node --env-file=.env.local scripts/check-sostain-admin-throttle.mjs
+```
+
+This tests the live Redis pipeline and isolated policy semantics. It **does not** prove enforcement through the real admin HTTP route, isolation from an active attacker, or MFA/session integrity. Real-route attempts should only be tested with a separately configured, dedicated development Upstash database; avoid exhausting shared administrator counters.
+
+Launch blockers unchanged: no public survey activation, pending full identity/MFA design, privacy retention/deletion, trusted production IP and Turnstile HTTP checks, and dependency advisories.
