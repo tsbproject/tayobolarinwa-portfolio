@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { researchSurveySchema } from "@/lib/research/sostain/schema";
 import { checkRateLimit, verifyTurnstile } from "@/lib/research/sostain/abuse-protection";
 import { createHmac } from "node:crypto";
+import { persistResearchResponse } from "@/lib/research/sostain/persistence";
 
 /**
  * Deliberately fail-closed until persistent storage, distributed rate limiting,
@@ -60,8 +61,21 @@ export async function POST(request: NextRequest) {
   const turnstile = await verifyTurnstile(validated.data.turnstileToken, ip);
   if (!turnstile.ok) return NextResponse.json({ message: turnstile.message }, { status: turnstile.status });
 
-  return NextResponse.json(
-    { message: "Research submissions are not open yet. No answers have been stored." },
-    { status: 503, headers: { "Cache-Control": "no-store" } }
-  );
+  try {
+    const outcome = await persistResearchResponse(validated.data);
+    if (outcome === "closed") {
+      return NextResponse.json({message:"Research submissions are currently closed."}, {status:503,headers:{"Cache-Control":"no-store"}});
+    }
+    // A repeated submissionId is an idempotent retry, not a second response.
+    return NextResponse.json(
+      {message: outcome === "duplicate" ? "Your response was already received." : "Your response was saved."},
+      {status:200, headers:{"Cache-Control":"no-store"}}
+    );
+  } catch {
+    // Never leak credentials or raw SQL errors to the public response.
+    return NextResponse.json(
+      {message:"Unable to save the survey response. No success has been recorded."},
+      {status:503, headers:{"Cache-Control":"no-store"}}
+    );
+  }
 }
