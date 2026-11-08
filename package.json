@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "@neondatabase/serverless": "^1.2.0",
     "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.1.0",
     "clsx": "^2.1.1",
