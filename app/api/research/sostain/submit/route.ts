@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { researchSurveySchema } from "@/lib/research/sostain/schema";
+import { checkRateLimit, verifyTurnstile } from "@/lib/research/sostain/abuse-protection";
+import { createHmac } from "node:crypto";
 
 /**
  * Deliberately fail-closed until persistent storage, distributed rate limiting,
@@ -7,6 +9,10 @@ import { researchSurveySchema } from "@/lib/research/sostain/schema";
  * No payload is logged or treated as submitted.
  */
 export async function POST(request: NextRequest) {
+  // Never enable collection from a front-end feature flag alone.
+  if (process.env.SOSTAIN_SURVEY_BACKEND_READY !== "true") {
+    return NextResponse.json({ message: "Research submissions are not open yet. No answers have been stored." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
   const origin = request.headers.get("origin");
   const validOrigins = new Set([
     "https://tayobolarinwa.dev",
@@ -41,6 +47,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Check the survey answers." }, { status: 400 });
   }
   if (validated.data.website.trim()) return NextResponse.json({ message: "Unable to accept submission." }, { status: 400 });
+
+  const salt = process.env.SOSTAIN_RATE_LIMIT_KEY;
+  if (!salt) return NextResponse.json({ message: "Research security is not configured." }, { status: 503 });
+  // Use an infrastructure-provided client IP only on the trusted Vercel deployment.
+  // Do not allow arbitrary client headers to bypass limits on other hosts.
+  const ip = request.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim();
+  if (!ip || ip.length > 64) return NextResponse.json({ message: "Unable to verify request origin." }, { status: 403 });
+  const key = createHmac("sha256", salt).update(ip).digest("hex");
+  const limit = await checkRateLimit(key);
+  if (!limit.ok) return NextResponse.json({ message: limit.message }, { status: limit.status });
+  const turnstile = await verifyTurnstile(validated.data.turnstileToken, ip);
+  if (!turnstile.ok) return NextResponse.json({ message: turnstile.message }, { status: turnstile.status });
 
   return NextResponse.json(
     { message: "Research submissions are not open yet. No answers have been stored." },
