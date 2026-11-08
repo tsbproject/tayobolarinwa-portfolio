@@ -1,12 +1,13 @@
 import { NextRequest } from "next/server";
-import { allowResearchAdmin, researchUnauthorizedResponse } from "@/lib/research/sostain/admin-auth";
+import { authorizeResearchAdmin } from "@/lib/research/sostain/admin-gate";
 import { buildResearchExcelWorkbook } from "@/lib/research/sostain/excel";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 
 export async function GET(request:NextRequest) {
-  if (!allowResearchAdmin(request.headers.get("authorization"))) return researchUnauthorizedResponse();
+  const auth = await authorizeResearchAdmin(request);
+  if (!auth.allowed) return auth.response;
   try {
     const xlsx=await buildResearchExcelWorkbook();
     return new Response(new Uint8Array(xlsx), {
