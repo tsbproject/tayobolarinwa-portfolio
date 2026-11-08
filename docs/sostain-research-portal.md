@@ -194,3 +194,26 @@ Use a unique random secret with a password manager. DO NOT put values in reposit
 - The admin credential is used with direct Authorization headers in fetch, not via URL query strings; the export is downloaded as a Blob after authenticated fetch.
 - Verify an unauthenticated `GET /api/research/sostain/admin/overview` returns 401; valid local login returns count 0; CSV contains header only; bad password returns an error; secret values are never printed in console.
 - Before launch: independently validate build/lint/TypeScript, test against a staged dataset, verify security headers and cache behaviour on deployed preview, resolve npm audit issues, and add stronger MFA-based research admin authentication if access expands.
+
+
+## Phase 7: Styled XLSX research export (2026-11-08)
+- Previous anonymised CSV export remains available and unchanged at `GET /api/research/sostain/admin/export`.
+- New protected Excel export: `GET /api/research/sostain/admin/excel`. It uses exactly the same server-side research admin authorization.
+- Workbook sheets: **Overview** (response count, category and monthly-price summaries, privacy note) and **Responses** (readable column names, dark navy headers, spacious column widths, alternating row fills, frozen header rows, filters and formatted timestamps).
+- The workbook is de-identified: contact names/details, survey IDs, IP addresses and CAPTCHA tokens are deliberately omitted. CSV formula injection defences are also applied to untrusted string values exported to Excel.
+- The dashboard's new **Download Excel Report** button uses the authenticated endpoint; **Export CSV** is still available for automated analysis.
+- Excel export is limited to 10,000 responses, like the original CSV export, and includes clear research-only metadata.
+- This implementation uses `exceljs@4.4.0` server-side. **The GitHub package.json has been updated; the package-lock.json is NOT yet updated**. Before `npm ci` or deployment, install locally:
+```powershell
+git pull --ff-only origin feature/sostain-research-portal
+npm install exceljs@4.4.0
+npx --no-install tsc --noEmit
+npm run lint
+npm run build
+git add package-lock.json
+git commit -m "Lock ExcelJS dependency for Sostain research reports"
+git push origin feature/sostain-research-portal
+```
+- Review `npm audit` findings before production use; introducing a new dependency requires dependency security review.
+- Local QA: sign into `http://localhost:3000/research/sostain/admin`; click **Download Excel Report**; check both sheets, column widths, frozen rows and filters. Because the survey remains in draft, a valid empty workbook should still have formatted headings and no responses.
+- Keep both public survey release flags `false` and Neon survey status `draft`. Existing portfolio routes and consultation system are not modified.
