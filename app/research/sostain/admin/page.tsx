@@ -7,5 +7,5 @@ export const metadata = {
 
 export default function ResearchAdminPage() {
   // No private data is loaded in this page. All reads are authorized per API call.
-  return <ResearchAdminClient/>;
+  return <ResearchAdminClient sessionMode={process.env.SOSTAIN_ADMIN_SESSION_ENABLED === "true"}/>;
 }
