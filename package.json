@@ -14,7 +14,7 @@
     "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.1.0",
     "clsx": "^2.1.1",
-    "exceljs": "4.4.0",
+    "exceljs": "^4.4.0",
     "framer-motion": "^12.42.2",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.23.0",
