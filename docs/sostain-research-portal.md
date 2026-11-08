@@ -174,3 +174,23 @@ Safety requirements:
 - Refresh the page before retrying; Turnstile tokens are single use.
 - After this diagnostic, re-run TypeScript, lint and production build, and share any errors.
 - Before production: verify request IP trust boundary and cleanly separate real write integration tests against an isolated test database; add privacy notice, protected CSV admin access and monitor dependency audit results.
+
+
+## Phase 6: Pilot research administration (feature branch, not live)
+- Private page: `/research/sostain/admin`. The static page contains **no private data**. Username/password are entered in a local client component and retained only in React memory for the session; they are not placed into URLs, localStorage or cookies.
+- Protected endpoints: `GET /api/research/sostain/admin/overview` and `GET /api/research/sostain/admin/export`.
+- Every API read validates the HTTP Basic Authorization header on the server using constant-time comparison of SHA-256 digests; missing credentials or invalid credentials return HTTP 401. Admin password must have at least 24 characters.
+- Provide both variables locally and in the correct Vercel environment (after review):
+```dotenv
+SOSTAIN_RESEARCH_ADMIN_USERNAME="your-private-research-admin-id"
+SOSTAIN_RESEARCH_ADMIN_PASSWORD="generate-a-long-random-password"
+```
+Use a unique random secret with a password manager. DO NOT put values in repository files, screenshots, chat or logs.
+- The admin page displays total responses, category counts and up to 20 recent response summaries. No contacts or names are queried or exported.
+- CSV export contains at most 10,000 rows, uses an explicit analytics-only column whitelist and has formula-injection escaping. If survey exceeds 10k responses, a future paginated export is required.
+- This is an early-stage isolated credential gate **not a replacement for MFA/SSO**, authentication failure monitoring, session expiration, role-based access or audit trails. Do not offer it broadly to team members until a mature auth system has been reviewed.
+- For production use, enforce HTTPS at the hosting layer. Locally, use `http://localhost:3000/research/sostain/admin`.
+- With `status='draft'`, a zero-response overview is expected. Do not enable survey flags to test the admin interface.
+- The admin credential is used with direct Authorization headers in fetch, not via URL query strings; the export is downloaded as a Blob after authenticated fetch.
+- Verify an unauthenticated `GET /api/research/sostain/admin/overview` returns 401; valid local login returns count 0; CSV contains header only; bad password returns an error; secret values are never printed in console.
+- Before launch: independently validate build/lint/TypeScript, test against a staged dataset, verify security headers and cache behaviour on deployed preview, resolve npm audit issues, and add stronger MFA-based research admin authentication if access expands.
