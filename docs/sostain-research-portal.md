@@ -14,7 +14,7 @@ Status: **pre-launch; NOT accepting submissions**. This branch is intentionally 
 - Public survey page: `/research/sostain`; two steps and seven core questions, mobile-first; schema-driven validation; optional interview opt-in; explicitly disabled until NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=true.
 - Versioned, typed question catalogue: `lib/research/sostain/`.
 - POST route: `/api/research/sostain/submit`; origin, content-type, size, schema and honeypot checks.
-- **The POST route deliberately returns HTTP 503 and nothing is stored.** The independent server-only release gate requires SOSTAIN_SURVEY_BACKEND_READY=true, but there is STILL no persistence implementation; setting flags alone does NOT open a functional survey.
+- **The POST route deliberately returns HTTP 503 while the backend-only release gate is disabled.** Atomic Neon persistence code has been written, but this code is NOT activated or database-tested yet. Do not enable flags until the database/schema/security/privacy/QA gates pass.
 - Turnstile client widget and server-side Siteverify plus Redis REST distributed rate-limit helpers are present but cannot be end-to-end tested without credentials.
 - Proposed SQL schema is in `docs/sostain-research-schema.sql`; it has NOT been executed in a database.
 - A CSV-safe serialization helper exists, but no authenticated export endpoint exists yet.
@@ -23,8 +23,8 @@ Status: **pre-launch; NOT accepting submissions**. This branch is intentionally 
 
 ## Production blockers — must resolve before public recruitment
 1. Provision **separate** research PostgreSQL database, credentials, backups, retention and access policy.
-2. Choose/install a supported database driver or Prisma, including a consistent updated lockfile.
-3. Implement transaction-safe persistence (research version, de-identified response, consent and optional contact separate), idempotency keyed by submissionId, and duplicate-handling tests.
+2. Install `@neondatabase/serverless@1.2.0` locally and commit the updated package-lock.json; GitHub code has the updated package.json but NOT a matching lockfile. CI/npm ci will fail until this step is done.
+3. **Implementation written, not tested:** transaction-safe atomic persistence (survey response, consent and optional contact), stable client retry submissionId and duplicate handling. Apply schema, validate DB write permissions and run end-to-end duplicate/retry tests.
 4. Add persistent distributed rate limiting, not the existing development `LocalRateLimiter` which always allows requests.
 5. Integrate Turnstile on client + server using Siteverify, verifying token before any storage.
 6. Add authenticated, audit-logged, formula-injection-safe CSV export that excludes direct contact fields by default.
@@ -80,3 +80,57 @@ npm run build
 - Confirm Turnstile expected hostname/action for both production and permitted preview environments.
 - Add user-facing rights/contact link and complete the privacy notice before using the survey.
 - Current code changes have NOT been validated locally with a full Next.js build. A Vercel status check is not a substitute for functional testing.
+
+
+## Phase 2 Neon connection handoff (2026-11-08)
+The Neon research project was created by the founder. Database connection, migration execution and storage tests have **not yet** been performed.
+
+**1. On the local portfolio feature branch**, after checking for a clean working tree:
+```powershell
+git pull --ff-only origin feature/sostain-research-portal
+npm install @neondatabase/serverless@1.2.0
+npx --no-install tsc --noEmit
+npm run lint
+npm run build
+git status --short
+```
+This updates `package-lock.json` to match the dependency already declared in `package.json`.
+**Do not run `npm ci` before updating the lockfile.** GitHub preview deployments may fail while the lockfile is incomplete.
+
+**2. Add your research connection string to your LOCAL `.env.local` file** (never paste it into chat or commit it):
+```dotenv
+SOSTAIN_RESEARCH_DATABASE_URL="postgresql://...your-new-Neon-research-connection..."
+NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=false
+SOSTAIN_SURVEY_BACKEND_READY=false
+```
+Use the separate Sostain research project, not the portfolio or future SaaS database. Verify `.env.local` is ignored by Git.
+The source can remain in the Neon console; keep the database credentials out of all screenshots and logs.
+
+**3. Run the SQL in Neon Console -> SQL Editor**, selecting the new Sostain research project:
+`docs/sostain-research-schema.sql`
+It inserts the initial survey record with `status='draft'`; this is intentional.
+
+**4. Verify the connection and schema**:
+```powershell
+node --env-file=.env.local scripts/check-sostain-database.mjs
+```
+Expected: connection OK, tables OK, survey status draft. No responses or personal details printed.
+
+**5. Do not activate the collection flags yet.**
+Production activation additionally requires the Redis REST rate limiter and Cloudflare Turnstile credentials, privacy notice, tests, and an authenticated export service. The database must use a least-privilege application role (no schema changes), and private contact fields must never enter analytics JSON.
+
+**6. Sync the dependency lockfile back to GitHub only once validation passes**:
+```powershell
+git add package-lock.json
+git commit -m "Lock Neon driver for Sostain research database"
+git push origin feature/sostain-research-portal
+```
+Do not commit `.env.local`, credential files, or downloaded database exports.
+
+### Security and deployment notes
+- The backend fails closed with HTTP 503 unless `SOSTAIN_SURVEY_BACKEND_READY=true`.
+- Frontend Submit remains disabled unless `NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=true`.
+- The database write checks the survey record status is `open` inside the SQL statement.
+- These are **three independent checks**, each requiring an intentional release decision after validation.
+- PostgreSQL uses a single data-modifying CTE statement for atomicity. It returns `stored`, `duplicate` or `closed`.
+- The site remains research-only and the portfolio's existing consultation pipeline has not been modified.
