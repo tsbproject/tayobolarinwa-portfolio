@@ -10,9 +10,9 @@ import { researchSurveySchema, type ResearchSurveyInput } from "@/lib/research/s
 
 type Answers = Omit<ResearchSurveyInput, "privacyAcknowledged"> & { privacyAcknowledged: boolean };
 const initial: Answers = {
-  surveyVersion, submissionId: "", category: businessCategories[0], teamSize: "Just me",
-  mainChannel: "WhatsApp", tracking: "WhatsApp chats", challenges: [],
-  challengeFrequency: "Weekly", price: "Not sure / Need to see it",
+  surveyVersion, submissionId: "", category: "" as ResearchSurveyInput["category"], teamSize: "" as ResearchSurveyInput["teamSize"],
+  mainChannel: "" as ResearchSurveyInput["mainChannel"], tracking: "" as ResearchSurveyInput["tracking"], challenges: [],
+  challengeFrequency: "" as ResearchSurveyInput["challengeFrequency"], price: "" as ResearchSurveyInput["price"],
   followup: "No", contactName: "", contactDetail: "", contactPermission: false,
   privacyAcknowledged: false, website: "", turnstileToken: "",
 };
@@ -37,6 +37,7 @@ export default function SostainSurvey() {
   function select<K extends "category"|"teamSize"|"mainChannel"|"tracking"|"challengeFrequency"|"price">(key:K, label:string, choices:readonly string[]) {
     return <label className="block text-sm font-medium text-slate-800">{label}
       <select className={fieldClass} value={answers[key]} onChange={event => set(key,event.target.value as Answers[K])}>
+        <option value="">Choose an answer</option>
         {choices.map(choice=><option key={choice} value={choice}>{choice}</option>)}
       </select>
     </label>;
