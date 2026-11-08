@@ -111,7 +111,7 @@ export default function ResearchAdminClient({sessionMode=false}:{sessionMode?:bo
   }
   return <main className="mx-auto max-w-5xl px-6 py-12">
     {checkingSession ? <p role="status" className="text-sm text-slate-600">Checking research admin session…</p> : null}
-    {!overview && !checkingSession ? <form onSubmit={login} autoComplete="off" className="mx-auto max-w-md space-y-5 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+    {!overview ? <form onSubmit={login} autoComplete="off" className="mx-auto max-w-md space-y-5 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
       <p className="text-xs font-bold uppercase tracking-wider text-blue-700">Sostain Research</p>
       <h1 className="text-2xl font-bold">Research administration</h1>
       <p className="text-sm text-slate-600">Private researcher access. Use only on localhost or HTTPS.</p>
