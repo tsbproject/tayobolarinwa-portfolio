@@ -134,3 +134,18 @@ Do not commit `.env.local`, credential files, or downloaded database exports.
 - These are **three independent checks**, each requiring an intentional release decision after validation.
 - PostgreSQL uses a single data-modifying CTE statement for atomicity. It returns `stored`, `duplicate` or `closed`.
 - The site remains research-only and the portfolio's existing consultation pipeline has not been modified.
+
+
+## Phase 3: Database integrity smoke test (2026-11-08)
+With the Neon database created, schema committed, and local connection check passing, run the test script
+`docs/sostain-research-integrity-smoke-test.sql` **in the dedicated Neon SQL Editor only**, after inspecting its contents.
+
+The script starts a transaction, temporarily opens the `draft` survey **within that uncommitted transaction only**, verifies atomic response + consent, optional contact separation, duplicate-blocking, and the draft guard; it then explicitly **ROLLBACK**s every test write. The expected notice is `PASS: atomic response/consent inserts...` and final survey status `draft`.
+
+Safety requirements:
+- Do not remove or change `ROLLBACK` to `COMMIT`.
+- Do not run in any other Neon project or on a survey already open to real respondents.
+- If any statement errors, run `ROLLBACK;` separately and verify the survey status is still `draft`.
+- This is a **database SQL smoke test**, not a full test of the TypeScript `persistResearchResponse` function nor the HTTP security pipeline; those require subsequent isolated integration tests.
+- Keep frontend and backend launch flags false pending the Turnstile, Redis, privacy notice, rate-limit and endpoint checks.
+- Confirm the local package-lock update has been pushed to GitHub before using `npm ci` in CI.
