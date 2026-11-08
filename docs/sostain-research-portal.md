@@ -11,10 +11,13 @@ Status: **pre-launch; NOT accepting submissions**. This branch is intentionally 
 - Preserve prior schema v1.0 in Git history; do not merge response datasets across differing survey versions without mapping.
 
 ## Current state
-- Public survey page: `/research/sostain`; two steps and seven core questions, mobile-first; schema-driven validation; optional interview opt-in.
+- Public survey page: `/research/sostain`; two steps and seven core questions, mobile-first; schema-driven validation; optional interview opt-in; explicitly disabled until NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=true.
 - Versioned, typed question catalogue: `lib/research/sostain/`.
 - POST route: `/api/research/sostain/submit`; origin, content-type, size, schema and honeypot checks.
-- **The POST route deliberately returns HTTP 503 for all otherwise valid submissions; nothing is stored.**
+- **The POST route deliberately returns HTTP 503 and nothing is stored.** The independent server-only release gate requires SOSTAIN_SURVEY_BACKEND_READY=true, but there is STILL no persistence implementation; setting flags alone does NOT open a functional survey.
+- Turnstile client widget and server-side Siteverify plus Redis REST distributed rate-limit helpers are present but cannot be end-to-end tested without credentials.
+- Proposed SQL schema is in `docs/sostain-research-schema.sql`; it has NOT been executed in a database.
+- A CSV-safe serialization helper exists, but no authenticated export endpoint exists yet.
 - Thank-you page only follows an actual successful response; under the current route that cannot occur.
 - No changes to global portfolio header/footer, existing consultation route, or shared API security pipeline.
 
@@ -46,3 +49,34 @@ Store contacts separately, avoid raw payload logs, restrict access using least p
 
 ## GitHub branch
 `feature/sostain-research-portal`
+
+
+## Configuration inventory (DO NOT add values to Git)
+- `NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN` — defaults to false. Only activate after all release checks pass.
+- `SOSTAIN_SURVEY_BACKEND_READY` — defaults to false. Must not activate until transactional persistence is implemented and tested.
+- `NEXT_PUBLIC_SOSTAIN_TURNSTILE_SITE_KEY` — public Cloudflare Turnstile site key.
+- `SOSTAIN_TURNSTILE_SECRET_KEY` — secret Cloudflare Turnstile verification key.
+- `SOSTAIN_UPSTASH_REDIS_REST_URL` and `SOSTAIN_UPSTASH_REDIS_REST_TOKEN` — durable shared rate-limit connection.
+- `SOSTAIN_RATE_LIMIT_KEY` — random secret used to HMAC client IP before sending Redis keys; set using a secret manager.
+- **Database credentials**: Not yet defined in the app, because the database driver, migration ownership, and target Neon instance must be explicitly provisioned and tested first.
+
+## Local sync after feature branch development
+From the existing Windows PowerShell clone:
+```powershell
+cd C:\Users\MarvelCMedia\Documents\tayobolarinwa-portfolio
+git status --short
+git fetch origin
+git switch --track -c feature/sostain-research-portal origin/feature/sostain-research-portal
+git status
+npx tsc --noEmit
+npm run lint
+npm run build
+```
+**Important**: Stop if `git status --short` shows uncommitted changes or Git says the branch already exists. Do not reset or discard changes. If the branch already exists locally, use `git switch feature/sostain-research-portal` then `git pull --ff-only origin feature/sostain-research-portal`. Resolve baseline errors before launch.
+
+## Preliminary security cautions
+- Verify the application actually receives a trusted, non-user-controllable `x-vercel-forwarded-for` header in its deployment environment before activating any submission. Reject missing or untrusted IP source; do not use arbitrary forwarded headers.
+- Verify Redis REST `EXPIRE NX` support and rate-limit semantics in integration tests.
+- Confirm Turnstile expected hostname/action for both production and permitted preview environments.
+- Add user-facing rights/contact link and complete the privacy notice before using the survey.
+- Current code changes have NOT been validated locally with a full Next.js build. A Vercel status check is not a substitute for functional testing.
