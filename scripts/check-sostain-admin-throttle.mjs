@@ -37,6 +37,7 @@ if (process.env.NODE_ENV === "production") {
     const globalKey = keyPrefix + "global";
     const accountA = keyPrefix + "account-a";
     const accountB = keyPrefix + "account-b";
+    const accountC = keyPrefix + "account-c";
     const ttl = 600;
 
     async function pipeline(commands) {
@@ -97,21 +98,30 @@ if (process.env.NODE_ENV === "production") {
       }
       console.log("PASS: the per-username 30/10-minute threshold blocks attempt 31.");
 
-      // The second identity has its own allowance; global counter stays shared.
-      let last = null;
-      for (let i = 1; i <= 49; i++) {
-        last = await attempt(accountB);
+      // Use fresh identities to prove global limit independently from
+      // any per-account limit. A already accounts for 31 global requests.
+      let secondLast = null;
+      for (let i = 1; i <= 30; i++) secondLast = await attempt(accountB);
+      if (!secondLast || secondLast.globalCount !== 61 || secondLast.accountCount !== 30 || !secondLast.allowed) {
+        throw new Error("Account B should be allowed on its 30th attempt.");
       }
-      if (!last || last.globalCount !== 80 || last.accountCount !== 49 || last.allowed) {
-        // Account B is above its own threshold, so cannot pass, but the
-        // global limit should not yet be exceeded.
-        throw new Error("Global counter did not reach 80 as expected.");
+      let globalAtThreshold = null;
+      for (let i = 1; i <= 19; i++) globalAtThreshold = await attempt(accountC);
+      if (!globalAtThreshold || globalAtThreshold.globalCount !== 80 ||
+          globalAtThreshold.accountCount !== 19 || !globalAtThreshold.allowed) {
+        throw new Error("The 80th global attempt should remain allowed.");
       }
-      const blockedGlobal = await attempt(accountB);
-      if (blockedGlobal.globalCount !== 81 || blockedGlobal.accountCount !== 50 || blockedGlobal.allowed) {
-        throw new Error("The 81st global attempt was not blocked.");
+      const blockedGlobal = await attempt(accountC);
+      if (blockedGlobal.globalCount !== 81 || blockedGlobal.accountCount !== 20 || blockedGlobal.allowed) {
+        throw new Error("The 81st global attempt was not blocked independently.");
       }
-      console.log("PASS: shared 80/10-minute global threshold blocks attempt 81.");
+      console.log("PASS: the global 80/10-minute limit independently blocks attempt 81.");
+
+      const [globalTtl, accountTtl] = await pipeline([["TTL", globalKey], ["TTL", accountC]]);
+      if (globalTtl < 1 || globalTtl > ttl || accountTtl < 1 || accountTtl > ttl) {
+        throw new Error("Throttle keys have missing or invalid expiry.");
+      }
+      console.log("PASS: disposable counter TTLs exist and are bounded to 10 minutes.");
 
       // An ordinary valid attempt would be checked independently using the
       // same Redis service, but this diagnostic NEVER sends a password.
@@ -121,10 +131,10 @@ if (process.env.NODE_ENV === "production") {
       process.exitCode = 1;
     } finally {
       try {
-        const [removed] = await pipeline([["DEL", globalKey, accountA, accountB]]);
-        if (removed !== 3) throw new Error("Expected all three isolated counters to exist.");
+        const [removed] = await pipeline([["DEL", globalKey, accountA, accountB, accountC]]);
+        if (removed !== 4) throw new Error("Expected all four isolated counters to exist.");
         cleanupSuccessful = true;
-        console.log("PASS: all three disposable test counters deleted.");
+        console.log("PASS: all four disposable test counters deleted.");
       } catch {
         halt("Could not confirm test-key cleanup. Inspect diagnostic-prefix Redis keys; do not retry until safe.");
       }
