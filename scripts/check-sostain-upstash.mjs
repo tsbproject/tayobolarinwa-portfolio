@@ -6,7 +6,7 @@ const key = "sostain:research:integration-check:" + randomUUID();
 let created = false;
 
 async function redis(commands) {
-  const response = await fetch(endpoint.replace(/\\/$/, "") + "/pipeline", {
+  const response = await fetch((endpoint.endsWith("/") ? endpoint.slice(0, -1) : endpoint) + "/pipeline", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
