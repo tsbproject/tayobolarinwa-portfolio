@@ -30,7 +30,7 @@ const initial: ResearchSurveyInput = {
   recordkeeping: "", profitConfidence: 3, invoices: "", latePayments: "", debtTracking: "",
   challenges: [], adminHours: "", paidTools: "", automationInterest: [], concerns: [],
   price: "", followup: "No", contactName: "", contactDetail: "", contactPermission: false,
-  privacyAcknowledged: true, website: "", turnstileToken: "",
+  privacyAcknowledged: false, website: "", turnstileToken: "",
 };
 
 const control = "mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100";
@@ -74,7 +74,7 @@ export default function SostainSurvey() {
   function select(name:ChoiceKey,label:string) {
     return (
       <label className="block text-sm font-medium text-slate-800" key={name}>{label}
-        <select className={control} value={String(answers[name])} onChange={e=>set(name,e.target.value as never)} required>
+        <select className={control} value={String(answers[name])} onChange={e=>name==="followup" && e.target.value==="No" ? setAnswers(a=>({...a,followup:"No",contactName:"",contactDetail:"",contactPermission:false})) : set(name,e.target.value as never)} required>
           <option value="">Select an answer</option>
           {options[name].map(x=><option key={x} value={x}>{x}</option>)}
         </select>
