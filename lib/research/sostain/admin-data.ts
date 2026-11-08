@@ -40,7 +40,7 @@ export async function getResearchOverview() {
   };
 }
 
-export async function exportResearchCsv(): Promise<string> {
+export async function getResearchExportRows() {
   const sql = database();
   // Response count capped deliberately; never include contact/consent tables,
   // submission IDs, IPs or Turnstile tokens in exported CSV.
@@ -57,7 +57,7 @@ export async function exportResearchCsv(): Promise<string> {
     ORDER BY submitted_at DESC, id DESC
     LIMIT 10000
   `;
-  return "\uFEFF" + safeResearchCsv(rows.map(row => ({
+  return rows.map(row => ({
     submitted_at: new Date(String(row.submitted_at)).toISOString(),
     business_category: row.business_category,
     team_size: row.team_size,
@@ -66,5 +66,10 @@ export async function exportResearchCsv(): Promise<string> {
     challenges: row.challenges,
     challenge_frequency: row.challenge_frequency,
     price: row.price,
-  })), allowedColumns);
+  }));
+}
+
+export async function exportResearchCsv(): Promise<string> {
+  const rows = await getResearchExportRows();
+  return "\uFEFF" + safeResearchCsv(rows, allowedColumns);
 }
