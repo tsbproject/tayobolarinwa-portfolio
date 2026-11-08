@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Overview = {
   total: number;
@@ -8,9 +8,11 @@ type Overview = {
   recent: {submittedAt:string;category:string;challengeSummary:string;price:string}[];
 };
 
-export default function ResearchAdminClient() {
+export default function ResearchAdminClient({sessionMode=false}:{sessionMode?:boolean}) {
   const [username,setUsername] = useState("");
   const [password,setPassword] = useState("");
+  const [code,setCode] = useState("");
+  const [checkingSession,setCheckingSession] = useState(sessionMode);
   const [overview,setOverview] = useState<Overview | null>(null);
   const [error,setError] = useState("");
   const [busy,setBusy] = useState(false);
@@ -19,6 +21,26 @@ export default function ResearchAdminClient() {
   const [authorization,setAuthorization] = useState("");
   const [exporting,setExporting] = useState(false);
 
+  useEffect(() => {
+    if (!sessionMode) return;
+    let active = true;
+    async function restore() {
+      try {
+        const session = await fetch("/api/research/sostain/admin/session",{cache:"no-store"});
+        if (session.status !== 200) return;
+        const response = await fetch("/api/research/sostain/admin/overview",{cache:"no-store"});
+        if (response.ok && active) setOverview((await response.json()) as Overview);
+      } catch {
+        // Missing, expired or unavailable session keeps the private view closed.
+      } finally {
+        if (active) setCheckingSession(false);
+      }
+    }
+    void restore();
+    return () => {active=false;};
+  },[sessionMode]);
+
+
   async function login(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
@@ -26,24 +48,37 @@ export default function ResearchAdminClient() {
     try {
       const encoded = btoa(unescape(encodeURIComponent(username + ":" + password)));
       const header = "Basic " + encoded;
-      const response = await fetch("/api/research/sostain/admin/overview",{
-        headers:{Authorization:header},cache:"no-store",
-      });
+      const response = sessionMode
+        ? await fetch("/api/research/sostain/admin/login",{
+          method:"POST",
+          headers:{"Authorization":header,"Content-Type":"application/json"},
+          body:JSON.stringify({code}),
+          cache:"no-store",
+        })
+        : await fetch("/api/research/sostain/admin/overview",{
+          headers:{Authorization:header},cache:"no-store",
+        });
       if (!response.ok) throw new Error(response.status === 401 ? "Invalid admin credentials or admin access not configured." : "Research admin service is unavailable.");
-      const data = (await response.json()) as Overview;
-      setOverview(data); setAuthorization(header);
-      setUsername(""); setPassword("");
+      const data = sessionMode
+        ? await (async () => {
+            const overviewResponse = await fetch("/api/research/sostain/admin/overview",{cache:"no-store"});
+            if (!overviewResponse.ok) throw new Error("Authenticated session could not load research overview.");
+            return (await overviewResponse.json()) as Overview;
+          })()
+        : (await response.json()) as Overview;
+      setOverview(data); setAuthorization(sessionMode ? "" : header);
+      setUsername(""); setPassword(""); setCode("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign in failed.");
     } finally {setBusy(false);}
   }
 
   async function exportFile(format: "csv" | "excel") {
-    if (!authorization || exporting) return;
+    if ((!sessionMode && !authorization) || exporting) return;
     setExporting(true); setError("");
     try {
       const response = await fetch(format === "excel" ? "/api/research/sostain/admin/excel" : "/api/research/sostain/admin/export",{
-        headers:{Authorization:authorization},cache:"no-store",
+        headers:sessionMode ? {} : {Authorization:authorization},cache:"no-store",
       });
       if (!response.ok) throw new Error("Export could not be completed.");
       const blob = await response.blob();
@@ -57,11 +92,26 @@ export default function ResearchAdminClient() {
     } finally {setExporting(false);}
   }
 
-  function signOut() {
-    setAuthorization("");setOverview(null);setUsername("");setPassword("");setError("");
+  async function signOut() {
+    if (sessionMode) {
+      try {
+        const response = await fetch("/api/research/sostain/admin/logout",{
+          method:"POST",cache:"no-store",
+        });
+        if (!response.ok) {
+          setError("Session logout could not be confirmed. Retry before leaving this device.");
+          return;
+        }
+      } catch {
+        setError("Session logout could not be confirmed. Retry before leaving this device.");
+        return;
+      }
+    }
+    setAuthorization("");setOverview(null);setUsername("");setPassword("");setCode("");setError("");
   }
   return <main className="mx-auto max-w-5xl px-6 py-12">
-    {!overview ? <form onSubmit={login} autoComplete="off" className="mx-auto max-w-md space-y-5 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+    {checkingSession ? <p role="status" className="text-sm text-slate-600">Checking research admin session…</p> : null}
+    {!overview && !checkingSession ? <form onSubmit={login} autoComplete="off" className="mx-auto max-w-md space-y-5 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
       <p className="text-xs font-bold uppercase tracking-wider text-blue-700">Sostain Research</p>
       <h1 className="text-2xl font-bold">Research administration</h1>
       <p className="text-sm text-slate-600">Private researcher access. Use only on localhost or HTTPS.</p>
@@ -71,6 +121,9 @@ export default function ResearchAdminClient() {
       <label className="block text-sm font-medium">Password
         <input type="password" required autoComplete="off" value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border p-3"/>
       </label>
+      {sessionMode && <label className="block text-sm font-medium">Authenticator code
+        <input type="text" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required autoComplete="one-time-code" value={code} onChange={e=>setCode(e.target.value)} className="mt-2 w-full rounded-xl border p-3" />
+      </label>}
       <button disabled={busy} className="rounded-xl bg-slate-950 px-6 py-3 font-semibold text-white disabled:opacity-50">{busy?"Checking…":"Sign in"}</button>
       {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
     </form> : <>
@@ -79,7 +132,7 @@ export default function ResearchAdminClient() {
         <div className="flex flex-wrap gap-2">
           <button type="button" disabled={exporting} onClick={()=>exportFile("excel")} className="rounded-lg bg-slate-950 px-4 py-3 font-semibold text-white disabled:opacity-50">{exporting?"Preparing…":"Download Excel Report"}</button>
           <button type="button" disabled={exporting} onClick={()=>exportFile("csv")} className="rounded-lg border border-slate-300 px-4 py-3 font-semibold disabled:opacity-50">Export CSV</button>
-          <button type="button" onClick={signOut} className="rounded-lg border border-slate-300 px-4 py-3 font-semibold">Sign out</button>
+          <button type="button" onClick={()=>void signOut()} className="rounded-lg border border-slate-300 px-4 py-3 font-semibold">Sign out</button>
         </div>
       </div>
       {error && <p role="alert" className="mt-5 text-sm text-red-700">{error}</p>}
