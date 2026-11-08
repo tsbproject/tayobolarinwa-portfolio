@@ -161,3 +161,16 @@ Safety requirements:
 - Expect `Cloudflare Turnstile verification: PASS. No survey answers were submitted.` Tokens are single use; refresh the diagnostic page for a new test.
 - After the check, run `npx --no-install tsc --noEmit`, `npm run lint`, and `npm run build`.
 - This does not validate rate limit plus Turnstile integration, production request IP extraction, privacy notice, nor authenticated exports. Public survey remains disabled.
+
+
+## Phase 5: Combined local-only submission security check
+- New local-only URL: `http://localhost:3000/research/sostain/integration-check`.
+- New local-only API: `POST /api/research/sostain/integration-check`; returns 404 if `NODE_ENV` is not `development`, rejects non-localhost origins, and refuses testing if either survey release flag is true.
+- This diagnostic validates a server-generated response against the actual Zod survey schema, checks a fresh short-lived Upstash rate-limit key, verifies an actual single-use Cloudflare Turnstile token, and invokes the Neon persistence gate while the survey status is `draft` (expect `closed`).
+- No user answers or contacts are sent to Neon; successful completion means **no research response was stored**. This is not a public submit API test and does not prove transaction commit behavior or concurrency safety.
+- **Before testing:** retain `NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=false` and `SOSTAIN_SURVEY_BACKEND_READY=false`; confirm the Neon survey status is `draft`, and that Turnstile/Upstash/Neon environment variables are present in local `.env.local`. Never set the survey status to `open` for this check.
+- Pull the current feature branch, restart `npm run dev`, open the local URL, complete Turnstile if needed, and click **Run Combined Check**.
+- Expected output: `PASS: schema validation, Upstash rate limit, Turnstile verification and Neon draft write gate. No survey response was stored.`
+- Refresh the page before retrying; Turnstile tokens are single use.
+- After this diagnostic, re-run TypeScript, lint and production build, and share any errors.
+- Before production: verify request IP trust boundary and cleanly separate real write integration tests against an isolated test database; add privacy notice, protected CSV admin access and monitor dependency audit results.
