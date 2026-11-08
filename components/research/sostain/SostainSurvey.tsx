@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import SurveyTurnstile from "./SurveyTurnstile";
 import {
@@ -29,6 +29,7 @@ export default function SostainSurvey() {
   const [step, setStep] = useState(0);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const submissionIdRef = useRef<string | null>(null);
   const surveyOpen = process.env.NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN === "true";
   function set<K extends keyof Answers>(key: K, value: Answers[K]) {
     setAnswers(previous => ({ ...previous, [key]: value }));
@@ -63,10 +64,11 @@ export default function SostainSurvey() {
     setBusy(true);
     setError("");
     try {
+      submissionIdRef.current ??= crypto.randomUUID();
       const response = await fetch("/api/research/sostain/submit",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({...answers, submissionId:crypto.randomUUID()}),
+        body:JSON.stringify({...answers, submissionId:submissionIdRef.current}),
       });
       const result: { message?: string } = await response.json();
       if (!response.ok) throw new Error(result.message || "Could not submit your answers.");
