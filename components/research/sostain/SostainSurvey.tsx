@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import SurveyTurnstile from "./SurveyTurnstile";
 import {
   businessCategories, challenges, channels, researchSteps, surveyVersion, trackingMethods,
 } from "@/lib/research/sostain/questions";
@@ -28,6 +29,7 @@ export default function SostainSurvey() {
   const [step, setStep] = useState(0);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const surveyOpen = process.env.NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN === "true";
   function set<K extends keyof Answers>(key: K, value: Answers[K]) {
     setAnswers(previous => ({ ...previous, [key]: value }));
     setError("");
@@ -55,6 +57,8 @@ export default function SostainSurvey() {
   }
   async function submit() {
     if (!validateStep()) return;
+    if (!surveyOpen) {setError("The survey is not accepting responses yet. Please check back after the secure launch."); return;}
+    if (!answers.turnstileToken) {setError("Complete the security verification before submitting."); return;}
     setBusy(true);
     setError("");
     try {
@@ -127,13 +131,14 @@ export default function SostainSurvey() {
       </div>
       <input className="hidden" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={answers.website} onChange={e=>set("website",e.target.value)}/>
       {error && <p role="alert" className="mt-5 text-sm font-medium text-red-700">{error}</p>}
+      {step===1 && surveyOpen && <SurveyTurnstile onToken={token=>set("turnstileToken",token)}/>}
       <div className="mt-7 flex items-center justify-between gap-3">
         <button type="button" disabled={step===0||busy} onClick={()=>{setStep(0);setError("");}} className={`${buttonClass} border border-slate-300 text-slate-800`}>Back</button>
         {step===0
           ? <button type="button" className={`${buttonClass} bg-blue-600 text-white`} onClick={next}>Continue</button>
-          : <button type="button" className={`${buttonClass} bg-blue-600 text-white`} disabled={busy} onClick={submit}>{busy?"Submitting…":"Submit answers"}</button>}
+          : <button type="button" className={`${buttonClass} bg-blue-600 text-white`} disabled={busy || !surveyOpen} onClick={submit}>{busy?"Submitting…":"Submit answers"}</button>}
       </div>
     </section>
-    <p className="mt-5 text-center text-xs text-slate-500">The research form is in preview mode until secure data storage and abuse protection are enabled. Submissions are not yet accepted.</p>
+    <p className="mt-5 text-center text-xs text-slate-500">{surveyOpen ? "Your responses are used for this research study. Participation is voluntary." : "Preview only: submissions are disabled until secure storage, research privacy information and anti-abuse protection have been verified."}</p>
   </div>;
 }
