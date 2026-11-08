@@ -12,7 +12,14 @@ export async function persistResearchResponse(data: ResearchSurveyInput): Promis
   const connectionString = process.env.SOSTAIN_RESEARCH_DATABASE_URL;
   if (!connectionString) throw new Error("Research database is not configured.");
   const sql = neon(connectionString);
+  return persistResearchResponseWithClient(data, sql);
+}
 
+/** Database-client injection is used only by controlled isolated integration tests. */
+export async function persistResearchResponseWithClient(
+  data: ResearchSurveyInput,
+  sql: ReturnType<typeof neon>,
+): Promise<"stored" | "duplicate" | "closed"> {
   // Explicit whitelist: never persist CAPTCHA tokens, honeypots, IPs,
   // direct-contact details or unapproved client fields in analytics JSON.
   const answers = {
