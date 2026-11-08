@@ -43,7 +43,7 @@ export async function checkRateLimit(subject: string): Promise<GateResult> {
   const key = "sostain:research:limit:" + subject;
   const windowSeconds = 600;
   try {
-    const result = await fetch(endpoint.replace(/\\/$/,"") + "/pipeline", {
+    const result = await fetch((endpoint.endsWith("/") ? endpoint.slice(0,-1) : endpoint) + "/pipeline", {
       method:"POST",
       headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
       body:JSON.stringify([["INCR",key],["EXPIRE",key,windowSeconds,"NX"]]),
