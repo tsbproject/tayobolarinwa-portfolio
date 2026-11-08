@@ -1,12 +1,13 @@
 import { NextRequest } from "next/server";
-import { allowResearchAdmin, researchUnauthorizedResponse } from "@/lib/research/sostain/admin-auth";
+import { authorizeResearchAdmin } from "@/lib/research/sostain/admin-gate";
 import { exportResearchCsv } from "@/lib/research/sostain/admin-data";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
-  if (!allowResearchAdmin(request.headers.get("authorization"))) return researchUnauthorizedResponse();
+  const auth = await authorizeResearchAdmin(request);
+  if (!auth.allowed) return auth.response;
   try {
     const csv = await exportResearchCsv();
     return new Response(csv, {
