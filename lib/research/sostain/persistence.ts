@@ -1,5 +1,5 @@
 import "server-only";
-import { neon } from "@neondatabase/serverless";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import { surveyVersion } from "./questions";
 import type { ResearchSurveyInput } from "./schema";
 
@@ -18,7 +18,7 @@ export async function persistResearchResponse(data: ResearchSurveyInput): Promis
 /** Database-client injection is used only by controlled isolated integration tests. */
 export async function persistResearchResponseWithClient(
   data: ResearchSurveyInput,
-  sql: ReturnType<typeof neon>,
+  sql: NeonQueryFunction<false, false>,
 ): Promise<"stored" | "duplicate" | "closed"> {
   // Explicit whitelist: never persist CAPTCHA tokens, honeypots, IPs,
   // direct-contact details or unapproved client fields in analytics JSON.
