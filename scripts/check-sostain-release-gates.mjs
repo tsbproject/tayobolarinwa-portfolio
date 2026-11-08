@@ -54,6 +54,18 @@ const checks = [
     expected:401,
   },
   {
+    label: "Admin rejects malformed Basic authentication",
+    path: "/api/research/sostain/admin/overview",
+    options: {method:"GET",headers:{"Authorization":"Basic malformed@header"}},
+    expected:401,
+  },
+  {
+    label: "Admin rejects oversized Basic authentication",
+    path: "/api/research/sostain/admin/overview",
+    options: {method:"GET",headers:{"Authorization":"Basic "+ "A".repeat(5000)}},
+    expected:401,
+  },
+  {
     label: "Write test rejects unauthorised invocation",
     path: "/api/research/sostain/write-check",
     options: {method:"POST",headers:{"Origin":base,"Content-Type":"application/json"},body:"{}"},
