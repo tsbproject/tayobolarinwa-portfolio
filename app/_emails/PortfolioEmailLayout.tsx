@@ -29,12 +29,21 @@ export default function PortfolioEmailLayout({
           border: "1px solid #e2e8f0", backgroundColor: "#ffffff",
         }}>
           <Section style={{backgroundColor:"#0f172a", padding:"26px 30px"}}>
-            <Img
-              src="https://tayobolarinwa.dev/images/logo/tsb-logo.png"
-              alt="Tayo Bolarinwa"
-              width="130"
-              style={{display:"block",maxWidth:"130px",height:"auto",marginBottom:"20px"}}
-            />
+            {/* The original logo contains dark lettering; preserve it on a light tile. */}
+            <Section style={{
+              backgroundColor:"#ffffff",
+              width:"164px",
+              padding:"12px 16px",
+              borderRadius:"8px",
+              margin:"0 0 22px",
+            }}>
+              <Img
+                src="https://tayobolarinwa.dev/images/logo/tsb-logo.png"
+                alt="Tayo Bolarinwa"
+                width="132"
+                style={{display:"block",width:"132px",height:"auto",margin:"0"}}
+              />
+            </Section>
             <Text style={{
               color:"#93c5fd",fontSize:"11px",letterSpacing:"2px",
               fontWeight:700,textTransform:"uppercase",margin:"0 0 8px",
