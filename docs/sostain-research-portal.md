@@ -217,3 +217,12 @@ git push origin feature/sostain-research-portal
 - Review `npm audit` findings before production use; introducing a new dependency requires dependency security review.
 - Local QA: sign into `http://localhost:3000/research/sostain/admin`; click **Download Excel Report**; check both sheets, column widths, frozen rows and filters. Because the survey remains in draft, a valid empty workbook should still have formatted headings and no responses.
 - Keep both public survey release flags `false` and Neon survey status `draft`. Existing portfolio routes and consultation system are not modified.
+
+
+## Phase 8: Prelaunch privacy and isolated write test plan
+- Added `/research/sostain/privacy`: transparent prelaunch notice identifying the research purpose, survey and optional interview data, Neon/Upstash/Cloudflare/Vercel providers, de-identified export boundaries and a portfolio contact link for data requests.
+- Survey consent checkbox now links to this notice. No change to the 7-question core survey.
+- Retention intervals are deliberately **not asserted** while retention automation/operational deletion procedures are absent. The privacy notice is a draft and must be finalised before collection.
+- See `docs/sostain-prelaunch-write-testing.md` for separate Neon test branch/project requirements, positive-write tests, idempotency, contact separation and security release blockers.
+- Public survey remains closed. No migrations, destructive DB operations or Vercel production changes performed in this phase.
+- After pulling, verify `/research/sostain/privacy`, form consent link, `npx --no-install tsc --noEmit`, `npm run lint`, and `npm run build`.
