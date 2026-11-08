@@ -1,5 +1,5 @@
 import { randomUUID, timingSafeEqual } from "node:crypto";
-import { neon } from "@neondatabase/serverless";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
 import { persistResearchResponseWithClient } from "@/lib/research/sostain/persistence";
 import { researchSurveySchema } from "@/lib/research/sostain/schema";
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
   const mainUrl = process.env.SOSTAIN_RESEARCH_DATABASE_URL;
   if (!testUrl || !mainUrl) return reply(503, "Both isolated and parent database URLs must be configured.");
 
-  let sql: ReturnType<typeof neon>;
+  let sql: NeonQueryFunction<false, false>;
   try {
     const test = identity(testUrl), parent = identity(mainUrl);
     // Neon branch endpoints must have distinct hostnames. Never trust path/name alone.
@@ -59,7 +59,6 @@ export async function POST(request: NextRequest) {
   }
 
   const one = randomUUID(), two = randomUUID(), closedId = randomUUID();
-  const expectedIds = [one,two,closedId];
   const fixture = (submissionId: string, followup: boolean) => researchSurveySchema.parse({
     surveyVersion,submissionId,category:businessCategories[0],teamSize:"Just me",
     mainChannel:channels[0],tracking:trackingMethods[0],
