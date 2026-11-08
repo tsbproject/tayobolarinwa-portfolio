@@ -91,3 +91,22 @@ SELECT COUNT(*) AS contact_count FROM research_contacts;
 For a fresh empty branch, expect `draft` and zero in each table. If any assertions fail or residual data remain, do not use this branch for further tests until inspected.
 
 This test still does NOT establish production request IP trust, admin MFA, full HTTP submission endpoint correctness, or public-launch readiness. Keep the main Neon survey `draft` and both public release flags false. The test branch will expire in 7 days.
+
+
+## Phase 9 closeout and Phase 10 read-only gate checks — 2026-11-08
+
+Founder-confirmed real isolated Neon persistence test:
+```text
+HTTP 200
+PASS: real Neon test-branch writes, consent separation, idempotent retry and draft gate.
+Synthetic records deleted and test survey restored to draft.
+```
+Independent SQL verification on `sostain-write-testing`: survey `draft`; responses 0; consents 0; contacts 0. Phase 9 is completed. The temporary Neon branch auto-expires after 7 days.
+
+Phase 10 security review baseline:
+- Public `/api/research/sostain/submit` route checks `SOSTAIN_SURVEY_BACKEND_READY` first and rejects when false.
+- Three admin API endpoints (overview, CSV, Excel) require independently checked HTTP Basic credentials.
+- Local-only `/api/research/sostain/write-check` rejects requests without a long test key.
+- Added read-only `scripts/check-sostain-release-gates.mjs` to verify HTTP status and `Cache-Control: no-store` on these paths. It sends **no valid survey answers**, does not send credentials, and must only be run on localhost while both release flags explicitly equal `false`.
+- Run in Windows PowerShell with dev server running: `node --env-file=.env.local scripts/check-sostain-release-gates.mjs`. This script has not yet been executed on the user's machine.
+- Next: verify release-gate HTTP results, audit runtime/development dependency vulnerabilities (`npm audit --omit=dev`, `npm audit`), assess admin brute-force protection/MFA and trusted production proxy IP semantics, finalise legal retention/deletion and security contact handling before any public launch.
