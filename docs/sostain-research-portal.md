@@ -149,3 +149,15 @@ Safety requirements:
 - This is a **database SQL smoke test**, not a full test of the TypeScript `persistResearchResponse` function nor the HTTP security pipeline; those require subsequent isolated integration tests.
 - Keep frontend and backend launch flags false pending the Turnstile, Redis, privacy notice, rate-limit and endpoint checks.
 - Confirm the local package-lock update has been pushed to GitHub before using `npm ci` in CI.
+
+
+## Phase 4: Local-only Turnstile test
+- `/research/sostain/turnstile-check` is only accessible when the Next.js runtime is `development`.
+- `POST /api/research/sostain/turnstile-check` returns 404 outside development and only accepts `Origin: http://localhost:3000` in development.
+- It verifies a real Cloudflare Turnstile token server-side, including allowed hostname (`localhost`) and the exact action `sostain-survey`. It does NOT write to Neon, use Redis or open the public submit endpoint.
+- Required local `.env.local`: `NEXT_PUBLIC_SOSTAIN_TURNSTILE_SITE_KEY`, `SOSTAIN_TURNSTILE_SECRET_KEY`. Turnstile widget must explicitly allow `localhost` for local testing.
+- Keep both `NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN=false` and `SOSTAIN_SURVEY_BACKEND_READY=false`.
+- Local command: `git pull --ff-only origin feature/sostain-research-portal` followed by `npm run dev`; visit `http://localhost:3000/research/sostain/turnstile-check`, complete challenge and choose Verify Turnstile.
+- Expect `Cloudflare Turnstile verification: PASS. No survey answers were submitted.` Tokens are single use; refresh the diagnostic page for a new test.
+- After the check, run `npx --no-install tsc --noEmit`, `npm run lint`, and `npm run build`.
+- This does not validate rate limit plus Turnstile integration, production request IP extraction, privacy notice, nor authenticated exports. Public survey remains disabled.
