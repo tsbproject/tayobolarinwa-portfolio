@@ -38,18 +38,18 @@ export default function ResearchAdminClient() {
     } finally {setBusy(false);}
   }
 
-  async function exportCsv() {
+  async function exportFile(format: "csv" | "excel") {
     if (!authorization || exporting) return;
     setExporting(true); setError("");
     try {
-      const response = await fetch("/api/research/sostain/admin/export",{
+      const response = await fetch(format === "excel" ? "/api/research/sostain/admin/excel" : "/api/research/sostain/admin/export",{
         headers:{Authorization:authorization},cache:"no-store",
       });
       if (!response.ok) throw new Error("Export could not be completed.");
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
-      anchor.href = url; anchor.download = "sostain-research-anonymized.csv";
+      anchor.href = url; anchor.download = format === "excel" ? "sostain-research-report.xlsx" : "sostain-research-anonymized.csv";
       document.body.append(anchor); anchor.click(); anchor.remove();
       URL.revokeObjectURL(url);
     } catch(err) {
@@ -77,7 +77,8 @@ export default function ResearchAdminClient() {
       <div className="flex flex-wrap items-center justify-between gap-5">
         <div><p className="text-xs font-bold uppercase tracking-wider text-blue-700">Sostain Research</p><h1 className="mt-2 text-3xl font-bold">Research Overview</h1><p className="mt-2 text-slate-600">Aggregate and de-identified answers only.</p></div>
         <div className="flex flex-wrap gap-2">
-          <button type="button" disabled={exporting} onClick={exportCsv} className="rounded-lg bg-slate-950 px-4 py-3 font-semibold text-white disabled:opacity-50">{exporting?"Preparing…":"Export anonymised CSV"}</button>
+          <button type="button" disabled={exporting} onClick={()=>exportFile("excel")} className="rounded-lg bg-slate-950 px-4 py-3 font-semibold text-white disabled:opacity-50">{exporting?"Preparing…":"Download Excel Report"}</button>
+          <button type="button" disabled={exporting} onClick={()=>exportFile("csv")} className="rounded-lg border border-slate-300 px-4 py-3 font-semibold disabled:opacity-50">Export CSV</button>
           <button type="button" onClick={signOut} className="rounded-lg border border-slate-300 px-4 py-3 font-semibold">Sign out</button>
         </div>
       </div>
