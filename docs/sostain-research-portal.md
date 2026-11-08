@@ -2,8 +2,16 @@
 
 Status: **pre-launch; NOT accepting submissions**. This branch is intentionally not deployable as a collecting survey until its backing infrastructure is provisioned and tested.
 
+## Short-form research decision (2026-11-08)
+- Founder feedback: a lengthy questionnaire risks abandonment by busy Nigerian SME respondents.
+- Reduced the earlier long-form v1.0 survey to **v1.1-short: 7 core questions in 2 steps**; the follow-up invitation is optional.
+- Target completion time: **2–3 minutes**, subject to piloting with five businesses (not a measured claim).
+- Core questions: business category, team size, main customer channel, current recordkeeping, top two challenges, challenge frequency, indicative monthly price.
+- Deferred: detailed finance, invoices, expenses, late-payment workflows, AI acceptance, and software adoption to **interviews**, not the initial survey.
+- Preserve prior schema v1.0 in Git history; do not merge response datasets across differing survey versions without mapping.
+
 ## Current state
-- Public survey page: `/research/sostain`; five steps, mobile-first; schema-driven validation; optional interview opt-in.
+- Public survey page: `/research/sostain`; two steps and seven core questions, mobile-first; schema-driven validation; optional interview opt-in.
 - Versioned, typed question catalogue: `lib/research/sostain/`.
 - POST route: `/api/research/sostain/submit`; origin, content-type, size, schema and honeypot checks.
 - **The POST route deliberately returns HTTP 503 for all otherwise valid submissions; nothing is stored.**
