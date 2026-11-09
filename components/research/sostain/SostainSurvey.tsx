@@ -143,6 +143,6 @@ export default function SostainSurvey() {
           : <button type="button" className={`${buttonClass} bg-blue-600 text-white`} disabled={busy || !surveyOpen} onClick={submit}>{busy?"Submitting…":"Submit answers"}</button>}
       </div>
     </section>
-    <p className="mt-5 text-center text-xs text-slate-500">{surveyOpen ? "Your responses are used for this research study. Participation is voluntary." : "Preview only: submissions are disabled until secure storage, research privacy information and anti-abuse protection have been verified."}</p>
+    <p className="mt-5 text-center text-xs text-slate-500">{surveyOpen ? "Your responses are used for this research study. Participation is voluntary." : "This research survey is not accepting submissions yet. Please return when public participation opens."}</p>
   </div>;
 }
