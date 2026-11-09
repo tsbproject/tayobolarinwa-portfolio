@@ -60,3 +60,24 @@ This checklist distinguishes source-code inspection, founder-reported local chec
 ### Status of historical continuity documents
 
 Older engineering notes may say admin MFA or Neon persistence was not done because they were written before later phases. Use the actual current code and confirmed 2026-11-08/09 test results above as the baseline. Keep this audit as the current launch checklist; it does not supersede the detailed security procedures.
+
+## 2026-11-09 targeted live Vercel metadata review (read-only)
+
+Vercel project identified through the repository's Git link: `tayobolarinwa-portfolio` under `tsbprojects-projects`, framework Next.js, domains `tayobolarinwa.dev` and `www.tayobolarinwa.dev`. Project access settings showed Vercel SSO protection on non-custom domains; this is project metadata only, not a successful request-path test.
+
+**Environment variable names/targets only were inspected. No secret values were decrypted.** Relevant observations:
+
+- `SOSTAIN_SURVEY_BACKEND_READY` and `NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN` are present for production and preview, but their **effective boolean values were not verified**. Keep both explicitly false.
+- `SOSTAIN_RESEARCH_DATABASE_URL` exists for **both production and preview**. Critical staging safeguard: preview connection isolation has **not** been proven; assume preview can reach real data until independently confirmed. Do not turn on preview submissions before isolation is established.
+- `SOSTAIN_RESEARCH_ADMIN_USERNAME` and `SOSTAIN_RESEARCH_ADMIN_PASSWORD` were **not present** among listed project variables. That would prevent successful configured admin login; verify there is no alternative source or deployment-specific configuration before calling production MFA operational. Do not add credentials without a deliberate production admin-access decision.
+- `SOSTAIN_ADMIN_SESSION_ENABLED` and `SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET` are present for production only; the configured flag **value was not verified**.
+- `SOSTAIN_UPSTASH_REDIS_REST_TOKEN` and `SOSTAIN_RATE_LIMIT_KEY` appear for production only; `SOSTAIN_UPSTASH_REDIS_REST_URL` appears for preview and production. Thus preview's full Redis-backed submission pipeline is **not** demonstrably configured.
+- `SOSTAIN_TURNSTILE_SECRET_KEY` and public site key appear for preview and production.
+- `SOSTAIN_PRIVACY_REQUEST_TEST_ENABLED` is **not present** in the listed Vercel variables. The route is also development-only.
+- The site/repository configuration was checked read-only. **No variables, domains, deployments, database surveys or production flags were modified.**
+
+These metadata findings sharpen P0-D (deployed environment review). They do not validate the Vercel edge IP header, authentication end-to-end, Turnstile acceptance on the domain, or isolated public HTTP submissions. A verified, **separate staging database and secrets** are required before full-path testing.
+
+### Privacy operator determination
+
+The user has designated **Tayo Bolarinwa** as the individual responsible for Sostain research. `app/research/sostain/privacy/page.tsx` now reflects this and includes explicit draft limitations. The lawful basis, enforceable retention, transfer safeguards, contact-path delivery and final approval still need evidence before a final version is published.
