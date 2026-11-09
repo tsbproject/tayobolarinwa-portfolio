@@ -16,7 +16,7 @@ export default function AboutCTA() {
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
             Whether you&apos;re launching a startup, modernizing an existing
-            platform or building a new digital product, I'd love to help
+            platform or building a new digital product, I&apos;d love to help
             bring your vision to life.
           </p>
 
