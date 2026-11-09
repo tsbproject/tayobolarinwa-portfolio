@@ -82,7 +82,7 @@ export async function revokeResearchSession(request: NextRequest): Promise<void>
   if (token) await redis([["DEL", sessionKey(token)]]);
 }
 
-export function researchSessionCookie(token: string, request: NextRequest) {
+export function researchSessionCookie(token: string) {
   // Secure in production; local HTTP is supported only for localhost development.
   const secure = process.env.NODE_ENV === "production";
   return {
