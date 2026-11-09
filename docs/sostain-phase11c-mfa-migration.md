@@ -91,3 +91,20 @@ node -e "const c=require('node:crypto');let bits=0,n=0,out='';const alpha='ABCDE
 - Re-run production build + closed survey checks before any release.
 
 No background work, authentication migration, survey launch or production credential update is carried out automatically.
+
+
+## Phase 11C security diagnostics (after local MFA activation)
+
+Added \`scripts/check-sostain-admin-sessions.mjs\` to exercise *disposable, randomly named* Upstash keys and deny-path checks against the **local** admin HTTP routes. It requires \`SOSTAIN_ADMIN_SESSION_ENABLED=true\` and both public survey flags explicitly false.
+
+\`\`\`powershell
+git status --short
+git pull --ff-only origin feature/sostain-research-portal
+node --env-file=.env.local scripts/check-sostain-admin-sessions.mjs
+\`\`\`
+
+The diagnostic exercises the same underlying Redis primitives used by research sessions: one-time \`SET NX EX\` (replay reservation), fixed 30-minute TTL, a short *test-only* expiry (two seconds), explicit \`DEL\` and simulated unavailable storage. It also makes **only unauthenticated / forged / disallowed-Origin** requests to the real local overview, CSV, Excel, login and logout HTTP endpoints. It sends **no passwords, MFA codes, real session cookies, or contact data**, and never uses real admin login/session keys.
+
+**What it does not prove:** the normal 30-minute session actually expires in a running browser, TOTP RFC 6238 numeric matching, MFA-login route handling of a real replayed code, end-to-end correct rejection on actual Redis outage, or complete CSRF/browser security. The simulated outage verifies the isolated storage operation errors, not the full HTTP route's catch path. Those still need dedicated integration/chaos validation and a security review before production. The user's prior successful login, refresh, exports and logout establish working basic functionality but do not replace these tests.
+
+Keep MFA enabled only in localhost. This script is **not** the earlier 12-check release test, which expects MFA disabled. Never run either script against a production origin. The new script uses temporary Redis writes and validates their deletion; it never changes research responses in Neon.
