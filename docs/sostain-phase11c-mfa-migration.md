@@ -49,7 +49,7 @@ Expect **12/12 PASS** with `SOSTAIN_ADMIN_SESSION_ENABLED` unset/false and the t
 Before enabling MFA, scan an offline QR generated locally by \`scripts/sostain-mfa-enroll.mjs\`; do not paste a long TOTP secret or expose an \`otpauth://\` URL to a website. This helper:
 - Requires both survey launch flags set to \`false\` in \`.env.local\`, and refuses to run if MFA mode is \`true\`.
 - Generates a new 256-bit secret locally via Node.js cryptographic randomness.
-- Writes the secret to the existing local \`.env.local\` **without enabling MFA**, and refuses to overwrite an existing secret.
+- Writes a new secret to the existing local \`.env.local\` **without enabling MFA**. If a valid 52-character Base32 MFA secret already exists, it reuses it without changing the file; an invalid/placeholder value is rejected and not replaced.
 - Uses a locally installed QR renderer to create a PNG within a random directory under the OS temporary directory (never \`public/\`, Git, or an online QR service).
 - Prints **only the local file location**, not the secret or QR payload.
 
@@ -66,7 +66,7 @@ Use the output path privately to open the PNG on your own PC (for example, \`Sta
 
 Once enrollment succeeds, set \`SOSTAIN_ADMIN_SESSION_ENABLED=true\` in \`.env.local\`, restart the local Next.js server, and follow the private validation steps below. Never enable the flag in Vercel at this stage.
 
-If \`SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET\` already exists, the helper deliberately stops instead of rotating your enrolled authenticator. If it is an un-enrolled value, resolve the duplicate deliberately offline; do not share that value.
+If \`SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET\` already exists and contains a valid 52-character Base32 value, the helper regenerates a QR from that same secret without modifying it. If the configured value is a placeholder or invalid, the helper stops with instructions to review that setting privately. Never share the secret or an enrollment QR.
 
 The \`npm install --no-save --package-lock=false\` command only provides the local QR renderer; no production dependency or package-lock change is intended. Check \`git status --short\` afterwards for unexpected changes and do not commit any secret or QR output.
 
