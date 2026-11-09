@@ -99,3 +99,26 @@ Pass criteria are the \`PASS\` notices in the SQL output, followed by **independ
 ### Still intentionally disabled
 
 No administrator button, DELETE API, retention cron, participant lookup endpoint, email/phone lookup, or real-user deletion has been added. An actual rights-request operation requires a verifiable request, approved retention policy, audit design, response ID targeting, least-privilege access and separate testing against synthetic data using a real application connection. The main database must remain untouched.
+
+## Phase 11D Part 2B — SQL Editor-visible proof of rehearsal
+
+The initial execution was followed by independent confirmation of the test-branch guard, survey `draft` status, and zero responses/consents/contacts; however, no SQL `PASS` notices from the `DO` block were captured. This is **not sufficient** to mark the withdrawal/erasure logic as validated.
+
+The rehearsal SQL has now been enhanced with a **transaction-local temporary results table**. Five assertions insert `PASS` rows only after their respective SQL operations and integrity checks succeed:
+
+1. Synthetic relationships initialized.
+2. Contact consent withdrawn; response preserved.
+3. Targeted response and linked rows erased.
+4. Unrelated synthetic record unaffected.
+5. Transaction rollback is required.
+
+A final `SELECT step_number, operation, outcome` should display all **five PASS rows** in the Neon SQL Editor, just before the final `ROLLBACK`. The proof table and all synthetic records are rolled back. Run the **complete script as one transaction**, not separate disconnected requests. If the editor does not show the results, stop and retain the SQL execution output; do not infer success from zero post-test counts alone.
+
+### Safe local run sequence
+
+- `git pull --ff-only origin feature/sostain-research-portal`.
+- Independently verify the Neon editor currently targets disposable `sostain-write-testing`. Guard marker must show `sostain-write-testing`; survey must be `draft`; responses, consents, contacts must each be `0`.
+- Paste the full updated `docs/sostain-phase11d-deletion-rehearsal.sql` into **that branch's** editor. Keep the final `ROLLBACK` unchanged.
+- Verify the five PASS result rows and then separately query survey status and table counts (must be draft and 0/0/0). Capture only nonsensitive test results, not connection strings.
+
+This verifies only synthetic transactional behavior, not production participant verification, approved retention, automated cleanup, audit logging or backup erasure. No destructive administrator API is enabled.
