@@ -114,7 +114,8 @@ export async function POST(request: NextRequest) {
     const decisions = [];
     for (let i = 0; i < 7; i++) decisions.push(await checkRateLimit(subject));
     checks.redisRateLimitAllowsSix = decisions.slice(0, 6).every(x => x.ok);
-    checks.redisRateLimitBlocksSeventh = !decisions[6].ok && decisions[6].status === 429;
+    const seventh = decisions[6];
+    checks.redisRateLimitBlocksSeventh = Boolean(seventh && !seventh.ok && seventh.status === 429);
   } catch {
     return response(503, "Redis rate-limit test failed.", checks);
   }
