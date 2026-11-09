@@ -108,6 +108,11 @@ async function main() {
       {}, 401
     );
     await checkHttp(
+      "Missing admin session cannot access governance report",
+      "/api/research/sostain/admin/governance",
+      {}, 401
+    );
+    await checkHttp(
       "Disallowed Origin prevents MFA login",
       "/api/research/sostain/admin/login",
       {method:"POST",headers:{"Origin":"https://invalid.example","Content-Type":"application/json"},body:"{}"},403
