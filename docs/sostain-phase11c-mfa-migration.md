@@ -43,7 +43,34 @@ node --env-file=.env.local scripts/check-sostain-release-gates.mjs
 
 Expect **12/12 PASS** with `SOSTAIN_ADMIN_SESSION_ENABLED` unset/false and the two public survey flags false. Verify existing admin login and CSV/Excel export once; they should be unchanged. Any failure: do not enable the mode.
 
-## MFA enrollment (local test only, after baseline passes)
+
+## Safer QR-based enrollment (recommended)
+
+Before enabling MFA, scan an offline QR generated locally by \`scripts/sostain-mfa-enroll.mjs\`; do not paste a long TOTP secret or expose an \`otpauth://\` URL to a website. This helper:
+- Requires both survey launch flags set to \`false\` in \`.env.local\`, and refuses to run if MFA mode is \`true\`.
+- Generates a new 256-bit secret locally via Node.js cryptographic randomness.
+- Writes the secret to the existing local \`.env.local\` **without enabling MFA**, and refuses to overwrite an existing secret.
+- Uses a locally installed QR renderer to create a PNG within a random directory under the OS temporary directory (never \`public/\`, Git, or an online QR service).
+- Prints **only the local file location**, not the secret or QR payload.
+
+After pulling the feature branch, from repository root:
+
+\`\`\`powershell
+git status --short
+git pull --ff-only origin feature/sostain-research-portal
+npm install --no-save --package-lock=false qrcode
+node scripts/sostain-mfa-enroll.mjs
+\`\`\`
+
+Use the output path privately to open the PNG on your own PC (for example, \`Start-Process 'FULL_PATH_FROM_TERMINAL'\`). Scan with Google Authenticator or another standard TOTP application. When scanning works, delete the PNG and the newly created empty temporary folder; **do not send the QR image or its URL to chat or anyone else**. Safeguard the secret already stored in \`.env.local\` with a private password-manager backup.
+
+Once enrollment succeeds, set \`SOSTAIN_ADMIN_SESSION_ENABLED=true\` in \`.env.local\`, restart the local Next.js server, and follow the private validation steps below. Never enable the flag in Vercel at this stage.
+
+If \`SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET\` already exists, the helper deliberately stops instead of rotating your enrolled authenticator. If it is an un-enrolled value, resolve the duplicate deliberately offline; do not share that value.
+
+The \`npm install --no-save --package-lock=false\` command only provides the local QR renderer; no production dependency or package-lock change is intended. Check \`git status --short\` afterwards for unexpected changes and do not commit any secret or QR output.
+
+## MFA enrollment (manual fallback; local test only, after baseline passes)
 
 1. Use a real authenticator app supporting six-digit SHA-1 TOTP at 30-second intervals. Generate a **unique 32-byte cryptographic random secret** and encode it in Base32 (52-character unpadded form).
 2. For convenience, run this Node.js script **locally** to generate a Base32 secret. Do not paste its output into chat or commit it:
