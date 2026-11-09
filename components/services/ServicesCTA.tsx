@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react/";
+import { ArrowRight } from "lucide-react";
 
 import Container from "@/components/layout/Container";
 import Section from "@/components/ui/Section";
