@@ -13,8 +13,8 @@ export default function SostainPrivacyPage() {
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Sostain · Business research</p>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">Research privacy notice</h1>
       <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
-        Pre-launch notice · Updated 9 November 2026. The survey is not accepting responses yet.
-        The research operator has approved the retention limits below; remaining privacy and release checks are in progress.
+        Privacy notice version sostain-research-v1 · Updated 9 November 2026.
+        Participation is voluntary. Check the research survey page for whether submissions are currently open.
       </p>
 
       <div className="mt-8 space-y-7 leading-7">
@@ -58,8 +58,12 @@ export default function SostainPrivacyPage() {
             Participation is voluntary; you may decline to provide interview contact details.
           </p>
           <p className="mt-2">
-            Before public collection starts, the lawful basis for processing survey answers and the
-            separate permission for optional interview contact will be documented in the final notice.
+            We rely on your affirmative consent to process the answers you choose to submit for this
+            research. You can participate without providing any interview contact details. If you separately
+            opt in to an interview and provide contact details, we rely on that separate permission to use
+            those details solely to contact you about the research. You may withdraw your permission using
+            the contact method below. Withdrawal does not invalidate processing performed before it,
+            and verified requests will be assessed under applicable data-protection requirements.
           </p>
         </section>
 
@@ -74,10 +78,11 @@ export default function SostainPrivacyPage() {
             of answers may still be potentially identifying.
           </p>
           <p className="mt-2">
-            Depending on provider configuration, information may be handled outside Nigeria. Applicable
-            service terms, data-processing safeguards, locations and backup arrangements are being
-            reviewed before launch. Please do not put customer names, financial account information
-            or other confidential third-party information into your answers.
+            These providers may process data outside Nigeria, including in the regions where their
+            infrastructure operates. Their service terms and applicable data-protection arrangements
+            govern that processing. You can ask for further information about relevant international
+            processing and safeguards through the contact route below. Do not include customer names,
+            financial account information or other confidential third-party information in your answers.
           </p>
         </section>
 
@@ -95,8 +100,9 @@ export default function SostainPrivacyPage() {
             We will verify requests carefully without disclosing another person&apos;s participation.
           </p>
           <p className="mt-2">
-            A survey response without interview contact details may be difficult to locate and verify
-            later. The final participant-request procedure will be confirmed before recruitment.
+            If you did not provide contact details, identifying and verifying your particular response
+            may be difficult. We will assess requests individually and will not disclose other participants'
+            information. You may also raise a complaint with the Nigeria Data Protection Commission.
           </p>
         </section>
 
@@ -108,14 +114,15 @@ export default function SostainPrivacyPage() {
             identifiable or pseudonymous survey responses. Contact permission and related records will
             be reviewed alongside their linked response. Verified withdrawal or a valid erasure request
             may require earlier removal, subject to applicable legal exceptions. The operator is responsible
-            for a weekly retention review and secure, targeted manual deletion. Provider backup retention,
-            legal exceptions and operational procedures are being verified before the survey opens.
+            for weekly retention reviews and secure, targeted manual deletion. Removed records may persist
+            temporarily in provider-managed backups until the backup retention cycle expires; we do not
+            promise immediate deletion from every backup copy.
           </p>
         </section>
       </div>
 
       <p className="mt-10 border-t border-slate-200 pt-5 text-sm text-slate-500">
-        Pre-launch notice · 9 November 2026 ·{" "}
+        Privacy notice version sostain-research-v1 · Updated 9 November 2026 ·{" "}
         <Link href="/research/sostain" className="text-blue-700 underline underline-offset-2">
           Return to research survey
         </Link>
