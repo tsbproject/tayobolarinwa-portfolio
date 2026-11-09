@@ -13,8 +13,8 @@ export default function SostainPrivacyPage() {
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Sostain · Business research</p>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">Research privacy notice</h1>
       <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
-        Pre-launch draft · Updated 9 November 2026. The survey is not accepting responses yet.
-        Retention periods and operational procedures must be approved before public recruitment.
+        Pre-launch notice · Updated 9 November 2026. The survey is not accepting responses yet.
+        The research operator has approved the retention limits below; remaining privacy and release checks are in progress.
       </p>
 
       <div className="mt-8 space-y-7 leading-7">
@@ -103,18 +103,19 @@ export default function SostainPrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-950">Retention and deletion</h2>
           <p className="mt-2">
-            Retention arrangements are not yet finalized. The current planning proposals are to keep
-            optional interview contact information for no longer than 90 days and identifiable or
-            pseudonymous research response records for no longer than 365 days, unless a shorter
-            period or a justified exception applies. <strong>These are proposals, not an approved or
-            operational retention promise.</strong> Appropriate deletion procedures, including
-            backup handling, will be reviewed and the approved limits published before opening the survey.
+            The research operator has approved a maximum retention of <strong>90 days from submission</strong> for
+            optional interview contact information and <strong>365 days from submission</strong> for
+            identifiable or pseudonymous survey responses. Contact permission and related records will
+            be reviewed alongside their linked response. Verified withdrawal or a valid erasure request
+            may require earlier removal, subject to applicable legal exceptions. The operator is responsible
+            for a weekly retention review and secure, targeted manual deletion. Provider backup retention,
+            legal exceptions and operational procedures are being verified before the survey opens.
           </p>
         </section>
       </div>
 
       <p className="mt-10 border-t border-slate-200 pt-5 text-sm text-slate-500">
-        Pre-launch draft · 9 November 2026 ·{" "}
+        Pre-launch notice · 9 November 2026 ·{" "}
         <Link href="/research/sostain" className="text-blue-700 underline underline-offset-2">
           Return to research survey
         </Link>
