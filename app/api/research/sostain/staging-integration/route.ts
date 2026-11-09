@@ -37,6 +37,31 @@ function previewEnabled() {
  * A successful run does not replace an end-to-end browser/Turnstile test.
  */
 export async function POST(request: NextRequest) {
+  // An explicitly requested, authenticated diagnostic runs before the normal
+  // integration switch. It returns only booleans and performs NO service calls
+  // or database/Redis writes. It is impossible to run on Production.
+  if (request.headers.get("x-sostain-diagnostic") === "true") {
+    if (process.env.VERCEL_ENV !== "preview") return response(404, "Not found.");
+    const diagnosticSecret = process.env.SOSTAIN_STAGING_PREFLIGHT_KEY;
+    if (!diagnosticSecret || diagnosticSecret.length < 32 ||
+        !sameSecret(request.headers.get("x-sostain-staging-key") ?? "", diagnosticSecret)) {
+      return response(403, "Forbidden.");
+    }
+    if (request.nextUrl.protocol !== "https:" ||
+        !request.nextUrl.hostname.toLowerCase().endsWith(".vercel.app") ||
+        request.headers.get("origin") !== request.nextUrl.origin) {
+      return response(403, "Forbidden.");
+    }
+    return response(200, "Read-only integration gate diagnostic.", {
+      previewEnvironment: process.env.VERCEL_ENV === "preview",
+      correctGitBranch: process.env.VERCEL_GIT_COMMIT_REF === "feature/sostain-research-portal",
+      nodeProduction: process.env.NODE_ENV === "production",
+      integrationSwitchExactlyTrue: process.env.SOSTAIN_STAGING_INTEGRATION_ENABLED === "true",
+      backendSurveyFlagExactlyFalse: process.env.SOSTAIN_SURVEY_BACKEND_READY === "false",
+      frontendSurveyFlagExactlyFalse: process.env.NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN === "false",
+    });
+  }
+
   if (!previewEnabled()) return response(404, "Not found.");
 
   const secret = process.env.SOSTAIN_STAGING_PREFLIGHT_KEY;
