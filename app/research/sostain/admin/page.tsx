@@ -1,5 +1,7 @@
 import ResearchAdminClient from "@/components/research/sostain/ResearchAdminClient";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Sostain Research Administration",
   robots: { index: false, follow: false },
