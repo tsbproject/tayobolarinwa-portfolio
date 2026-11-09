@@ -5,7 +5,7 @@
  *
  * Run: node --env-file=.env.local scripts/check-sostain-admin-sessions.mjs
  */
-import { createHash, randomBytes, randomUUID } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 
 const base = "http://localhost:3000";
 const results = [];
@@ -125,11 +125,14 @@ async function main() {
   } finally {
     if (keysTouched) {
       try {
-        const [removed] = await pipeline([["DEL", ...keys]]);
-        // replay and active should exist; expired and revoked were deliberately deleted.
-        assert(removed === 2, "Expected to delete two remaining temporary keys.");
+        // DEL is idempotent: some test keys may already have expired or been
+        // revoked, so the deletion count can validly be 0..4.
+        await pipeline([["DEL", ...keys]]);
+        const remaining = await pipeline(keys.map(key => ["EXISTS", key]));
+        assert(remaining.every(count => count === 0),
+          "One or more disposable diagnostic keys remain after cleanup.");
         cleanupOk = true;
-        pass("All disposable Redis diagnostic keys cleaned up.");
+        pass("All disposable Redis diagnostic keys verified absent after cleanup.");
       } catch (error) {
         fail("Cannot confirm diagnostic key cleanup; investigate only diagnostic-prefixed keys before retrying.");
         console.error(error instanceof Error ? error.message : "Cleanup error");
