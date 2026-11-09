@@ -38,7 +38,7 @@
 
 ## Sign-off before changing the public notice
 
-- [ ] Controller identity and contact confirmed.
+- [x] Responsible individual identified: **Tayo Bolarinwa**. Contact path provisionally identified as `/consultation`; confirm operational receipt/routing before launch.
 - [ ] Legal basis, consent language and rights procedures reviewed.
 - [ ] Retention durations approved *and operationally enforceable*.
 - [ ] Processing/service regions and transfer terms reviewed.
@@ -48,3 +48,10 @@
 - [ ] Survey still closed until full HTTP staging and Vercel deployment checks pass.
 
 **No one should interpret creation of this checklist as policy approval.**
+
+
+## Owner instruction — 9 November 2026
+
+The research operator is **Tayo Bolarinwa**, acting as an individual conducting independent Sostain product research. Do not present Marvel Creative Media, Kielflo Technologies or Sostain as a separately established legal controller without an additional explicit decision. The prelaunch public page was revised to describe this role and to direct rights inquiries to `/consultation`. The contact-form delivery path must still be validated.
+
+The proposed 90/365-day limits are stated on the prelaunch page as **not yet approved or operational commitments**. Update to final, enforceable limits and a dated approved notice before public collection. No production release authorization has been given.
