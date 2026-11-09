@@ -27,8 +27,30 @@ for (const flag of flags) {
   }
 }
 if (failed) process.exit(1);
+if (process.env.SOSTAIN_ADMIN_SESSION_ENABLED === "true") {
+  console.error("FAIL: Legacy release-gate test expects MFA session mode disabled.");
+  process.exit(1);
+}
 
 const checks = [
+  {
+    label: "MFA login endpoint is unavailable before activation",
+    path: "/api/research/sostain/admin/login",
+    options: {method:"POST",headers:{"Origin":base,"Content-Type":"application/json"},body:"{}"},
+    expected:404,
+  },
+  {
+    label: "MFA session endpoint is unavailable before activation",
+    path: "/api/research/sostain/admin/session",
+    options: {method:"GET"},
+    expected:404,
+  },
+  {
+    label: "MFA logout endpoint is unavailable before activation",
+    path: "/api/research/sostain/admin/logout",
+    options: {method:"POST",headers:{"Origin":base}},
+    expected:404,
+  },
   {
     label: "Public survey POST returns 503 while disabled",
     path: "/api/research/sostain/submit",
