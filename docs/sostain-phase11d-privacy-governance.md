@@ -71,3 +71,31 @@ npm run build
 With `npm run dev` running, navigate to `http://localhost:3000/api/research/sostain/admin/governance` in a private browser to verify missing-session HTTP **401**, and in the already-authenticated MFA browser to verify the JSON governance report. **Do not copy individual answers or contact details** into support conversations.
 
 No privacy notice is being advertised as final, no responses are collected publicly, and no retention job runs until approval and isolated testing.
+
+
+## Phase 11D Part 2 — Consent withdrawal and erasure rehearsal (ROLLBACK only)
+
+Added \`docs/sostain-phase11d-deletion-rehearsal.sql\`. **It is a SQL Editor rehearsal, not an application deletion endpoint or a production migration.** Its last statement is \`ROLLBACK\`.
+
+### Strict preconditions
+
+- Only use a **disposable, empty Neon database branch** explicitly selected in the Neon Console, named \`sostain-write-testing\`, where the \`research_integration_test_guard\` marker exists and has \`environment='sostain-write-testing'\`.
+- The old 7-day Phase 9 branch may have expired; if so, provision a fresh isolated test branch and install the approved guard on **that branch only** using \`docs/sostain-test-branch-guard.sql\`. Never install the marker on the main research database.
+- Independently verify the selected Neon branch and that the \`1.1-short\` survey is \`draft\` and all three response/consent/contact tables are empty.
+- **Never copy the rehearsal into the main or production SQL Editor**, even though it contains safeguards. Never change \`ROLLBACK\` to \`COMMIT\`.
+- In case any assertion fails, PostgreSQL aborts the transaction. Do not use this as a real user data deletion mechanism.
+
+### What the SQL exercises
+
+1. Acquires a transaction advisory lock; verifies guard, survey draft and empty branch.
+2. Inserts three entirely synthetic records using \`.invalid\` contact addresses (withdrawal, erasure, untouched control).
+3. Withdraws contact consent by deleting one associated \`research_contacts\` record and setting \`research_consents.followup_permission=false\`, while preserving the survey answer.
+4. Deletes one targeted \`research_responses\` parent, proving foreign-key cascades remove that response's consent and contact.
+5. Verifies the untouched synthetic control remains intact and cardinalities match.
+6. Rolls **all test inserts/changes/deletions back**, leaving survey draft and all three tables empty.
+
+Pass criteria are the \`PASS\` notices in the SQL output, followed by **independent** read-only post-test queries showing zero responses, consents and contacts and a draft survey. These tests cannot prove a production rights-request workflow or that data is removed from database backups.
+
+### Still intentionally disabled
+
+No administrator button, DELETE API, retention cron, participant lookup endpoint, email/phone lookup, or real-user deletion has been added. An actual rights-request operation requires a verifiable request, approved retention policy, audit design, response ID targeting, least-privilege access and separate testing against synthetic data using a real application connection. The main database must remain untouched.
