@@ -6,6 +6,15 @@
 -- No real participant records are used or modified.
 BEGIN;
 
+-- Temporary proof table lasts only for this transaction, and is rolled
+-- back with the rest of the rehearsal. A SELECT prints visible results even
+-- when the SQL Editor suppresses RAISE NOTICE messages.
+CREATE TEMP TABLE sostain_privacy_rehearsal_results (
+  step_number integer PRIMARY KEY,
+  operation text NOT NULL,
+  outcome text NOT NULL CHECK (outcome = 'PASS')
+) ON COMMIT DROP;
+
 DO $privacy_test$
 DECLARE
   withdrawal_id uuid := gen_random_uuid();
@@ -65,6 +74,8 @@ BEGIN
       OR (SELECT COUNT(*) FROM research_contacts WHERE response_id IN (withdrawal_id, erasure_id, untouched_id)) <> 2 THEN
     RAISE EXCEPTION 'Synthetic setup integrity failure';
   END IF;
+  INSERT INTO sostain_privacy_rehearsal_results VALUES
+    (1, 'Synthetic relationships initialized', 'PASS');
   RAISE NOTICE 'PASS: synthetic response/consent/contact relationships prepared';
 
   -- PRIVACY OPERATION A: verified interview consent withdrawal.
@@ -87,6 +98,8 @@ BEGIN
        WHERE response_id = withdrawal_id AND followup_permission = FALSE) THEN
     RAISE EXCEPTION 'Withdrawal did not preserve answer and revoke follow-up consistently';
   END IF;
+  INSERT INTO sostain_privacy_rehearsal_results VALUES
+    (2, 'Contact consent withdrawn; response preserved', 'PASS');
   RAISE NOTICE 'PASS: consent withdrawal removes contact and revokes follow-up but preserves answer';
 
   -- PRIVACY OPERATION B: verified full erasure.
@@ -100,6 +113,8 @@ BEGIN
      OR EXISTS (SELECT 1 FROM research_contacts WHERE response_id = erasure_id) THEN
     RAISE EXCEPTION 'Erasure cascade failed';
   END IF;
+  INSERT INTO sostain_privacy_rehearsal_results VALUES
+    (3, 'Targeted response and linked rows erased', 'PASS');
   RAISE NOTICE 'PASS: erasure removes targeted answer, consent, and contact';
 
   -- Invariants: other participants are never targeted by either operation.
@@ -112,10 +127,28 @@ BEGIN
      OR EXISTS (SELECT 1 FROM research_contacts) THEN
     RAISE EXCEPTION 'Operations changed an unrelated synthetic record or incorrect totals';
   END IF;
+  INSERT INTO sostain_privacy_rehearsal_results VALUES
+    (4, 'Unrelated synthetic record unaffected', 'PASS');
   RAISE NOTICE 'PASS: unaffected synthetic record remains intact';
+  INSERT INTO sostain_privacy_rehearsal_results VALUES
+    (5, 'Transaction rollback is required', 'PASS');
   RAISE NOTICE 'PASS: all operations remain uncommitted and will be rolled back';
 END $privacy_test$;
 
+-- Visible validation result. Exactly five PASS rows should appear.
+SELECT step_number, operation, outcome
+FROM sostain_privacy_rehearsal_results
+ORDER BY step_number;
+
+-- Guard that the result display cannot silently report partial success.
+DO $assert_results$
+BEGIN
+  IF (SELECT COUNT(*) FROM sostain_privacy_rehearsal_results WHERE outcome = 'PASS') <> 5 THEN
+    RAISE EXCEPTION 'Privacy rehearsal proof is incomplete';
+  END IF;
+END $assert_results$;
+
+-- NEVER change to COMMIT.
 ROLLBACK;
 
 -- Optional independent post-test verification in this SAME isolated branch:
