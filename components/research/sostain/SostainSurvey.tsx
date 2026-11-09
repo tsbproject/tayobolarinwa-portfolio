@@ -129,7 +129,7 @@ export default function SostainSurvey() {
           </div>}
           <label className="flex items-start gap-2 text-sm">
             <input className="mt-1" type="checkbox" checked={answers.privacyAcknowledged} onChange={e=>set("privacyAcknowledged",e.target.checked)}/>
-            I understand this is voluntary research. I have read the <Link href="/research/sostain/privacy" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-700 underline underline-offset-2">research privacy notice</Link>, and I should not enter confidential customer details.
+            I voluntarily consent to the use of my survey answers for Sostain product research. I have read the <Link href="/research/sostain/privacy" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-700 underline underline-offset-2">research privacy notice</Link>, and I should not enter confidential customer details.
           </label>
         </>}
       </div>
