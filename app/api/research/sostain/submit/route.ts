@@ -3,6 +3,7 @@ import { researchSurveySchema } from "@/lib/research/sostain/schema";
 import { checkRateLimit, verifyTurnstile } from "@/lib/research/sostain/abuse-protection";
 import { createHmac } from "node:crypto";
 import { persistResearchResponse } from "@/lib/research/sostain/persistence";
+import { getVercelClientIp } from "@/lib/research/sostain/client-ip";
 
 /**
  * Deliberately fail-closed until persistent storage, distributed rate limiting,
@@ -53,8 +54,8 @@ export async function POST(request: NextRequest) {
   if (!salt) return NextResponse.json({ message: "Research security is not configured." }, { status: 503 });
   // Use an infrastructure-provided client IP only on the trusted Vercel deployment.
   // Do not allow arbitrary client headers to bypass limits on other hosts.
-  const ip = request.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim();
-  if (!ip || ip.length > 64) return NextResponse.json({ message: "Unable to verify request origin." }, { status: 403 });
+  const ip = getVercelClientIp(request.headers.get("x-vercel-forwarded-for"));
+  if (!ip) return NextResponse.json({ message: "Unable to verify request origin." }, { status: 403 });
   const key = createHmac("sha256", salt).update(ip).digest("hex");
   const limit = await checkRateLimit(key);
   if (!limit.ok) return NextResponse.json({ message: limit.message }, { status: limit.status });
