@@ -62,8 +62,13 @@ async function main() {
       throw new Error(name + " must be explicitly false. Survey launch flags were not changed.");
     }
   }
-  if (settingExists(env, "SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET")) {
-    throw new Error("MFA secret already configured in .env.local. Refusing to replace it.");
+  const existing = settingExists(env, "SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET");
+  const configuredSecret = settingValue(env, "SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET");
+  if (existing && (!configuredSecret || !/^[A-Z2-7]{52}$/.test(configuredSecret.toUpperCase()))) {
+    throw new Error(
+      "Existing MFA secret is not a valid 52-character Base32 key. " +
+      "Review that one setting privately in .env.local. No secret has been changed."
+    );
   }
 
   let QRCode;
@@ -73,7 +78,7 @@ async function main() {
     throw new Error('Local QR renderer missing. Run: npm install --no-save --package-lock=false qrcode');
   }
 
-  const secret = base32(randomBytes(32));
+  const secret = existing ? configuredSecret.toUpperCase() : base32(randomBytes(32));
   const issuer = "Sostain Research";
   const account = "Research Admin (Local)";
   const uri = "otpauth://totp/" + encodeURIComponent(issuer + ":" + account) +
@@ -91,12 +96,15 @@ async function main() {
 
   // Make one narrowly scoped env edit; keep the existing file intact otherwise.
   // Do not enable MFA. Review / enroll / confirm before changing the switch.
-  const newline = env.includes("\r\n") ? "\r\n" : "\n";
-  const next = env + (env.endsWith("\n") ? "" : newline) +
-    "SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET=\"" + secret + "\"" + newline;
-  await writeFile(envPath, next, { encoding: "utf8", mode: 0o600 });
-
-  console.log("PASS: New MFA secret saved privately to .env.local.");
+  if (!existing) {
+    const newline = env.includes("\r\n") ? "\r\n" : "\n";
+    const next = env + (env.endsWith("\n") ? "" : newline) +
+      "SOSTAIN_RESEARCH_ADMIN_TOTP_SECRET=\"" + secret + "\"" + newline;
+    await writeFile(envPath, next, { encoding: "utf8", mode: 0o600 });
+    console.log("PASS: New MFA secret saved privately to .env.local.");
+  } else {
+    console.log("PASS: Existing MFA secret reused without editing .env.local.");
+  }
   console.log("PASS: QR image generated entirely locally.");
   console.log("QR image: " + qrPath);
   console.log("Next: open the PNG on this computer, scan it using an authenticator app,");
