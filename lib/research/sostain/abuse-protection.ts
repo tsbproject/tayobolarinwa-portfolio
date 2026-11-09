@@ -20,7 +20,14 @@ export async function verifyTurnstile(token: string, ip?: string): Promise<GateR
     });
     if (!response.ok) return fail(503,"Security verification is unavailable.");
     const result: {success?:boolean;hostname?:string;action?:string} = await response.json();
-    const allowedHosts = new Set(["tayobolarinwa.dev","www.tayobolarinwa.dev", ...(process.env.NODE_ENV==="development" ? ["localhost"] : [])]);
+    const stagingHost = process.env.VERCEL_ENV === "preview" &&
+      process.env.VERCEL_GIT_COMMIT_REF === "feature/sostain-research-portal" &&
+      process.env.SOSTAIN_STAGING_E2E_ENABLED === "true" &&
+      process.env.SOSTAIN_SURVEY_BACKEND_READY === "false" &&
+      process.env.NEXT_PUBLIC_SOSTAIN_SURVEY_OPEN === "false"
+      ? "tayobolarinwa-portfolio-git-feature-1059e2-tsbprojects-projects.vercel.app"
+      : null;
+    const allowedHosts = new Set(["tayobolarinwa.dev","www.tayobolarinwa.dev", ...(process.env.NODE_ENV==="development" ? ["localhost"] : []), ...(stagingHost ? [stagingHost] : [])]);
     if (result.success !== true || !result.hostname || !allowedHosts.has(result.hostname)) {
       return fail(403,"Security verification failed.");
     }
