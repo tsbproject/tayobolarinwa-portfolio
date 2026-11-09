@@ -42,7 +42,7 @@ export async function POST(request:NextRequest) {
     const token = await createResearchSession(step);
     if (!token) return error(401,"This verification code has already been used. Use a new code.");
     const response = NextResponse.json({ok:true},{headers});
-    response.cookies.set(researchSessionCookie(token,request));
+    response.cookies.set(researchSessionCookie(token));
     return response;
   } catch {
     return error(503,"Research admin session service temporarily unavailable.");
